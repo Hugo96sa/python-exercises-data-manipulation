@@ -300,12 +300,34 @@ class Exercises:
         except ValueError:
             print("Please enter a valid string.")
 
+    # generate a list from 1 to 200
+    def exercise_25(self):
+        numbers = [*range(1, 201)]
+        for i in numbers:
+            print(i)
+    
+    # Interchange the values of 2 variables with multiple assignment
+    def exercise_26(self):
+        try:
+            a = int(input('Enter the first number: '))
+            b = int(input('Enter the second number: '))
+            a, b = b, a
+            print(a, b)
+        except ValueError:
+            print('Please enter a valid integers.')
 
+    # perform basic operations with sets
+    def exercise_27(self):
+        set_1 = {1, 2, 3}
+        set_2 = {2, 4, 7}
+        union = set_1 | set_2
+        intersection = set_1 & set_2
+        print(f'Union {union}, intersection {intersection}')
 
 if __name__ == '__main__':
     exer = Exercises()
 
-    exer.exercise_1()
+    # exer.exercise_1()
     # exer.exercise_2()
     # exer.exercise_3()
     # exer.exercise_4()
@@ -328,5 +350,7 @@ if __name__ == '__main__':
     # exer.exercise_21()
     # exer.exercise_22()
     # exer.exercise_23()
-    exer.exercise_24()
-
+    # exer.exercise_24()
+    # exer.exercise_25()
+    # exer.exercise_26()
+    exer.exercise_27()

@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
 
@@ -387,6 +389,50 @@ public class Exercises {
         }
     }
 
+    // Generate a list of numbers from 1 to 200
+    public void exercise_25() {
+        for (int i = 1; i <= 200; i++) {
+            System.out.println(i);
+        }
+    }
+
+    // Interchange the values of 2 variables with multiple assignment, there is not MA in Java
+    public void exercise_26() {
+        try {
+            System.out.println("Enter the first number: ");
+            int a = scanner.nextInt();
+            System.out.println("Enter the second number: ");
+            int b = scanner.nextInt();
+            int aux = a;
+            a = b;
+            b = aux;
+            System.out.println(a + " " + b);
+        } catch (Exception e) {
+            System.out.println("Please enter a valid integers.");
+        }
+    }
+
+    // perform basic operations with sets
+    public void exercise_27() {
+        Set<Integer> set1 = new HashSet<>();
+        set1.add(1);
+        set1.add(2);
+        set1.add(3);
+
+        Set<Integer> set2 = new HashSet<>();
+        set2.add(2);
+        set2.add(4);
+        set2.add(7);
+
+        Set<Integer> union = new HashSet<>(set1);
+        union.addAll(set2);
+
+        Set<Integer> intersection = new HashSet<>(set1);
+        intersection.retainAll(set2);
+
+        System.out.println("Union: " + union + " Intersection: " + intersection);
+    }
+
     public void closeScanner() {
         try {
             scanner.close();
@@ -421,7 +467,10 @@ public class Exercises {
         // exer.exercise_21();
         // exer.exercise_22();
         // exer.exercise_23();
-        exer.exercise_24();
+        // exer.exercise_24();
+        // exer.exercise_25();
+        // exer.exercise_26();
+        exer.exercise_27();
         
         exer.closeScanner();
     }
