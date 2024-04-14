@@ -133,5 +133,16 @@ class Exercises:
 if __name__ == '__main__':
     exer = Exercises()
 
+    exer.exercise_1()
+    exer.exercise_2()
+    exer.exercise_3()
+    exer.exercise_4()
+    exer.exercise_5()
+    exer.exercise_6()
+    exer.exercise_7()
+    exer.exercise_8()
+    exer.exercise_9()
+    exer.exercise_10()
+    exer.exercise_11()
     exer.exercise_12()
 
