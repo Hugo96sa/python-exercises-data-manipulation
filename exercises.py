@@ -9,20 +9,20 @@ class Exercises:
             number_1 = int(input('Enter first number: '))
             number_2 = int(input('Enter second number: '))
             result = number_1 + number_2
-            print('the sum is', result)
+            print('the sum is:', result)
         
         except ValueError:
-            print("Please enter valid integers.")
+            print('Please enter valid numbers.')
     
     # Calculate the circle area with a given radius
     def exercise_2(self):
         try:
-            radius = float(input('Enter radius: '))
+            radius = float(input('Enter the radius of the circle: '))
             area = math.pi * (radius ** 2)
             print('The area of the circle is:', round(area, 4))
         
         except ValueError:
-            print("Please enter valid number.")
+            print('Please enter a valid number.')
     
     # Concatenate a string with fstrings
     def exercise_3(self):
@@ -33,7 +33,7 @@ class Exercises:
             print(concat_string)
 
         except ValueError:
-            print("Please enter valid Strings.")
+            print('Please enter valid Strings.')
 
     # Create a list and print it
     def exercise_4(self):
@@ -46,10 +46,10 @@ class Exercises:
             num_1 = int(input('Enter first number: '))
             num_2 = int(input('Enter second number: '))
             result = num_1 * num_2
-            print(result)
+            print(f'Result: {result}')
 
         except ValueError:
-            print("Please enter valid integers.")
+            print('Please enter valid integers.')
     
     # Multiplicate 2 numbers without using * operator and show its result
     def exercise_6(self):
@@ -63,20 +63,20 @@ class Exercises:
             num_1 = int(input('Enter first number: '))
             num_2 = int(input('Enter second number: '))
             result = multiply_by_sum(num_1, num_2)
-            print(f"The product of {num_1} and {num_2} is: {result}")
+            print(f'The product of {num_1} and {num_2} is: {result}')
 
         except ValueError:
-            print("Please enter valid integers.")
+            print('Please enter valid integers.')
 
-    # Create a text string and show its lenght
+    # Read a text string and show its lenght
     def exercise_7(self):
         try:
             string = input('Enter a text string: ')
             length = len(string)
-            print(f'length = {length}')
+            print(f'Length: {length}')
 
         except ValueError:
-            print("Please enter a valid string.")
+            print('Please enter a valid string.')
     
     # Calculate the mean of a list of numbers
     def exercise_8(self):
@@ -88,15 +88,15 @@ class Exercises:
             numbers = [int(num) for num in numbers_str]
             # Calculate the mean of the numbers
             mean = sum(numbers) / len(numbers)
-            print(f'The mean of the list is: {mean}')
+            print(f'The mean of the numbers list is: {mean}')
 
         except ValueError:
-            print("Please enter a valid list.")
+            print('Please enter a valid list of numbers separated with spaces.')
     
     # Create a tuple of elements and print it
     def exercise_9(self):
         my_tuple = (3, False, 'one', 5.5)
-        print(f'Tuple = {my_tuple}')
+        print(f'Tuple: {my_tuple}')
 
     # Power of a number
     def exercise_10(self):
@@ -104,20 +104,20 @@ class Exercises:
             base = int(input('Enter base number: '))
             exponent = int(input('Enter exponent number: '))
             result = base ** exponent
-            print(f'result = {result}')
+            print(f'Result: {result}')
         
         except ValueError:
-            print("Please enter a valid integers.")
+            print('Please enter valid integers.')
 
     # Return the Inverse of a String
     def exercise_11(self):
         try:
             string = input('Enter a String to find out its inverse: ')
             inverse = string[::-1]
-            print(f'Inverse string = {inverse}')
+            print(f'Inverse string: {inverse}')
 
         except ValueError:
-            print("Please enter a valid string.")
+            print('Please enter a valid string.')
 
     # Calculate the rectangle area with given base and height
     def exercise_12(self):
@@ -125,19 +125,19 @@ class Exercises:
             base = float(input('Enter base: '))
             height = float(input('Enter height: '))
             area = base * height
-            print(f'The area is = {area}')
+            print(f'The area is: {area}')
         
         except ValueError:
-            print("Please enter valid numbers.")
+            print('Please enter valid numbers.')
 
     # Convert a whole number in string
     def exercise_13(self):
         try:
             integer = int(input('Enter a number: '))
-            print(f'the integer was: {str(integer)}, input function reads a string, so it need to be converted to int.')
+            print(f'The integer was: {str(integer)}, input function reads a string, so it need to be converted to int.')
 
         except ValueError:
-            print("Please enter a valid number.")
+            print('Please enter a valid number.')
 
     # Replace a character in a string
     def exercise_14(self):
@@ -267,6 +267,7 @@ class Exercises:
         except ValueError:
             print('Please enter a valid string.')
     
+    # Separate a string into substrings using the spaces
     def exercise_23(self):
         try:
             string = input('Enter a string with spaces like the one you are reading: ')
@@ -276,11 +277,36 @@ class Exercises:
         except ValueError:
             print("Please enter a valid string.")
 
+    # Verify if a word is palindrome
+    def exercise_24(self):
+        try:
+            string = input("Enter a string to check if it is a palindrome: ")
+
+            string_lenght = len(string)
+            half_lenght = (string_lenght // 2) + 1
+            is_palindrome = False
+            i = 0
+
+            while string[i] == string[string_lenght - i - 1]:
+                if (i == half_lenght):
+                    is_palindrome = True
+                    break
+                i += 1
+
+            if(is_palindrome):
+                print("The string is a palindrome")
+            else:
+                print("The string is not a palindrome")
+        
+        except ValueError:
+            print("Please enter a valid string.")
+
+
 
 if __name__ == '__main__':
     exer = Exercises()
 
-    # exer.exercise_1()
+    exer.exercise_1()
     # exer.exercise_2()
     # exer.exercise_3()
     # exer.exercise_4()
@@ -302,5 +328,5 @@ if __name__ == '__main__':
     # exer.exercise_20()
     # exer.exercise_21()
     # exer.exercise_22()
-    exer.exercise_23()
+    # exer.exercise_23()
 
