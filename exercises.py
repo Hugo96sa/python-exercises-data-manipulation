@@ -255,7 +255,26 @@ class Exercises:
 
         except ValueError:
             print('Please enter a valid string.')
-        
+    
+    # Multiply a string by a given number
+    def exercise_22(self):
+        try:
+            string = input('Enter a string: ')
+            number = int(input('Enter a number: '))
+            result = string * number
+            print(f'The result is: {result}')
+
+        except ValueError:
+            print('Please enter a valid string.')
+    
+    def exercise_23(self):
+        try:
+            string = input('Enter a string with spaces like the one you are reading: ')
+            string_list = string.split()
+            print(f'The string separated into simple words is {string_list}')
+
+        except ValueError:
+            print("Please enter a valid string.")
 
 
 if __name__ == '__main__':
@@ -281,5 +300,7 @@ if __name__ == '__main__':
     # exer.exercise_18()
     # exer.exercise_19()
     # exer.exercise_20()
-    exer.exercise_21()
+    # exer.exercise_21()
+    # exer.exercise_22()
+    exer.exercise_23()
 
