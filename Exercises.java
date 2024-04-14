@@ -181,9 +181,9 @@ public class Exercises {
     // Convert a whole number in string
     public void exercise_13() {
         try {
-            System.out.println("Enter a number: ");
+            System.out.println("Enter an integer: ");
             int number = scanner.nextInt();
-            System.out.println("The integer was: " + Integer.toString(number) + ", input function reads a string, so it needs to be converted to int.");
+            System.out.println("The integer was: " + Integer.toString(number));
         } catch (Exception e) {
             System.out.println("Please enter a valid number.");
         }
@@ -207,7 +207,7 @@ public class Exercises {
                 throw new Exception("Character not found in string.");
             }
 
-            String newString = string.replace(oldChar, newChar);
+            String newString = string.replaceFirst(oldChar, newChar);
             System.out.println("The new string is: " + newString);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -236,10 +236,11 @@ public class Exercises {
             for (int i = 0; i < numbersStr.length; i++) {
                 numbers[i] = Double.parseDouble(numbersStr[i]);
             }
-            java.util.Arrays.sort(numbers);
-            System.out.println("The sorted list is: " + java.util.Arrays.toString(numbers));
+            
+            Arrays.sort(numbers);
+            System.out.println("The sorted list is: " + Arrays.toString(numbers));
         } catch (Exception e) {
-            System.out.println("Please enter a valid list.");
+            System.out.println("Please enter a valid list of numbers separated with spaces.");
         }
     }
 
@@ -256,16 +257,16 @@ public class Exercises {
             }
             System.out.println(result);
         } catch (Exception e) {
-            System.out.println("Please enter valid numbers.");
+            System.out.println("Please enter valid integers.");
         }
     }
 
     // Extract a substring from a given string
     public void exercise_18() {
         try {
-            System.out.println("Enter the string: ");
+            System.out.println("Enter a string: ");
             String string = scanner.nextLine();
-            System.out.println("Enter the start position: ");
+            System.out.println("Enter the starting position: ");
             int startPos = scanner.nextInt();
             System.out.println("Enter the end position: ");
             int endPos = scanner.nextInt();
@@ -279,18 +280,19 @@ public class Exercises {
             }
 
             String substring = string.substring(startPos, endPos);
-            System.out.println("The substring is " + substring);
+            System.out.println("The substring is: " + substring);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    // Convert a float into a string
+    // Convert a double into an int
     public void exercise_19() {
         try {
             System.out.println("Enter a decimal number: ");
             double number = scanner.nextDouble();
-            System.out.println("The integer number is: " + (int) number);
+            System.out.println("The integer part is: " + (int) number);
         } catch (Exception e) {
             System.out.println("Please enter valid numbers.");
         }
@@ -353,7 +355,7 @@ public class Exercises {
             System.out.println("Enter a string with spaces: ");
             String string = scanner.nextLine();
             String[] substrings = string.split(" ");
-            System.out.println("The string separated into simple words is " + java.util.Arrays.toString(substrings));
+            System.out.println("The string separated into simple words is " + Arrays.toString(substrings));
         } catch (Exception e) {
             System.out.println("Please enter a valid string.");
         }
@@ -386,7 +388,11 @@ public class Exercises {
     }
 
     public void closeScanner() {
-        scanner.close();
+        try {
+            scanner.close();
+        } catch (Exception e) {
+            System.out.println("Error closing scanner: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
@@ -401,7 +407,7 @@ public class Exercises {
         // exer.exercise_7();
         // exer.exercise_8();
         // exer.exercise_9();
-        exer.exercise_10();
+        // exer.exercise_10();
         // exer.exercise_11();
         // exer.exercise_12();
         // exer.exercise_13();
@@ -415,6 +421,8 @@ public class Exercises {
         // exer.exercise_21();
         // exer.exercise_22();
         // exer.exercise_23();
+        exer.exercise_24();
+        
         exer.closeScanner();
     }
 }

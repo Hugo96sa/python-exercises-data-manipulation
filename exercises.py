@@ -133,11 +133,11 @@ class Exercises:
     # Convert a whole number in string
     def exercise_13(self):
         try:
-            integer = int(input('Enter a number: '))
-            print(f'The integer was: {str(integer)}, input function reads a string, so it need to be converted to int.')
+            integer = int(input('Enter an integer: '))
+            print(f'The integer was: {str(integer)}, input function reads a string, so it needs to be converted to int.')
 
         except ValueError:
-            print('Please enter a valid number.')
+            print('Please enter a valid integer.')
 
     # Replace a character in a string
     def exercise_14(self):
@@ -163,12 +163,12 @@ class Exercises:
     # Turn a string to lowercase
     def exercise_15(self):
         try:
-            lower_string = input('Enter a string: ')
-            upper_string = lower_string.upper()
+            input_string = input('Enter a string: ')
+            upper_string = input_string.upper()
             print(f'The uppercase string is {upper_string}')
 
         except ValueError:
-            print('Please enter a valid number.')
+            print('Please enter a valid string.')
 
     # Sort a list in ascending order
     def exercise_16(self):
@@ -183,7 +183,7 @@ class Exercises:
             print(f'The sorted list is: {numbers}')
 
         except ValueError:
-            print("Please enter a valid list.")
+            print('Please enter a valid list of numbers separated with spaces.')
     
     # Calculate the power of a number without using the ** operator
     def exercise_17(self):
@@ -196,13 +196,13 @@ class Exercises:
             print(result)
         
         except ValueError:
-            print("Please enter valid numbers.")
+            print('Please enter valid integers.')
 
     # Extract a substring from a given string
     def exercise_18(self):
         try:
-            string = input('Enter the string: ')
-            pos_string_1 = int(input('Enter the start position: '))
+            string = input('Enter a string: ')
+            pos_string_1 = int(input('Enter the starting position: '))
             pos_string_2 = int(input('Enter the end position: '))
 
             if pos_string_1 < 0 or pos_string_2 > len(string):
@@ -217,14 +217,14 @@ class Exercises:
         except ValueError as e:
             print(e)
     
-    # convert a float into a string
+    # convert a float into an int
     def exercise_19(self):
         try:
             number = int(input('Enter a decimal number: '))
-            print(f'The integer number is: {number}')
+            print(f'The integer part is: {number}')
         
         except ValueError:
-            print("Please enter a valid numbers.")
+            print('Please enter a valid numbers.')
 
     # Count the ocurrence of a character in a given string
     def exercise_20(self):
@@ -232,13 +232,13 @@ class Exercises:
             string = input('Enter a string: ')
             char = input('Enter a char: ')
             if len(char) != 1:
-                raise ValueError('Please enter single characters.')
+                raise ValueError('Please enter a single character.')
 
             if char not in string:
                 raise LookupError('Character not found in string.')
             
             count = string.count(char)
-            print(f'The number of ocurrence is: {count}')
+            print(f'The number of occurrences is: {count}')
 
         except ValueError as e:
             print(e)
@@ -265,14 +265,14 @@ class Exercises:
             print(f'The result is: {result}')
 
         except ValueError:
-            print('Please enter a valid string.')
+            print('Please enter a valid string and number.')
     
     # Separate a string into substrings using the spaces
     def exercise_23(self):
         try:
-            string = input('Enter a string with spaces like the one you are reading: ')
+            string = input('Enter a string with spaces: ')
             string_list = string.split()
-            print(f'The string separated into simple words is {string_list}')
+            print(f'The string separated into simple words is: {string_list}')
 
         except ValueError:
             print("Please enter a valid string.")
@@ -281,7 +281,6 @@ class Exercises:
     def exercise_24(self):
         try:
             string = input("Enter a string to check if it is a palindrome: ")
-
             string_lenght = len(string)
             half_lenght = (string_lenght // 2) + 1
             is_palindrome = False
@@ -329,4 +328,5 @@ if __name__ == '__main__':
     # exer.exercise_21()
     # exer.exercise_22()
     # exer.exercise_23()
+    exer.exercise_24()
 
