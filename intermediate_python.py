@@ -492,4 +492,4 @@ if __name__ == '__main__':
         print(e)  
 
     except AttributeError:
-        print('There was a problem retriving the pandas attribute or the key_selector is None')
+        print("There was a problem retriving the pandas attribute or the key_selector is None.")
