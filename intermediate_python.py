@@ -487,5 +487,9 @@ if __name__ == '__main__':
         Intermediate(None).exercise_28()
         
 
+    # Handle the exceptions appropriately
     except ValueError as e:
-        print(e)  # Handle the exception appropriately
+        print(e)  
+
+    except AttributeError:
+        print('There was a problem retriving the pandas attribute or the key_selector is None')

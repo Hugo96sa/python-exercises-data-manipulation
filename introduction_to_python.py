@@ -606,5 +606,9 @@ if __name__ == '__main__':
         # Introduction(baseball_key).exercise_36()
         Introduction(fifa_key).exercise_37()
     
+    # Handle the exceptions appropriately
     except ValueError as e:
-        print(e)  # Handle the exception appropriately
+        print(e)  
+
+    except AttributeError:
+        print('There was a problem retriving the pandas attribute or the key_selector is None')
