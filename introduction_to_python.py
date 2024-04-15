@@ -428,6 +428,7 @@ class Introduction:
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
+
         # Combine height and weight into a list of lists
         baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
 
@@ -444,6 +445,7 @@ class Introduction:
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
+
         # Combine height and weight into a list of lists
         baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
 
@@ -457,6 +459,7 @@ class Introduction:
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
+
         # Combine height and weight into a list of lists
         baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
 
@@ -477,6 +480,7 @@ class Introduction:
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
+
         # Combine height and weight into a list of lists
         baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
 
@@ -500,6 +504,7 @@ class Introduction:
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
+
         # Combine height and weight into a list of lists
         baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
         np_baseball = np.array(baseball)
@@ -517,6 +522,7 @@ class Introduction:
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
+        
         # Combine height and weight into a list of lists
         baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
         np_baseball = np.array(baseball)

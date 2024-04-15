@@ -1,5 +1,5 @@
 import math
-import numpy as np
+
 
 class Exercises:
 
@@ -134,7 +134,7 @@ class Exercises:
     def exercise_13(self):
         try:
             integer = int(input('Enter an integer: '))
-            print(f'The integer was: {str(integer)}, input function reads a string, so it needs to be converted to int.')
+            print(f'The integer was: {str(integer)}, input function returns a string, so it needs to be converted to int.')
 
         except ValueError:
             print('Please enter a valid integer.')
