@@ -9,11 +9,27 @@ fifa_file_path = 'data/introduction_to_python/fifa.csv'
 
 
 class Introduction:
-    def __init__(self, data_selector, data_file_path):
+    def __init__(self, data_selector):
+        try:
+            self.df = self.set_data(data_selector)
+
+        except FileNotFoundError:
+            print(f"Error: File not found for: '{data_selector}'.")
+            self.df = None
+
+        except pd.errors.ParserError:
+            print(f"Error: Parsing issue for: '{data_selector}'.")
+            self.df = None
+    
+    def set_data(self, data_selector):
         if data_selector == baseball_key:
-            self.df = pd.read_csv(data_file_path)
+            return pd.read_csv(baseball_file_path)
         elif data_selector == fifa_key:
-            self.df = pd.read_csv(data_file_path, sep=', ')
+            return pd.read_csv(fifa_file_path, sep=', ')
+        elif data_selector is None:
+            return None
+        else:
+            raise ValueError("Invalid data_selector provided.")
 
     def exercise_1(self):
         # Example, do not modify!
@@ -544,44 +560,45 @@ class Introduction:
 
 
 if __name__ == '__main__':
-    baseb = Introduction(baseball_key, baseball_file_path)
-    fifa = Introduction(fifa_key, fifa_file_path)
-    intro = Introduction(None, None)
-
-    # intro.exercise_1()
-    # intro.exercise_2()
-    # intro.exercise_3()
-    # intro.exercise_4()
-    # intro.exercise_5()
-    # intro.exercise_6()
-    # intro.exercise_7()
-    # intro.exercise_8()
-    # intro.exercise_9()
-    # intro.exercise_10()
-    # intro.exercise_11()
-    # intro.exercise_12()
-    # intro.exercise_13()
-    # intro.exercise_14()
-    # intro.exercise_15()
-    # intro.exercise_16()
-    # intro.exercise_17()
-    # intro.exercise_18()
-    # intro.exercise_19()
-    # intro.exercise_20()
-    # intro.exercise_21()
-    # intro.exercise_22()
-    # intro.exercise_23()
-    # intro.exercise_24()
-    # intro.exercise_25()
-    # intro.exercise_26()
-    # baseb.exercise_27()
-    # baseb.exercise_28()
-    # baseb.exercise_29()
-    # baseb.exercise_30()
-    # baseb.exercise_31()
-    # baseb.exercise_32()
-    # baseb.exercise_33()
-    # baseb.exercise_34()
-    # baseb.exercise_35()
-    # baseb.exercise_36()
-    fifa.exercise_37()
+    try: 
+        # Here all the instances are being executed only when called and with the given key
+        # Introduction(None).exercise_1()
+        # Introduction(None).exercise_2()
+        # Introduction(None).exercise_3()
+        # Introduction(None).exercise_4()
+        # Introduction(None).exercise_5()
+        # Introduction(None).exercise_6()
+        # Introduction(None).exercise_7()
+        # Introduction(None).exercise_8()
+        # Introduction(None).exercise_9()
+        # Introduction(None).exercise_10()
+        # Introduction(None).exercise_11()
+        # Introduction(None).exercise_12()
+        # Introduction(None).exercise_13()
+        # Introduction(None).exercise_14()
+        # Introduction(None).exercise_15()
+        # Introduction(None).exercise_16()
+        # Introduction(None).exercise_17()
+        # Introduction(None).exercise_18()
+        # Introduction(None).exercise_19()
+        # Introduction(None).exercise_20()
+        # Introduction(None).exercise_21()
+        # Introduction(None).exercise_22()
+        # Introduction(None).exercise_23()
+        # Introduction(None).exercise_24()
+        # Introduction(None).exercise_25()
+        # Introduction(None).exercise_26()
+        # Introduction(baseball_key).exercise_27()
+        # Introduction(baseball_key).exercise_28()
+        # Introduction(baseball_key).exercise_29()
+        # Introduction(baseball_key).exercise_30()
+        # Introduction(baseball_key).exercise_31()
+        # Introduction(baseball_key).exercise_32()
+        # Introduction(baseball_key).exercise_33()
+        # Introduction(baseball_key).exercise_34()
+        # Introduction(baseball_key).exercise_35()
+        # Introduction(baseball_key).exercise_36()
+        Introduction(fifa_key).exercise_37()
+    
+    except ValueError as e:
+        print(e)  # Handle the exception appropriately

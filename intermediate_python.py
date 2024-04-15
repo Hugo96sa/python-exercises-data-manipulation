@@ -3,21 +3,41 @@ import numpy as np
 
 brics_key = 'brics'
 cars_key = 'cars'
+gapminder_key = 'gapminder'
 baseball_key = 'baseball'
 
 brics_file_path = 'data/intermediate_python/brics.csv'
 cars_file_path = 'data/intermediate_python/cars.csv'
+gapminder_file_path = 'data/intermediate_python/gapminder.csv'
 baseball_file_path = 'data/introduction_to_python/baseball.csv'
 
 
 class Intermediate:
-    def __init__(self, data_selector, data_file_path):
+    def __init__(self, data_selector):
+        try:
+            self.df = self.set_data(data_selector)
+
+        except FileNotFoundError:
+            print(f"Error: File not found for: '{data_selector}'.")
+            self.df = None
+
+        except pd.errors.ParserError:
+            print(f"Error: Parsing issue for: '{data_selector}'.")
+            self.df = None
+
+    def set_data(self, data_selector):
         if data_selector == brics_key:
-            self.df = pd.read_csv(data_file_path, index_col=0)
+            return pd.read_csv(brics_file_path, index_col=0)
         elif data_selector == cars_key:
-            self.df = pd.read_csv(data_file_path, index_col=0)
+            return pd.read_csv(cars_file_path, index_col=0)
+        elif data_selector == gapminder_key:
+            return pd.read_csv(gapminder_file_path, index_col=0)
         elif data_selector == baseball_key:
-            self.df = pd.read_csv(data_file_path)
+            return pd.read_csv(baseball_file_path)
+        elif data_selector is None:
+            return None
+        else:
+            raise ValueError("Invalid data_selector provided.")
 
     def exercise_1(self):
         # Pre-defined lists
@@ -206,25 +226,26 @@ class Intermediate:
 
 
 if __name__ == '__main__':
-    brics = Intermediate(brics_key, brics_file_path)
-    cars = Intermediate(cars_key, cars_file_path)
-    inter = Intermediate(None, None)
-    baseb = Intermediate(baseball_key, baseball_file_path)
+    try:
+        # Here all the instances are being executed only when called and with the given key
+        # Intermediate(None).exercise_1()
+        # Intermediate(cars_key).exercise_2()
+        # Intermediate(brics_key).exercise_3()
+        # Intermediate(brics_key).exercise_3()
+        # Intermediate(None).exercise_4()
+        # Intermediate(cars_key).exercise_5()
+        # Intermediate(cars_key).exercise_6()
+        # Intermediate(cars_key).exercise_7()
+        # Intermediate(cars_key).exercise_8()
+        # Intermediate(None).exercise_9()
+        # Intermediate(None).exercise_10()
+        # Intermediate(None).exercise_11()
+        # Intermediate(None).exercise_12()
+        # Intermediate(None).exercise_13()
+        # Intermediate(baseball_key).exercise_14() # very large
+        # Intermediate(cars_key).exercise_15()
+        # Intermediate(cars_key).exercise_16()
+        Intermediate(cars_key).exercise_17()
 
-    # inter.exercise_1()
-    # cars.exercise_2()
-    # brics.exercise_3()
-    # inter.exercise_4()
-    # cars.exercise_5()
-    # cars.exercise_6()
-    # cars.exercise_7()
-    # cars.exercise_8()
-    # inter.exercise_9()
-    # inter.exercise_10()
-    # inter.exercise_11()
-    # inter.exercise_12()
-    # inter.exercise_13()
-    # baseb.exercise_14() # very large
-    # cars.exercise_15()
-    # cars.exercise_16()
-    cars.exercise_17()
+    except ValueError as e:
+        print(e)  # Handle the exception appropriately
