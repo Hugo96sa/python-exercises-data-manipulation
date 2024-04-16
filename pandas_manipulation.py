@@ -383,12 +383,81 @@ class Manipulation:
 
         # Reset the temperatures_ind index, dropping its contents
         print(temperatures_ind.reset_index(drop=True))
+    
+    def exercise_22(self):
+        temperatures = self.df
+        temperatures_ind = temperatures.set_index("city")
+        
+        # Make a list of cities to subset on
+        cities = ["Moscow", "Saint Petersburg"]
+
+        # Subset temperatures using square brackets
+        print(temperatures[temperatures["city"].isin(cities)])
+
+        # Subset temperatures_ind using .loc[]
+        print(temperatures_ind.loc[cities])
+
+    def exercise_23(self):
+        temperatures = self.df
+
+        # Index temperatures by country & city
+        temperatures_ind = temperatures.set_index(["country", "city"])
+
+        # List of tuples: Brazil, Rio De Janeiro & Pakistan, Lahore
+        rows_to_keep = [("Brazil", "Rio De Janeiro"), ("Pakistan", "Lahore")]
+
+        # Subset for rows to keep
+        print(temperatures_ind.loc[rows_to_keep])
+    
+    def exercise_24(self):
+        temperatures = self.df
+        temperatures_ind = temperatures.set_index(["country", "city"])
+
+        # Sort temperatures_ind by index values
+        print(temperatures_ind.sort_index())
+
+        # Sort temperatures_ind by index values at the city level
+        print(temperatures_ind.sort_index(level=["city","country"]))
+
+        # Sort temperatures_ind by country then descending city
+        print(temperatures_ind.sort_index(level=["country", "city"], ascending=[True, False]))
+
+
+    def exercise_25(self):
+        temperatures = self.df
+        temperatures_ind = temperatures.set_index(["country", "city"])
+
+        # Sort the index of temperatures_ind
+        temperatures_srt = temperatures_ind.sort_index()
+
+        # Subset rows from Pakistan to Russia
+        print(temperatures_srt.loc["Pakistan":"Russia"])
+
+        # Try to subset rows from Lahore to Moscow
+        print(temperatures_srt.loc["Lahore":"Moscow"])
+
+        # Subset rows from Pakistan, Lahore to Russia, Moscow
+        print(temperatures_srt.loc[("Pakistan","Lahore"):("Russia","Moscow")])
+
+    def exercise_26(self):
+        temperatures = self.df
+        temperatures_ind = temperatures.set_index(["country", "city"])
+        temperatures_srt = temperatures_ind.sort_index()
+
+        # Subset rows from India, Hyderabad to Iraq, Baghdad
+        print(temperatures_srt.loc[("India","Hyderabad"):("Iraq","Baghdad")])
+
+        # Subset columns from date to avg_temp_c
+        print(temperatures_srt.loc[:,"date":"avg_temp_c"])
+
+        # Subset in both directions at once
+        print(temperatures_srt.loc[("India","Hyderabad"):("Iraq","Baghdad"),"date":"avg_temp_c"])
 
 if __name__ == '__main__':
     try: 
         # Manipulation(homeless_key).exercise_1()
         # Manipulation(homeless_key).exercise_2()
-        Manipulation(homeless_key).exercise_3()
+        # Manipulation(homeless_key).exercise_3()
         # Manipulation(homeless_key).exercise_4()
         # Manipulation(homeless_key).exercise_5()
         # Manipulation(homeless_key).exercise_6()
@@ -407,6 +476,11 @@ if __name__ == '__main__':
         # Manipulation(sales_key).exercise_19()
         # Manipulation(temp_key).exercise_20()
         # Manipulation(temp_key).exercise_21()
+        # Manipulation(temp_key).exercise_22()
+        # Manipulation(temp_key).exercise_23()
+        # Manipulation(temp_key).exercise_24()
+        # Manipulation(temp_key).exercise_25()
+        Manipulation(temp_key).exercise_26()
     
     # Handle the exceptions appropriately
     except ValueError as e:
