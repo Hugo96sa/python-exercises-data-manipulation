@@ -3,7 +3,7 @@ import numpy as np
 
 homeless_key = 'homeless'
 sales_key = 'sales'
-temp_key = 'sales'
+temp_key = 'temp'
 
 homeless_file_path = 'data/pandas_manipulation/homelessness.csv'
 sales_file_path = 'data/pandas_manipulation/sales_subset.csv'
@@ -35,6 +35,7 @@ class Manipulation:
         else:
             raise ValueError("Invalid data_selector provided.")
 
+    # Read and explore the homelessness data
     def exercise_1(self):
         homelessness = self.df
 
@@ -50,6 +51,7 @@ class Manipulation:
         # Print a description of homelessness
         print(homelessness.describe())
 
+    # perform numpy observations and general extractions
     def exercise_2(self):
         homelessness = self.df
 
@@ -62,6 +64,7 @@ class Manipulation:
         # Print the row index of homelessness
         print(homelessness.index)
 
+    # Perform sorting operations in DF
     def exercise_3(self):
         homelessness = self.df
 
@@ -83,6 +86,7 @@ class Manipulation:
         # Print the top few rows
         print(homelessness_reg_fam.head())
 
+    # Perform sorting by value with two columns
     def exercise_4(self):
         homelessness = self.df
 
@@ -305,12 +309,86 @@ class Manipulation:
         sales_by_type_is_holiday = sales.groupby(['type', 'is_holiday'])['weekly_sales'].sum()
         print(sales_by_type_is_holiday)
 
+    def exercise_17(self):
+        sales = self.df
+
+        # For each store type, aggregate weekly_sales: get min, max, mean, and median, passing aggregates as a strings
+        sales_stats = sales.groupby('type')['weekly_sales'].agg(['min', 'max', 'mean', 'median'])
+
+        # Print sales_stats
+        print(sales_stats)
+
+        # For each store type, aggregate unemployment and fuel_price_usd_per_l: get min, max, mean, and median, passing aggregates as a strings
+        unemp_fuel_stats = sales.groupby('type')[['unemployment', 'fuel_price_usd_per_l']].agg(['min', 'max', 'mean', 'median'])
+
+        # Print unemp_fuel_stats
+        print(unemp_fuel_stats)
+
+    def exercise_18(self):
+        sales = self.df
+
+        # Pivot for mean weekly_sales for each store type
+        mean_sales_by_type = sales.pivot_table(values = 'weekly_sales', index = 'type')
+
+        # Print mean_sales_by_type
+        print(mean_sales_by_type)
+
+        # Pivot for mean and median weekly_sales for each store type
+        mean_med_sales_by_type = sales.pivot_table(values = 'weekly_sales', index = 'type', aggfunc = ['mean', 'median'])
+
+        # Print mean_med_sales_by_type
+        print(mean_med_sales_by_type)
+
+        mean_sales_by_type_holiday = sales.pivot_table(values = 'weekly_sales', index = 'type', columns = 'is_holiday', aggfunc = 'mean')
+
+        # Print mean_sales_by_type_holiday
+        print(mean_sales_by_type_holiday)
+
+    def exercise_19(self):
+        sales = self.df
+
+        print(sales.pivot_table(values = 'weekly_sales', index = 'department', columns = 'type', aggfunc = 'mean', fill_value = 0))
+
+        print(sales.pivot_table(values="weekly_sales", index="department", columns="type", aggfunc = 'mean', fill_value = 0, margins = True))
+
+    def exercise_20(self):
+        temp = self.df
+
+        # Filter the DataFrame to include only rows with null values in 'avg_temp_c'
+        null_temp_df = temp[temp['avg_temp_c'].isnull()]
+
+        # Group by 'country' and count the null values in each group
+        null_temp_counts = null_temp_df.groupby('country').size()
+
+        # Sort the counts in descending order to find the country with the most null values
+        null_temp_counts_sorted = null_temp_counts.sort_values(ascending=False)
+
+        # Print the sorted counts
+        print(null_temp_counts_sorted)
+
+    def exercise_21(self):
+        temperatures = self.df
+
+        # Look at temperatures
+        print(temperatures.head())
+
+        # Set the index of temperatures to city
+        temperatures_ind = temperatures.set_index("city")
+
+        # Look at temperatures_ind
+        print(temperatures_ind.head())
+
+        # Reset the temperatures_ind index, keeping its contents
+        print(temperatures_ind.reset_index())
+
+        # Reset the temperatures_ind index, dropping its contents
+        print(temperatures_ind.reset_index(drop=True))
 
 if __name__ == '__main__':
     try: 
         # Manipulation(homeless_key).exercise_1()
         # Manipulation(homeless_key).exercise_2()
-        # Manipulation(homeless_key).exercise_3()
+        Manipulation(homeless_key).exercise_3()
         # Manipulation(homeless_key).exercise_4()
         # Manipulation(homeless_key).exercise_5()
         # Manipulation(homeless_key).exercise_6()
@@ -323,7 +401,12 @@ if __name__ == '__main__':
         # Manipulation(sales_key).exercise_13()
         # Manipulation(sales_key).exercise_14()
         # Manipulation(sales_key).exercise_15()
-        Manipulation(sales_key).exercise_16()
+        # Manipulation(sales_key).exercise_16()
+        # Manipulation(sales_key).exercise_17()
+        # Manipulation(sales_key).exercise_18()
+        # Manipulation(sales_key).exercise_19()
+        # Manipulation(temp_key).exercise_20()
+        # Manipulation(temp_key).exercise_21()
     
     # Handle the exceptions appropriately
     except ValueError as e:
