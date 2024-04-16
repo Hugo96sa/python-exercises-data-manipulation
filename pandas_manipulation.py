@@ -6,12 +6,14 @@ sales_key = 'sales'
 temp_key = 'temp'
 avocados_key = 'avocados'
 avocados_2016_key = 'avocados_2016'
+airline_key = 'airline'
 
 homeless_file_path = 'data/pandas_manipulation/homelessness.csv'
 sales_file_path = 'data/pandas_manipulation/sales_subset.csv'
 temp_file_path = 'data/pandas_manipulation/temperatures.csv'
 avocados_file_path = 'data/pandas_manipulation/avoplotto.pkl'
 avocados_2016_file_path = 'data/pandas_manipulation/avocados_2016.csv'
+airline_file_path = 'data/pandas_manipulation/airline_bumping.csv'
 
 
 class Manipulation:
@@ -38,6 +40,8 @@ class Manipulation:
             return pd.read_pickle(avocados_file_path)
         elif data_selector == avocados_2016_key:
             return pd.read_csv(avocados_2016_file_path, index_col=0)
+        elif data_selector == airline_key:
+            return pd.read_csv(airline_file_path, index_col=0)
         elif data_selector is None:
             return None
         else:
@@ -666,6 +670,64 @@ class Manipulation:
         # Show the plot
         plt.show()
 
+    def exercise_39(self):
+        # Create a list of dictionaries with new data
+        avocados_list = [
+            {"date": "2019-11-03", "small_sold": 10376832, "large_sold": 7835071},
+            {"date": "2019-11-10", "small_sold": 10717154, "large_sold": 8561348},
+        ]
+
+        # Convert list into DataFrame
+        avocados_2019 = pd.DataFrame(avocados_list)
+
+        # Print the new DataFrame
+        print(avocados_2019)
+
+    def exercise_40(self):
+        # Create a dictionary of lists with new data
+        avocados_dict = {
+        "date": ["2019-11-17", "2019-12-01"],
+        "small_sold": [10859987, 9291631],
+        "large_sold": [7674135, 6238096]
+        }
+
+        # Convert dictionary into DataFrame
+        avocados_2019 = pd.DataFrame(avocados_dict)
+
+        # Print the new DataFrame
+        print(avocados_2019)
+    
+    def exercise_41(self):
+        # Read CSV as DataFrame called airline_bumping, already done in the set_data method above
+        airline_bumping = self.df
+
+        # Take a look at the DataFrame
+        print(airline_bumping.head())
+
+        # For each airline, select nb_bumped and total_passengers and sum
+        airline_totals = airline_bumping.groupby("airline")[["nb_bumped","total_passengers"]].sum()
+
+        # Create new col, bumps_per_10k: no. of bumps per 10k passengers for each airline
+        airline_totals["bumps_per_10k"] = airline_totals["nb_bumped"] / airline_totals["total_passengers"] * 10000
+
+        # Print airline_totals
+        print(airline_totals)
+
+    def exercise_42(self):
+        airline_bumping = self.df
+        airline_totals = airline_bumping.groupby("airline")[["nb_bumped","total_passengers"]].sum()
+        airline_totals["bumps_per_10k"] = airline_totals["nb_bumped"] / airline_totals["total_passengers"] * 10000
+
+        # Create airline_totals_sorted
+        airline_totals_sorted = airline_totals.sort_values("bumps_per_10k", ascending = False)
+
+        # Print airline_totals_sorted
+        print(airline_totals_sorted)
+
+        # Save as airline_totals_sorted.csv
+        airline_totals_sorted.to_csv("data/pandas_manipulation/airline_totals_sorted.csv")
+    
+
 if __name__ == '__main__':
     try:
         # Manipulation(homeless_key).exercise_1()
@@ -705,7 +767,11 @@ if __name__ == '__main__':
         # Manipulation(avocados_key).exercise_35()
         # Manipulation(avocados_2016_key).exercise_36()
         # Manipulation(avocados_2016_key).exercise_37()
-        Manipulation(avocados_2016_key).exercise_38()
+        # Manipulation(avocados_2016_key).exercise_38()
+        # Manipulation(None).exercise_39()
+        # Manipulation(None).exercise_40()
+        # Manipulation(airline_key).exercise_41()
+        Manipulation(airline_key).exercise_42()
 
     # Handle the exceptions appropriately
     except ValueError as e:
