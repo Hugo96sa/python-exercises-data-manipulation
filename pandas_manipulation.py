@@ -1,12 +1,17 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 homeless_key = 'homeless'
 sales_key = 'sales'
 temp_key = 'temp'
+avocados_key = 'avocados'
+avocados_2016_key = 'avocados_2016'
 
 homeless_file_path = 'data/pandas_manipulation/homelessness.csv'
 sales_file_path = 'data/pandas_manipulation/sales_subset.csv'
 temp_file_path = 'data/pandas_manipulation/temperatures.csv'
+avocados_file_path = 'data/pandas_manipulation/avoplotto.pkl'
+avocados_2016_file_path = 'data/pandas_manipulation/avocados_2016.csv'
 
 
 class Manipulation:
@@ -29,6 +34,10 @@ class Manipulation:
             return pd.read_csv(sales_file_path, index_col=0)
         elif data_selector == temp_key:
             return pd.read_csv(temp_file_path, index_col=0)
+        elif data_selector == avocados_key:
+            return pd.read_pickle(avocados_file_path)
+        elif data_selector == avocados_2016_key:
+            return pd.read_csv(avocados_2016_file_path, index_col=0)
         elif data_selector is None:
             return None
         else:
@@ -468,46 +477,239 @@ class Manipulation:
         # Set date as the index and sort the index
         temperatures_ind = temperatures.set_index("date").sort_index()
 
-        # Use .loc[] to subset temperatures_ind for rows in 2010 and 2011
-        print(temperatures_ind.loc["2010":"2011"])
+        # Use .loc[] to subset temperatures_ind for rows in 2010 and 2011, mind the inclusive range
+        print(temperatures_ind.loc["2010":"2012"])
 
-        # Use .loc[] to subset temperatures_ind for rows from Aug 2010 to Feb 2011
-        print(temperatures_ind.loc["2010-08":"2011-02"])
+        # Use .loc[] to subset temperatures_ind for rows from Aug 2010 to Feb 2011, mind the inclusive range
+        print(temperatures_ind.loc["2010-08":"2011-03"])
 
+    def exercise_28(self):
+        temperatures = self.df
+
+        # Get 23rd row, 2nd column (index 22, 1)
+        print(temperatures.iloc[22, 1])
+
+        # Use slicing to get the first 5 rows
+        print(temperatures.iloc[:5])
+
+        # Use slicing to get columns 3 to 4
+        print(temperatures.iloc[:, 2:4])
+
+        # Use slicing in both directions at once
+        print(temperatures.iloc[:5, 2:4])
+
+    def exercise_29(self):
+        temperatures = self.df
+        # Convert "date" column to datetime format
+        temperatures["date"] = pd.to_datetime(temperatures["date"])
+
+        # Add a year column to temperatures
+        temperatures["year"] = temperatures["date"].dt.year
+
+        # Pivot avg_temp_c by country and city vs year
+        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country","city"], columns="year")
+
+        # See the result
+        print(temp_by_country_city_vs_year)
+
+    def exercise_30(self):
+        temperatures = self.df
+        temperatures["date"] = pd.to_datetime(temperatures["date"])
+        temperatures["year"] = temperatures["date"].dt.year
+        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country","city"], columns="year")
+
+        # Subset for Egypt to India
+        print(temp_by_country_city_vs_year.loc["Egypt":"India"])
+
+        # Subset for Egypt, Cairo to India, Delhi
+        print(temp_by_country_city_vs_year.loc[("Egypt","Cairo"):("India","Delhi")])
+
+        # Subset for Egypt, Cairo to India, Delhi, and 2005 to 2010
+        print(temp_by_country_city_vs_year.loc[("Egypt","Cairo"):("India","Delhi"),"2005":"2010"])
+    
+    def exercise_31(self):
+        temperatures = self.df
+        temperatures["date"] = pd.to_datetime(temperatures["date"])
+        temperatures["year"] = temperatures["date"].dt.year
+        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country","city"], columns="year")
+
+        # Get the worldwide mean temp by year
+        mean_temp_by_year = temp_by_country_city_vs_year.mean(axis="index")
+
+        # Filter for the year that had the highest mean temp
+        print(mean_temp_by_year[mean_temp_by_year == max(mean_temp_by_year)])
+
+        # Get the mean temp by city
+        mean_temp_by_city = temp_by_country_city_vs_year.mean(axis="columns")
+
+        # Filter for the city that had the lowest mean temp
+        print(mean_temp_by_city[mean_temp_by_city == min(mean_temp_by_city)])
+
+    def exercise_32(self):
+        avocados = self.df
+
+        # Look at the first few rows of data
+        print(avocados.head())
+
+        # Get the total number of avocados sold of each size
+        nb_sold_by_size = avocados.groupby("size")["nb_sold"].sum()
+
+        # Create a bar plot of the number of avocados sold by size
+        nb_sold_by_size.plot(kind="bar")
+
+        # Show the plot
+        plt.show()
+
+    def exercise_33(self):
+        avocados = self.df
+
+        # Get the total number of avocados sold on each date
+        nb_sold_by_date = avocados.groupby("date")["nb_sold"].sum()
+
+        # Create a line plot of the number of avocados sold by date
+        nb_sold_by_date.plot(kind="line")
+
+        # Show the plot
+        plt.show()
+    
+    def exercise_34(self):
+        avocados = self.df
+
+        # Scatter plot of nb_sold vs avg_price with title
+        avocados.plot(x="nb_sold", y="avg_price", kind="scatter", title="Number of avocados sold vs. average price")
+
+        # Show the plot
+        plt.show()
+    
+    def exercise_35(self):
+        avocados = self.df
+
+        # Histogram of conventional avg_price 
+        avocados[avocados["type"] == "conventional"]["avg_price"].hist()
+
+        # Histogram of organic avg_price
+        avocados[avocados["type"] == "organic"]["avg_price"].hist()
+
+        # Add a legend
+        plt.legend(["conventional","organic"])
+
+        # Show the plot
+        plt.show()
+
+        # Modify histogram transparency to 0.5 
+        avocados[avocados["type"] == "conventional"]["avg_price"].hist(alpha=0.5)
+
+        # Modify histogram transparency to 0.5
+        avocados[avocados["type"] == "organic"]["avg_price"].hist(alpha=0.5)
+
+        # Add a legend
+        plt.legend(["conventional", "organic"])
+
+        # Show the plot
+        plt.show()
+
+        # Modify bins to 20
+        avocados[avocados["type"] == "conventional"]["avg_price"].hist(alpha=0.5, bins=20)
+
+        # Modify bins to 20
+        avocados[avocados["type"] == "organic"]["avg_price"].hist(alpha=0.5, bins=20)
+
+        # Add a legend
+        plt.legend(["conventional", "organic"])
+
+        # Show the plot
+        plt.show()
+
+    def exercise_36(self):
+        avocados_2016 = self.df
+
+        # Check individual values for missing values
+        print(avocados_2016.isna())
+
+        # Check each column for missing values
+        print(avocados_2016.isna().any())
+
+        # Bar plot of missing values by variable
+        avocados_2016.isna().sum().plot(kind="bar")
+
+        # Show plot
+        plt.show()
+    
+    def exercise_37(self):
+        avocados_2016 = self.df
+        
+        # Remove rows with missing values
+        avocados_complete = avocados_2016.dropna()
+
+        # Check if any columns contain missing values
+        print(avocados_complete.isna().any())
+    
+    def exercise_38(self):
+        avocados_2016 = self.df
+
+        # List the columns with missing values
+        cols_with_missing = ["small_sold", "large_sold", "xl_sold"]
+
+        # Create histograms showing the distributions cols_with_missing
+        avocados_2016[cols_with_missing].plot(kind="hist")
+        # avocados_2016[cols_with_missing].hist()
+
+        # Show the plot
+        plt.show()
+
+        # Fill in missing values with 0
+        avocados_filled = avocados_2016.fillna(0)
+
+        # Create histograms of the filled columns
+        avocados_filled[cols_with_missing].hist()
+
+        # Show the plot
+        plt.show()
 
 if __name__ == '__main__':
     try:
-        Manipulation(homeless_key).exercise_1()
-        Manipulation(homeless_key).exercise_2()
-        Manipulation(homeless_key).exercise_3()
-        Manipulation(homeless_key).exercise_4()
-        Manipulation(homeless_key).exercise_5()
-        Manipulation(homeless_key).exercise_6()
-        Manipulation(homeless_key).exercise_7()
-        Manipulation(homeless_key).exercise_8()
-        Manipulation(sales_key).exercise_9()
-        Manipulation(sales_key).exercise_10()
-        Manipulation(sales_key).exercise_11()
-        Manipulation(sales_key).exercise_12()
-        Manipulation(sales_key).exercise_13()
-        Manipulation(sales_key).exercise_14()
-        Manipulation(sales_key).exercise_15()
-        Manipulation(sales_key).exercise_16()
-        Manipulation(sales_key).exercise_17()
-        Manipulation(sales_key).exercise_18()
-        Manipulation(sales_key).exercise_19()
-        Manipulation(temp_key).exercise_20()
-        Manipulation(temp_key).exercise_21()
-        Manipulation(temp_key).exercise_22()
-        Manipulation(temp_key).exercise_23()
-        Manipulation(temp_key).exercise_24()
-        Manipulation(temp_key).exercise_25()
-        Manipulation(temp_key).exercise_26()
-        Manipulation(temp_key).exercise_27()
+        # Manipulation(homeless_key).exercise_1()
+        # Manipulation(homeless_key).exercise_2()
+        # Manipulation(homeless_key).exercise_3()
+        # Manipulation(homeless_key).exercise_4()
+        # Manipulation(homeless_key).exercise_5()
+        # Manipulation(homeless_key).exercise_6()
+        # Manipulation(homeless_key).exercise_7()
+        # Manipulation(homeless_key).exercise_8()
+        # Manipulation(sales_key).exercise_9()
+        # Manipulation(sales_key).exercise_10()
+        # Manipulation(sales_key).exercise_11()
+        # Manipulation(sales_key).exercise_12()
+        # Manipulation(sales_key).exercise_13()
+        # Manipulation(sales_key).exercise_14()
+        # Manipulation(sales_key).exercise_15()
+        # Manipulation(sales_key).exercise_16()
+        # Manipulation(sales_key).exercise_17()
+        # Manipulation(sales_key).exercise_18()
+        # Manipulation(sales_key).exercise_19()
+        # Manipulation(temp_key).exercise_20()
+        # Manipulation(temp_key).exercise_21()
+        # Manipulation(temp_key).exercise_22()
+        # Manipulation(temp_key).exercise_23()
+        # Manipulation(temp_key).exercise_24()
+        # Manipulation(temp_key).exercise_25()
+        # Manipulation(temp_key).exercise_26()
+        # Manipulation(temp_key).exercise_27()
+        # Manipulation(temp_key).exercise_28()
+        # Manipulation(temp_key).exercise_29()
+        # Manipulation(temp_key).exercise_30()
+        # Manipulation(temp_key).exercise_31()
+        # Manipulation(avocados_key).exercise_32()
+        # Manipulation(avocados_key).exercise_33()
+        # Manipulation(avocados_key).exercise_34()
+        # Manipulation(avocados_key).exercise_35()
+        # Manipulation(avocados_2016_key).exercise_36()
+        # Manipulation(avocados_2016_key).exercise_37()
+        Manipulation(avocados_2016_key).exercise_38()
 
     # Handle the exceptions appropriately
     except ValueError as e:
         print(e)
 
-    except AttributeError:
-        print("There was a problem retrieving the pandas attribute or the key_selector is None.")
+    except AttributeError as e:
+         print(e)
