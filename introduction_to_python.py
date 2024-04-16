@@ -20,7 +20,7 @@ class Introduction:
         except pd.errors.ParserError:
             print(f"Error: Parsing issue for: '{data_selector}'.")
             self.df = None
-    
+
     def set_data(self, data_selector):
         if data_selector == baseball_key:
             return pd.read_csv(baseball_file_path)
@@ -522,7 +522,7 @@ class Introduction:
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
-        
+
         # Combine height and weight into a list of lists
         baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
         np_baseball = np.array(baseball)
@@ -566,7 +566,7 @@ class Introduction:
 
 
 if __name__ == '__main__':
-    try: 
+    try:
         # Here all the instances are being executed only when called and with the given key
         # Introduction(None).exercise_1()
         # Introduction(None).exercise_2()
@@ -605,10 +605,10 @@ if __name__ == '__main__':
         # Introduction(baseball_key).exercise_35()
         # Introduction(baseball_key).exercise_36()
         Introduction(fifa_key).exercise_37()
-    
+
     # Handle the exceptions appropriately
     except ValueError as e:
-        print(e)  
+        print(e)
 
     except AttributeError:
-        print("There was a problem retriving the pandas attribute or the key_selector is None.")
+        print("There was a problem retrieving the pandas attribute or the key_selector is None.")

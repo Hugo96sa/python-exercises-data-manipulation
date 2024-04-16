@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 homeless_key = 'homeless'
 sales_key = 'sales'
@@ -22,7 +21,7 @@ class Manipulation:
         except pd.errors.ParserError:
             print(f"Error: Parsing issue for: '{data_selector}'.")
             self.df = None
-    
+
     def set_data(self, data_selector):
         if data_selector == homeless_key:
             return pd.read_csv(homeless_file_path, index_col=0)
@@ -75,13 +74,13 @@ class Manipulation:
         print(homelessness_ind.head())
 
         # Sort homelessness by descending family members
-        homelessness_fam = homelessness.sort_values("family_members", ascending = False)
+        homelessness_fam = homelessness.sort_values("family_members", ascending=False)
 
         # Print the top few rows
         print(homelessness_fam.head())
 
         # Sort homelessness by region, then descending family members
-        homelessness_reg_fam = homelessness.sort_values(["region", "family_members"], ascending = [True, False])
+        homelessness_reg_fam = homelessness.sort_values(["region", "family_members"], ascending=[True, False])
 
         # Print the top few rows
         print(homelessness_reg_fam.head())
@@ -91,7 +90,7 @@ class Manipulation:
         homelessness = self.df
 
         # Sort homelessness by region, then descending family members
-        homelessness_reg_fam = homelessness.sort_values(["region", "family_members"], ascending = [True, False])
+        homelessness_reg_fam = homelessness.sort_values(["region", "family_members"], ascending=[True, False])
 
         # Print the top few rows
         print(homelessness_reg_fam.head())
@@ -128,7 +127,7 @@ class Manipulation:
 
         # See the result
         print(fam_lt_1k_pac)
-    
+
     def exercise_6(self):
         homelessness = self.df
 
@@ -147,7 +146,7 @@ class Manipulation:
 
         # See the result
         print(mojave_homelessness)
-    
+
     def exercise_7(self):
         homelessness = self.df
 
@@ -160,18 +159,18 @@ class Manipulation:
 
         # See the result
         print(homelessness)
-    
+
     def exercise_8(self):
         homelessness = self.df
 
         # Create indiv_per_10k col as homeless individuals per 10k state pop
-        homelessness["indiv_per_10k"] = 10000 * homelessness['individuals'] / homelessness['state_pop'] 
+        homelessness["indiv_per_10k"] = 10000 * homelessness['individuals'] / homelessness['state_pop']
 
         # Subset rows for indiv_per_10k greater than 20
         high_homelessness = homelessness[homelessness['indiv_per_10k'] > 20]
 
         # Sort high_homelessness by descending indiv_per_10k
-        high_homelessness_srt = high_homelessness.sort_values('indiv_per_10k', ascending = False)
+        high_homelessness_srt = high_homelessness.sort_values('indiv_per_10k', ascending=False)
 
         # From high_homelessness_srt, select the state and indiv_per_10k cols
         result = high_homelessness_srt[['state', 'indiv_per_10k']]
@@ -209,21 +208,22 @@ class Manipulation:
         # A custom IQR (inter-quartile range) function
         def iqr(column):
             return column.quantile(0.75) - column.quantile(0.25)
-            
+
         # Print IQR of the temperature_c column
         print(sales['temperature_c'].agg(iqr))
 
         # Update to print IQR of temperature_c, fuel_price_usd_per_l, & unemployment
         print(sales[["temperature_c", 'fuel_price_usd_per_l', 'unemployment']].agg(iqr))
 
-        # Update to print IQR and median of temperature_c, fuel_price_usd_per_l, & unemployment, passing median as a string instead of np.median
+        # Update to print IQR and median of temperature_c, fuel_price_usd_per_l, & unemployment,
+        # passing median as a string instead of np.median
         print(sales[["temperature_c", "fuel_price_usd_per_l", "unemployment"]].agg([iqr, 'median']))
 
     def exercise_12(self):
         sales_1_1 = self.df[(self.df['store'] == 1) & (self.df['department'] == 1)]
 
         # Sort sales_1_1 by date
-        sales_1_1 = sales_1_1.sort_values('date', ascending = True)
+        sales_1_1 = sales_1_1.sort_values('date', ascending=True)
 
         # Get the cumulative sum of weekly_sales, add as cum_weekly_sales col
         sales_1_1['cum_weekly_sales'] = sales_1_1['weekly_sales'].cumsum()
@@ -233,7 +233,7 @@ class Manipulation:
 
         # See the columns you calculated
         print(sales_1_1[["date", "weekly_sales", "cum_weekly_sales", "cum_max_sales"]])
-    
+
     def exercise_13(self):
         sales = self.df
 
@@ -265,17 +265,17 @@ class Manipulation:
         print(store_counts)
 
         # Get the proportion of stores of each type
-        store_props = store_types['type'].value_counts(normalize = True)
+        store_props = store_types['type'].value_counts(normalize=True)
         print(store_props)
 
         # Count the number of each department number and sort
-        dept_counts_sorted = store_depts['department'].value_counts(sort = True)
+        dept_counts_sorted = store_depts['department'].value_counts(sort=True)
         print(dept_counts_sorted)
 
         # Get the proportion of departments of each number and sort
         dept_props_sorted = store_depts['department'].value_counts(sort=True, normalize=True)
         print(dept_props_sorted)
-    
+
     def exercise_15(self):
         sales = self.df
 
@@ -283,18 +283,18 @@ class Manipulation:
         sales_all = sales["weekly_sales"].sum()
 
         # Subset for type A stores, calc total weekly sales
-        sales_A = sales[sales["type"] == "A"]["weekly_sales"].sum()
+        sales_a = sales[sales["type"] == "A"]["weekly_sales"].sum()
 
         # Subset for type B stores, calc total weekly sales
-        sales_B = sales[sales["type"] == "B"]["weekly_sales"].sum()
+        sales_b = sales[sales["type"] == "B"]["weekly_sales"].sum()
 
         # Subset for type C stores, calc total weekly sales
-        sales_C = sales[sales["type"] == "C"]["weekly_sales"].sum()
+        sales_c = sales[sales["type"] == "C"]["weekly_sales"].sum()
 
         # Get proportion for each type
-        sales_propn_by_type = [sales_A, sales_B, sales_C] / sales_all
+        sales_propn_by_type = [sales_a, sales_b, sales_c] / sales_all
         print(sales_propn_by_type)
-    
+
     def exercise_16(self):
         sales = self.df
 
@@ -318,8 +318,10 @@ class Manipulation:
         # Print sales_stats
         print(sales_stats)
 
-        # For each store type, aggregate unemployment and fuel_price_usd_per_l: get min, max, mean, and median, passing aggregates as a strings
-        unemp_fuel_stats = sales.groupby('type')[['unemployment', 'fuel_price_usd_per_l']].agg(['min', 'max', 'mean', 'median'])
+        # For each store type, aggregate unemployment and fuel_price_usd_per_l: get min, max, mean, and median
+        # passing aggregates as a strings
+        unemp_fuel_stats = sales.groupby('type')[['unemployment', 'fuel_price_usd_per_l']].agg(
+            ['min', 'max', 'mean', 'median'])
 
         # Print unemp_fuel_stats
         print(unemp_fuel_stats)
@@ -328,18 +330,19 @@ class Manipulation:
         sales = self.df
 
         # Pivot for mean weekly_sales for each store type
-        mean_sales_by_type = sales.pivot_table(values = 'weekly_sales', index = 'type')
+        mean_sales_by_type = sales.pivot_table(values='weekly_sales', index='type')
 
         # Print mean_sales_by_type
         print(mean_sales_by_type)
 
         # Pivot for mean and median weekly_sales for each store type
-        mean_med_sales_by_type = sales.pivot_table(values = 'weekly_sales', index = 'type', aggfunc = ['mean', 'median'])
+        mean_med_sales_by_type = sales.pivot_table(values='weekly_sales', index='type', aggfunc=['mean', 'median'])
 
         # Print mean_med_sales_by_type
         print(mean_med_sales_by_type)
 
-        mean_sales_by_type_holiday = sales.pivot_table(values = 'weekly_sales', index = 'type', columns = 'is_holiday', aggfunc = 'mean')
+        mean_sales_by_type_holiday = sales.pivot_table(values='weekly_sales', index='type', columns='is_holiday',
+                                                       aggfunc='mean')
 
         # Print mean_sales_by_type_holiday
         print(mean_sales_by_type_holiday)
@@ -347,9 +350,11 @@ class Manipulation:
     def exercise_19(self):
         sales = self.df
 
-        print(sales.pivot_table(values = 'weekly_sales', index = 'department', columns = 'type', aggfunc = 'mean', fill_value = 0))
+        print(
+            sales.pivot_table(values='weekly_sales', index='department', columns='type', aggfunc='mean', fill_value=0))
 
-        print(sales.pivot_table(values="weekly_sales", index="department", columns="type", aggfunc = 'mean', fill_value = 0, margins = True))
+        print(sales.pivot_table(values="weekly_sales", index="department", columns="type", aggfunc='mean', fill_value=0,
+                                margins=True))
 
     def exercise_20(self):
         temp = self.df
@@ -383,11 +388,11 @@ class Manipulation:
 
         # Reset the temperatures_ind index, dropping its contents
         print(temperatures_ind.reset_index(drop=True))
-    
+
     def exercise_22(self):
         temperatures = self.df
         temperatures_ind = temperatures.set_index("city")
-        
+
         # Make a list of cities to subset on
         cities = ["Moscow", "Saint Petersburg"]
 
@@ -408,7 +413,7 @@ class Manipulation:
 
         # Subset for rows to keep
         print(temperatures_ind.loc[rows_to_keep])
-    
+
     def exercise_24(self):
         temperatures = self.df
         temperatures_ind = temperatures.set_index(["country", "city"])
@@ -417,11 +422,10 @@ class Manipulation:
         print(temperatures_ind.sort_index())
 
         # Sort temperatures_ind by index values at the city level
-        print(temperatures_ind.sort_index(level=["city","country"]))
+        print(temperatures_ind.sort_index(level=["city", "country"]))
 
         # Sort temperatures_ind by country then descending city
         print(temperatures_ind.sort_index(level=["country", "city"], ascending=[True, False]))
-
 
     def exercise_25(self):
         temperatures = self.df
@@ -437,7 +441,7 @@ class Manipulation:
         print(temperatures_srt.loc["Lahore":"Moscow"])
 
         # Subset rows from Pakistan, Lahore to Russia, Moscow
-        print(temperatures_srt.loc[("Pakistan","Lahore"):("Russia","Moscow")])
+        print(temperatures_srt.loc[("Pakistan", "Lahore"):("Russia", "Moscow")])
 
     def exercise_26(self):
         temperatures = self.df
@@ -445,46 +449,65 @@ class Manipulation:
         temperatures_srt = temperatures_ind.sort_index()
 
         # Subset rows from India, Hyderabad to Iraq, Baghdad
-        print(temperatures_srt.loc[("India","Hyderabad"):("Iraq","Baghdad")])
+        print(temperatures_srt.loc[("India", "Hyderabad"):("Iraq", "Baghdad")])
 
         # Subset columns from date to avg_temp_c
-        print(temperatures_srt.loc[:,"date":"avg_temp_c"])
+        print(temperatures_srt.loc[:, "date":"avg_temp_c"])
 
         # Subset in both directions at once
-        print(temperatures_srt.loc[("India","Hyderabad"):("Iraq","Baghdad"),"date":"avg_temp_c"])
+        print(temperatures_srt.loc[("India", "Hyderabad"):("Iraq", "Baghdad"), "date":"avg_temp_c"])
+
+    def exercise_27(self):
+        temperatures = self.df
+
+        # Use Boolean conditions to subset temperatures for rows in 2010 and 2011
+        temperatures_bool = temperatures[
+            (temperatures["date"] >= "2010-01-01") & (temperatures["date"] <= "2011-12-31")]
+        print(temperatures_bool)
+
+        # Set date as the index and sort the index
+        temperatures_ind = temperatures.set_index("date").sort_index()
+
+        # Use .loc[] to subset temperatures_ind for rows in 2010 and 2011
+        print(temperatures_ind.loc["2010":"2011"])
+
+        # Use .loc[] to subset temperatures_ind for rows from Aug 2010 to Feb 2011
+        print(temperatures_ind.loc["2010-08":"2011-02"])
+
 
 if __name__ == '__main__':
-    try: 
-        # Manipulation(homeless_key).exercise_1()
-        # Manipulation(homeless_key).exercise_2()
-        # Manipulation(homeless_key).exercise_3()
-        # Manipulation(homeless_key).exercise_4()
-        # Manipulation(homeless_key).exercise_5()
-        # Manipulation(homeless_key).exercise_6()
-        # Manipulation(homeless_key).exercise_7()
-        # Manipulation(homeless_key).exercise_8()
-        # Manipulation(sales_key).exercise_9()
-        # Manipulation(sales_key).exercise_10()
-        # Manipulation(sales_key).exercise_11()
-        # Manipulation(sales_key).exercise_12()
-        # Manipulation(sales_key).exercise_13()
-        # Manipulation(sales_key).exercise_14()
-        # Manipulation(sales_key).exercise_15()
-        # Manipulation(sales_key).exercise_16()
-        # Manipulation(sales_key).exercise_17()
-        # Manipulation(sales_key).exercise_18()
-        # Manipulation(sales_key).exercise_19()
-        # Manipulation(temp_key).exercise_20()
-        # Manipulation(temp_key).exercise_21()
-        # Manipulation(temp_key).exercise_22()
-        # Manipulation(temp_key).exercise_23()
-        # Manipulation(temp_key).exercise_24()
-        # Manipulation(temp_key).exercise_25()
+    try:
+        Manipulation(homeless_key).exercise_1()
+        Manipulation(homeless_key).exercise_2()
+        Manipulation(homeless_key).exercise_3()
+        Manipulation(homeless_key).exercise_4()
+        Manipulation(homeless_key).exercise_5()
+        Manipulation(homeless_key).exercise_6()
+        Manipulation(homeless_key).exercise_7()
+        Manipulation(homeless_key).exercise_8()
+        Manipulation(sales_key).exercise_9()
+        Manipulation(sales_key).exercise_10()
+        Manipulation(sales_key).exercise_11()
+        Manipulation(sales_key).exercise_12()
+        Manipulation(sales_key).exercise_13()
+        Manipulation(sales_key).exercise_14()
+        Manipulation(sales_key).exercise_15()
+        Manipulation(sales_key).exercise_16()
+        Manipulation(sales_key).exercise_17()
+        Manipulation(sales_key).exercise_18()
+        Manipulation(sales_key).exercise_19()
+        Manipulation(temp_key).exercise_20()
+        Manipulation(temp_key).exercise_21()
+        Manipulation(temp_key).exercise_22()
+        Manipulation(temp_key).exercise_23()
+        Manipulation(temp_key).exercise_24()
+        Manipulation(temp_key).exercise_25()
         Manipulation(temp_key).exercise_26()
-    
+        Manipulation(temp_key).exercise_27()
+
     # Handle the exceptions appropriately
     except ValueError as e:
-        print(e)  
+        print(e)
 
     except AttributeError:
-        print("There was a problem retriving the pandas attribute or the key_selector is None.")
+        print("There was a problem retrieving the pandas attribute or the key_selector is None.")

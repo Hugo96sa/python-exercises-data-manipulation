@@ -234,7 +234,7 @@ class Intermediate:
         # Use .apply(str.upper)
         cars["COUNTRY"] = cars["country"].apply(str.upper)
         print(cars)
-    
+
     def exercise_19(self):
         # Generate and print random float with the given seed
         print(np.random.rand())
@@ -244,7 +244,7 @@ class Intermediate:
         print(np.random.randint(1, 7))
         # Use randint() again
         print(np.random.randint(1, 7))
-    
+
     def exercise_21(self):
         # Starting step
         step = 50
@@ -253,23 +253,23 @@ class Intermediate:
         dice = np.random.randint(1, 7)
 
         # Finish the control construct
-        if dice <= 2 :
+        if dice <= 2:
             step = step - 1
-        elif dice <= 5 :
+        elif dice <= 5:
             step += 1
-        else :
+        else:
             step = step + np.random.randint(1, 7)
 
         # Print out dice and step
         print(dice)
         print(step)
-    
+
     def exercise_22(self):
         # Initialize random_walk
         random_walk = [0]
 
         # Complete the ___
-        for x in range(100) :
+        for x in range(100):
             # Set step: last element in random_walk
             step = random_walk[-1]
 
@@ -289,12 +289,12 @@ class Intermediate:
 
         # Print random_walk
         print(random_walk)
-    
+
     def exercise_23(self):
         # Initialize random_walk
         random_walk = [0]
 
-        for x in range(100) :
+        for x in range(100):
             step = random_walk[-1]
             dice = np.random.randint(1, 7)
 
@@ -313,7 +313,7 @@ class Intermediate:
     def exercise_24(self):
         random_walk = [0]
 
-        for x in range(100) :
+        for x in range(100):
             step = random_walk[-1]
             dice = np.random.randint(1, 7)
 
@@ -340,11 +340,11 @@ class Intermediate:
         all_walks = []
 
         # Simulate random walk five times
-        for i in range(5) :
+        for i in range(5):
 
             # Code from before
             random_walk = [0]
-            for x in range(100) :
+            for x in range(100):
                 step = random_walk[-1]
                 dice = np.random.randint(1, 7)
 
@@ -365,9 +365,9 @@ class Intermediate:
     def exercise_26(self):
         # initialize and populate all_walks
         all_walks = []
-        for i in range(5) :
+        for i in range(5):
             random_walk = [0]
-            for x in range(100) :
+            for x in range(100):
                 step = random_walk[-1]
                 dice = np.random.randint(1, 7)
                 if dice <= 2:
@@ -400,9 +400,9 @@ class Intermediate:
 
         # Simulate random walk 20 times
         all_walks = []
-        for i in range(20) :
+        for i in range(20):
             random_walk = [0]
-            for x in range(100) :
+            for x in range(100):
                 step = random_walk[-1]
                 dice = np.random.randint(1, 7)
                 if dice <= 2:
@@ -413,7 +413,7 @@ class Intermediate:
                     step = step + np.random.randint(1, 7)
 
                 # Implement clumsiness
-                if np.random.rand() <= 0.005 :
+                if np.random.rand() <= 0.005:
                     step = 0
 
                 random_walk.append(step)
@@ -427,9 +427,9 @@ class Intermediate:
     def exercise_28(self):
         # Simulate random walk 500 times
         all_walks = []
-        for i in range(500) :
+        for i in range(500):
             random_walk = [0]
-            for x in range(100) :
+            for x in range(100):
                 step = random_walk[-1]
                 dice = np.random.randint(1, 7)
                 if dice <= 2:
@@ -438,7 +438,7 @@ class Intermediate:
                     step += 1
                 else:
                     step = step + np.random.randint(1, 7)
-                if np.random.rand() <= 0.001 :
+                if np.random.rand() <= 0.001:
                     step = 0
                 random_walk.append(step)
             all_walks.append(random_walk)
@@ -452,6 +452,7 @@ class Intermediate:
         # Plot histogram of ends, display plot
         plt.hist(ends)
         plt.show()
+
 
 if __name__ == '__main__':
     try:
@@ -485,11 +486,10 @@ if __name__ == '__main__':
         # Intermediate(None).exercise_26()
         # Intermediate(None).exercise_27()
         Intermediate(None).exercise_28()
-        
 
     # Handle the exceptions appropriately
     except ValueError as e:
-        print(e)  
+        print(e)
 
     except AttributeError:
-        print("There was a problem retriving the pandas attribute or the key_selector is None.")
+        print("There was a problem retrieving the pandas attribute or the key_selector is None.")
