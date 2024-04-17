@@ -49,7 +49,7 @@ class Manipulation:
         else:
             raise ValueError("Invalid data_selector provided.")
 
-    # Read and explore the homelessness data
+    # Read and explore the homelessness data DF
     def exercise_1(self):
         homelessness = self.df
 
@@ -65,7 +65,7 @@ class Manipulation:
         # Print a description of homelessness
         print(homelessness.describe())
 
-    # perform numpy observations and general extractions
+    # Explore DF parts and print them, it consists of only 3 parts stored as attributes
     def exercise_2(self):
         homelessness = self.df
 
@@ -78,7 +78,7 @@ class Manipulation:
         # Print the row index of homelessness
         print(homelessness.index)
 
-    # Perform sorting operations in DF
+    # Perform sorting operations in DF, note that a list can be passed as an argument
     def exercise_3(self):
         homelessness = self.df
 
@@ -100,15 +100,15 @@ class Manipulation:
         # Print the top few rows
         print(homelessness_reg_fam.head())
 
-    # Perform sorting by value with two columns
+    # Perform sub setting by columns
     def exercise_4(self):
         homelessness = self.df
 
-        # Sort homelessness by region, then descending family members
-        homelessness_reg_fam = homelessness.sort_values(["region", "family_members"], ascending=[True, False])
+        # Select the individuals column
+        individuals = homelessness['individuals']
 
-        # Print the top few rows
-        print(homelessness_reg_fam.head())
+        # Print the head of the result
+        print(individuals.head())
 
         # Select the state and family_members columns
         state_fam = homelessness[['state', 'family_members']]
@@ -122,6 +122,7 @@ class Manipulation:
         # Print the head of the result
         print(ind_state.head())
 
+    # Perform sub setting by rows, note that you can subset rows with multiple conditions using () and &
     def exercise_5(self):
         homelessness = self.df
 
@@ -143,6 +144,7 @@ class Manipulation:
         # See the result
         print(fam_lt_1k_pac)
 
+    # Perform sub setting by rows with categorical values, note that isin() can accept a list
     def exercise_6(self):
         homelessness = self.df
 
@@ -162,6 +164,7 @@ class Manipulation:
         # See the result
         print(mojave_homelessness)
 
+    # Perform operations with columns in the DF
     def exercise_7(self):
         homelessness = self.df
 
