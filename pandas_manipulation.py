@@ -1,19 +1,21 @@
+# Hugo Solares
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
+airline_key = 'airline'
+avocados_key = 'avocados'
+avocados_2016_key = 'avocados_2016'
 homeless_key = 'homeless'
 sales_key = 'sales'
 temp_key = 'temp'
-avocados_key = 'avocados'
-avocados_2016_key = 'avocados_2016'
-airline_key = 'airline'
 
+airline_file_path = 'data/pandas_manipulation/airline_bumping.csv'
+avocados_file_path = 'data/pandas_manipulation/avoplotto.pkl'
+avocados_2016_file_path = 'data/pandas_manipulation/avocados_2016.csv'
 homeless_file_path = 'data/pandas_manipulation/homelessness.csv'
 sales_file_path = 'data/pandas_manipulation/sales_subset.csv'
 temp_file_path = 'data/pandas_manipulation/temperatures.csv'
-avocados_file_path = 'data/pandas_manipulation/avoplotto.pkl'
-avocados_2016_file_path = 'data/pandas_manipulation/avocados_2016.csv'
-airline_file_path = 'data/pandas_manipulation/airline_bumping.csv'
 
 
 class Manipulation:
@@ -30,18 +32,18 @@ class Manipulation:
             self.df = None
 
     def set_data(self, data_selector):
-        if data_selector == homeless_key:
+        if data_selector == airline_key:
+            return pd.read_csv(airline_file_path, index_col=0)
+        elif data_selector == avocados_key:
+            return pd.read_pickle(avocados_file_path)
+        elif data_selector == avocados_2016_key:
+            return pd.read_csv(avocados_2016_file_path, index_col=0)
+        elif data_selector == homeless_key:
             return pd.read_csv(homeless_file_path, index_col=0)
         elif data_selector == sales_key:
             return pd.read_csv(sales_file_path, index_col=0)
         elif data_selector == temp_key:
             return pd.read_csv(temp_file_path, index_col=0)
-        elif data_selector == avocados_key:
-            return pd.read_pickle(avocados_file_path)
-        elif data_selector == avocados_2016_key:
-            return pd.read_csv(avocados_2016_file_path, index_col=0)
-        elif data_selector == airline_key:
-            return pd.read_csv(airline_file_path, index_col=0)
         elif data_selector is None:
             return None
         else:
@@ -730,6 +732,7 @@ class Manipulation:
 
 if __name__ == '__main__':
     try:
+        # Here all the instances are being executed only when called and with the given key, hope you find it useful
         # Manipulation(homeless_key).exercise_1()
         # Manipulation(homeless_key).exercise_2()
         # Manipulation(homeless_key).exercise_3()
@@ -778,4 +781,4 @@ if __name__ == '__main__':
         print(e)
 
     except AttributeError as e:
-         print(e)
+        print(e)

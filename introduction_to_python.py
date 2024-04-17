@@ -1,3 +1,5 @@
+# Hugo Solares
+
 import pandas as pd
 import numpy as np
 
@@ -31,18 +33,21 @@ class Introduction:
         else:
             raise ValueError("Invalid data_selector provided.")
 
+    # Print the sum of 7 + 10
     def exercise_1(self):
         # Example, do not modify!
         print(5 / 8)
         # Print the sum of 7 and 10
         print(7 + 10)
 
+    # Write the comment for the print for 7 + 10
     def exercise_2(self):
         # Division
         print(5 / 8)
-        # Addition
+        # Addition, practice with comments
         print(7 + 10)
 
+    # Use Python to calculate arithmetic operations
     def exercise_3(self):
         # Addition
         print(4 + 5)
@@ -53,6 +58,7 @@ class Introduction:
         # Division
         print(10 / 2)
 
+    # Create and print a variable
     def exercise_4(self):
         # Create a variable savings
         savings = 100
@@ -60,6 +66,7 @@ class Introduction:
         # Print out savings
         print(savings)
 
+    # Create and perform calculations with variables
     def exercise_5(self):
         savings = 100
 
@@ -76,6 +83,7 @@ class Introduction:
         # Print total_savings
         print(total_savings)
 
+    # Create variables other than numbers
     def exercise_6(self):
         # Create a variable half
         half = 0.5
@@ -86,6 +94,7 @@ class Introduction:
         # Create a variable is_good
         is_good = True
 
+    # Perform operations with other types
     def exercise_7(self):
         monthly_savings = 10
         num_months = 12
@@ -103,6 +112,7 @@ class Introduction:
         # Print out doubleintro
         print(doubleintro)
 
+    # Practice type conversion
     def exercise_8(self):
         # Definition of savings and total_savings
         savings = 100
@@ -117,6 +127,7 @@ class Introduction:
         # Convert pi_string into float: pi_float
         pi_float = float(pi_string)
 
+    # Create a list
     def exercise_9(self):
         # area variables (in square meters)
         hall = 11.25
@@ -131,6 +142,7 @@ class Introduction:
         # Print areas
         print(areas)
 
+    # Create a list with different types
     def exercise_10(self):
         # area variables (in square meters)
         hall = 11.25
@@ -145,6 +157,7 @@ class Introduction:
         # Print areas
         print(areas)
 
+    # Create a list of lists
     def exercise_11(self):
         # area variables (in square meters)
         hall = 11.25
@@ -166,6 +179,7 @@ class Introduction:
         # Print out the type of house
         print(type(house))
 
+    # Subset elements inside the list
     def exercise_12(self):
         # Create the areas list
         areas = ["hallway", 11.25, "kitchen", 18.0, "living room", 20.0, "bedroom", 10.75, "bathroom", 9.50]
@@ -179,6 +193,7 @@ class Introduction:
         # Print out the area of the living room
         print(areas[5])
 
+    # Create a dictionary-like list
     def exercise_13(self):
         # Create the areas list
         areas = ["hallway", 11.25, "kitchen", 18.0, "living room", 20.0, "bedroom", 10.75, "bathroom", 9.50]
@@ -189,6 +204,7 @@ class Introduction:
         # Print the variable eat_sleep_area
         print(eat_sleep_area)
 
+    # Create and subset a dictionary-like list
     def exercise_14(self):
         # Create the areas list
         areas = ["hallway", 11.25, "kitchen", 18.0, "living room", 20.0, "bedroom", 10.75, "bathroom", 9.50]
@@ -203,6 +219,7 @@ class Introduction:
         print(downstairs)
         print(upstairs)
 
+    # Slice and subset a dictionary-like list
     def exercise_15(self):
         # Create the areas list
         areas = ["hallway", 11.25, "kitchen", 18.0, "living room", 20.0, "bedroom", 10.75, "bathroom", 9.50]
@@ -213,6 +230,7 @@ class Introduction:
         # Alternative slicing to create upstairs
         upstairs = areas[6:]
 
+    # Replace elements inside of a list
     def exercise_16(self):
         # Create the areas list
         areas = ["hallway", 11.25, "kitchen", 18.0, "living room", 20.0, "bedroom", 10.75, "bathroom", 9.50]
@@ -223,6 +241,7 @@ class Introduction:
         # Change "living room" to "chill zone"
         areas[4] = "chill zone"
 
+    # Extend a list, to delete elements of a list you may use del()
     def exercise_17(self):
         # Create the areas list and make some changes
         areas = ["hallway", 11.25, "kitchen", 18.0, "chill zone", 20.0,
@@ -234,6 +253,7 @@ class Introduction:
         # Add garage data to areas_1, new list is areas_2
         areas_2 = areas_1 + ["garage", 15.45]
 
+    # Verify that original areas list is not afectes by changes in other copies
     def exercise_18(self):
         # Create list areas
         areas = [11.25, 18.0, 20.0, 10.75, 9.50]
@@ -246,7 +266,8 @@ class Introduction:
 
         # Print areas
         print(areas)
-
+    
+    # Use some functions like type(), len(), int()
     def exercise_19(self):
         # Create variables var1 and var2
         var1 = [1, 2, 3, 4]
@@ -261,6 +282,7 @@ class Introduction:
         # Convert var2 to an integer: out2
         out2 = int(var2)
 
+    # Review arguments usage in a function like sorted()
     def exercise_20(self):
         # Create lists first and second
         first = [11.25, 18.0, 20.0]
@@ -275,6 +297,7 @@ class Introduction:
         # Print out full_sorted
         print(full_sorted)
 
+    # Exercise some string methods
     def exercise_21(self):
         # string to experiment with: place
         place = "poolhouse"
@@ -289,6 +312,7 @@ class Introduction:
         # Print out the number of o's in place
         print(place.count("o"))
 
+    # Now with list methods
     def exercise_22(self):
         # Create list areas
         areas = [11.25, 18.0, 20.0, 10.75, 9.50]
@@ -299,6 +323,7 @@ class Introduction:
         # Print out how often 9.50 appears in areas
         print(areas.count(9.50))
 
+    # More list methods
     def exercise_23(self):
         # Create list areas
         areas = [11.25, 18.0, 20.0, 10.75, 9.50]
@@ -316,6 +341,7 @@ class Introduction:
         # Print out areas
         print(areas)
 
+    # Calculate the area and the circumference of a circle
     def exercise_24(self):
         # Import the math package
         import math as mt
@@ -333,6 +359,7 @@ class Introduction:
         print("Circumference: " + str(c))
         print("Area: " + str(a))
 
+    # Calculate the distance travelled by the Moon over 12 degrees of its orbit
     def exercise_25(self):
         # Import radians function of math package
         from math import radians
@@ -347,6 +374,7 @@ class Introduction:
         # Print out dist
         print(dist)
 
+    # turn a list into a numpy array
     def exercise_26(self):
         # Create list baseball
         baseball = [180, 215, 210, 210, 188, 176, 209, 200]
@@ -357,6 +385,7 @@ class Introduction:
         # Print out type of np_baseball
         print(type(np_baseball))
 
+    # Convert height in inches to meters using numpy arrays
     def exercise_27(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
@@ -373,6 +402,7 @@ class Introduction:
         # Print np_height_m
         print(np_height_m)
 
+    # Now find the weight in kg and calculate the bmi of each playes using numpy arrays
     def exercise_28(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
@@ -389,7 +419,8 @@ class Introduction:
 
         # Print out bmi
         print(bmi)
-
+    
+    # Find out which players are considered light using bmi with m and kg
     def exercise_29(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
@@ -409,6 +440,7 @@ class Introduction:
         # Print out BMIs of all baseball players whose BMI is below 21
         print(bmi[light])
 
+    # Subset numpy arrays
     def exercise_30(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
@@ -424,13 +456,14 @@ class Introduction:
         # Print out sub-array of np_height_in: index 100 up to and including index 110
         print(np_height_in[100:111])
 
+    # Practice 2d numpy arrays, first create one in pairs from the DF
     def exercise_31(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
 
         # Combine height and weight into a list of lists
-        baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
+        baseball = [[h, w] for h, w in zip(height_in, weight_lb)]
 
         # Create a 2D numpy array from baseball: np_baseball
         np_baseball = np.array(baseball)
@@ -441,13 +474,12 @@ class Introduction:
         # Print out the shape of np_baseball
         print(np_baseball.shape)
 
+    # Checkout the data type in a numpy arrays
     def exercise_32(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
-
-        # Combine height and weight into a list of lists
-        baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
+        baseball = [[h, w] for h, w in zip(height_in, weight_lb)]
 
         # Create a 2D numpy array from baseball: np_baseball
         np_baseball = np.array(baseball)
@@ -455,13 +487,12 @@ class Introduction:
         # Print out the shape of np_baseball
         print(np_baseball.shape)
 
+    # Subset in a 2d numpy array
     def exercise_33(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
-
-        # Combine height and weight into a list of lists
-        baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
+        baseball = [[h, w] for h, w in zip(height_in, weight_lb)]
 
         # Create np_baseball (2 cols)
         np_baseball = np.array(baseball)
@@ -476,37 +507,33 @@ class Introduction:
         # Print out height of 124th player
         print(np_baseball[123, 0])
 
+    # Perform calculations inside the 3D np array, wheight, height and age
     def exercise_34(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
-
-        # Combine height and weight into a list of lists
-        baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
+        age_years = mlb_df['Age'].to_list()
+        baseball = [[h, w, a] for h, w, a in zip(height_in, weight_lb, age_years)]
 
         # Create np_baseball (3 cols)
         np_baseball = np.array(baseball)
 
-        # Calculate the BMI: bmi
-        bmi1 = np_baseball[:, 0] / (np_baseball[:, 1] ** 2)
-
-        # # Print out addition of np_baseball and updated
+        # # Print out addition of np_baseball and updated, updated is a 2D np array of 1015 x 3, sadly not found in resources 
         # print(np_baseball + updated)
-        #
-        # # Create numpy array: conversion
-        # conversion = [0.0254, 0.453592, 1]
-        # np_conversion = np.array(conversion)
-        #
-        # # Print out product of np_baseball and conversion
-        # print(np_baseball * np_conversion)
+        
+        # Create numpy array: conversion
+        conversion = [0.0254, 0.453592, 1]
+        np_conversion = np.array(conversion)
+        
+        # Print out product of np_baseball and conversion
+        print(np_baseball * np_conversion)
 
+    # Calculate the nean and median of the np_basebal np array
     def exercise_35(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
-
-        # Combine height and weight into a list of lists
-        baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
+        baseball = [[h, w] for h, w in zip(height_in, weight_lb)]
         np_baseball = np.array(baseball)
 
         # Create np_height_in from np_baseball
@@ -518,13 +545,12 @@ class Introduction:
         # Print out the median of np_height_in
         print(np.median(np_height_in))
 
+    # Explore np_baseball data
     def exercise_36(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
         weight_lb = mlb_df['Weight'].to_list()
-
-        # Combine height and weight into a list of lists
-        baseball = [[w, h] for w, h in zip(weight_lb, height_in)]
+        baseball = [[h, w] for h, w in zip(height_in, weight_lb)]
         np_baseball = np.array(baseball)
 
         # Print mean height (first column)
@@ -541,8 +567,9 @@ class Introduction:
 
         # Print out correlation between first and second column. Replace 'None'
         corr = np.corrcoef(np_baseball[:, 0], np_baseball[:, 1])
-        print("Correlation: " + str(corr))
+        print("Correlation: \n" + str(corr))
 
+    # Now use fifa data, practice np operations and retrieve summary statistics
     def exercise_37(self):
         fifa_df = self.df
         positions = fifa_df['position'].to_list()
@@ -567,7 +594,7 @@ class Introduction:
 
 if __name__ == '__main__':
     try:
-        # Here all the instances are being executed only when called and with the given key
+        # Here all the instances are being executed only when called and with the given key, hope you find it useful
         # Introduction(None).exercise_1()
         # Introduction(None).exercise_2()
         # Introduction(None).exercise_3()

@@ -1,16 +1,18 @@
+# Hugo Solares
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+baseball_key = 'baseball'
 brics_key = 'brics'
 cars_key = 'cars'
 gapminder_key = 'gapminder'
-baseball_key = 'baseball'
 
+baseball_file_path = 'data/introduction_to_python/baseball.csv'
 brics_file_path = 'data/intermediate_python/brics.csv'
 cars_file_path = 'data/intermediate_python/cars.csv'
 gapminder_file_path = 'data/intermediate_python/gapminder.csv'
-baseball_file_path = 'data/introduction_to_python/baseball.csv'
 
 
 class Intermediate:
@@ -28,14 +30,14 @@ class Intermediate:
             self.df = None
 
     def set_data(self, data_selector):
-        if data_selector == brics_key:
+        if data_selector == baseball_key:
+            return pd.read_csv(baseball_file_path)
+        elif data_selector == brics_key:
             return pd.read_csv(brics_file_path, index_col=0)
         elif data_selector == cars_key:
             return pd.read_csv(cars_file_path, index_col=0)
         elif data_selector == gapminder_key:
             return pd.read_csv(gapminder_file_path, index_col=0)
-        elif data_selector == baseball_key:
-            return pd.read_csv(baseball_file_path)
         elif data_selector is None:
             return None
         else:
@@ -456,7 +458,7 @@ class Intermediate:
 
 if __name__ == '__main__':
     try:
-        # Here all the instances are being executed only when called and with the given key
+        # Here all the instances are being executed only when called and with the given key, hope you find it useful
         # Intermediate(None).exercise_1()
         # Intermediate(cars_key).exercise_2()
         # Intermediate(brics_key).exercise_3()
