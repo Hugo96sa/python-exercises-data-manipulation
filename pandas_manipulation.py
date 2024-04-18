@@ -49,23 +49,31 @@ class Manipulation:
         else:
             raise ValueError("Invalid data_selector provided.")
 
-    # Read and explore the homelessness data DF
+    # Read and explore the homelessness DF
     def exercise_1(self):
         homelessness = self.df
 
         # Print the head of the homelessness data
         print(homelessness.head())
 
-        # Print information about homelessness
+        # Print the tail of the homelessness data
+        print(homelessness.tail())
+
+        # Print a random sample of the homelessness data
+        print(homelessness.sample())
+
+        # Print information about homelessness, including data types and null values.
         print(homelessness.info())
 
-        # Print the shape of homelessness
+        # Print the shape of homelessness, shape attribute is a tuple containing the number of rows and columns
         print(homelessness.shape)
 
-        # Print a description of homelessness
+        # Print a description of homelessness, with descriptive statistics about the DataFrame
+        # such as mean, median, min, max, etc.
         print(homelessness.describe())
 
-    # Explore DF parts and print them, it consists of only 3 parts stored as attributes
+    # Explore the DF parts and print them, it consists of only 3 parts: values, column names and indexes,
+    # those are stored as attributes
     def exercise_2(self):
         homelessness = self.df
 
@@ -78,7 +86,36 @@ class Manipulation:
         # Print the row index of homelessness
         print(homelessness.index)
 
-    # Perform sorting operations in DF, note that a list can be passed as an argument
+    # Indexing and Selection
+    def exercise_2_1(self):
+        homelessness = self.df
+
+        # Select a single column from a DataFrame with df[column_name].
+        print(homelessness['state'].head())
+
+        # Select a single column from a DataFrame with df.column_name.
+        print(homelessness.region.head())
+
+        # Select multiple columns from a DataFrame with df[[col1, col2]].
+        print(homelessness[['region', 'state']].head())
+
+        # Select specific rows and columns by labels with df.loc[row_label, col_label]
+        print(homelessness.loc[3, 'state'])
+
+        # Select specific rows and columns by integer indices with df.iloc[row_index, col_index]
+        print(homelessness.iloc[3, 1])
+
+    # Filtering and Sorting
+    def exercise_2_2(self):
+        homelessness = self.df
+
+        # Filter rows based on a condition df[df['column'] > value]
+        print(homelessness[homelessness['individuals'] > 10000])
+
+        # Filter rows based on multiple conditions, use &
+        print(homelessness[(homelessness['individuals'] > 10000) & (homelessness['state_pop'] > 15000000)])
+
+    # Perform Sorting operations in DF, note that a list can be passed as an argument
     def exercise_3(self):
         homelessness = self.df
 
@@ -227,6 +264,8 @@ class Manipulation:
         print(sales['date'].min())
 
     # Define a custom IQR function and print aggregate operations using this function
+    # The .agg() method allows you to apply your own custom functions to a DataFrame, as well as apply functions to
+    # more than one column of a DataFrame at once, making your aggregations super-efficient.
     def exercise_11(self):
         sales = self.df
 
@@ -237,14 +276,16 @@ class Manipulation:
         # Print IQR of the temperature_c column
         print(sales['temperature_c'].agg(iqr))
 
-        # Update to print IQR of temperature_c, fuel_price_usd_per_l, & unemployment
+        # Print IQR of temperature_c, fuel_price_usd_per_l, & unemployment
         print(sales[["temperature_c", 'fuel_price_usd_per_l', 'unemployment']].agg(iqr))
 
-        # Update to print IQR and median of temperature_c, fuel_price_usd_per_l, & unemployment,
+        # Print IQR and median of temperature_c, fuel_price_usd_per_l, & unemployment,
         # passing median as a string argument instead of np.median object
         print(sales[["temperature_c", "fuel_price_usd_per_l", "unemployment"]].agg([iqr, 'median']))
 
+    # Find the cummulative sum and maximum values in 'weekly_sales' from 'store' = 1 and 'department' == 1 data
     def exercise_12(self):
+        # Subset the DF to find the data in which 'store' == 1 and 'department' == 1, note that we use & operator
         sales_1_1 = self.df[(self.df['store'] == 1) & (self.df['department'] == 1)]
 
         # Sort sales_1_1 by date
@@ -259,6 +300,8 @@ class Manipulation:
         # See the columns you calculated
         print(sales_1_1[["date", "weekly_sales", "cum_weekly_sales", "cum_max_sales"]])
 
+    # Find unique conbinations of 'store' and 'type' / 'store' and 'department' by dropping duplicates
+    # subset the rows where 'is_holiday' == True, dropiing duplicates with the same 'date'
     def exercise_13(self):
         sales = self.df
 
@@ -275,32 +318,36 @@ class Manipulation:
 
         # Print date col of holiday_dates
         print(holiday_dates['date'])
-
+    
+    # From last exercise, count and get the proportion of the store/types and store/departments, sort them
     def exercise_14(self):
         sales = self.df
-
-        # Drop duplicate store/type combinations
         store_types = sales.drop_duplicates(subset=["store", "type"])
-
-        # Drop duplicate store/department combinations
         store_depts = sales.drop_duplicates(subset=["store", "department"])
 
-        # Count the number of stores of each type
-        store_counts = store_types['type'].value_counts()
-        print(store_counts)
+        # # Count the number of stores of each type
+        # store_counts = store_types['type'].value_counts()
+        # print(store_counts)
 
-        # Get the proportion of stores of each type
-        store_props = store_types['type'].value_counts(normalize=True)
-        print(store_props)
+        # # Get the proportion of stores of each type
+        # store_props = store_types['type'].value_counts(normalize=True)
+        # print(store_props)
 
-        # Count the number of each department number and sort
-        dept_counts_sorted = store_depts['department'].value_counts(sort=True)
-        print(dept_counts_sorted)
+        store_depts['count'] = sales.groupby(['store', 'department']).transform('size')
 
-        # Get the proportion of departments of each number and sort
-        dept_props_sorted = store_depts['department'].value_counts(sort=True, normalize=True)
-        print(dept_props_sorted)
+        # # Count the number of each department number and sort
+        # dept_counts_sorted = store_depts['department'].value_counts(sort=True)
+        # print(dept_counts_sorted)
 
+        # # Get the proportion of departments of each number and sort
+        # dept_props_sorted = store_depts['department'].value_counts(sort=True, normalize=True)
+        # print(dept_props_sorted)
+
+        print(store_depts['count'])
+
+
+
+    # Calculate the percentage of sales occured in each store type
     def exercise_15(self):
         sales = self.df
 
@@ -745,6 +792,8 @@ if __name__ == '__main__':
         # Here all the instances are being executed only when called and with the given key, hope you find it useful
         # Manipulation(homeless_key).exercise_1()
         # Manipulation(homeless_key).exercise_2()
+        # Manipulation(homeless_key).exercise_2_1()
+        Manipulation(homeless_key).exercise_2_2()
         # Manipulation(homeless_key).exercise_3()
         # Manipulation(homeless_key).exercise_4()
         # Manipulation(homeless_key).exercise_5()
@@ -753,7 +802,7 @@ if __name__ == '__main__':
         # Manipulation(homeless_key).exercise_8()
         # Manipulation(sales_key).exercise_9()
         # Manipulation(sales_key).exercise_10()
-        Manipulation(sales_key).exercise_11()
+        # Manipulation(sales_key).exercise_11()
         # Manipulation(sales_key).exercise_12()
         # Manipulation(sales_key).exercise_13()
         # Manipulation(sales_key).exercise_14()
