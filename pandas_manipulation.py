@@ -164,7 +164,7 @@ class Manipulation:
         # See the result
         print(mojave_homelessness)
 
-    # Perform operations with columns in the DF
+    # Add a column in the DF called 'total' with the sum of 'individuals' and 'family_members'
     def exercise_7(self):
         homelessness = self.df
 
@@ -178,6 +178,9 @@ class Manipulation:
         # See the result
         print(homelessness)
 
+    # We have seen the four most common types of data manipulation: sorting rows, subsetting columns, 
+    # subsetting rows, and adding new columns.
+    # Perform broadcasting calculations and subsetting operations in the DF to find the places with high homelessness
     def exercise_8(self):
         homelessness = self.df
 
@@ -196,6 +199,8 @@ class Manipulation:
         # See the result
         print(result)
 
+    # Summary statistics
+    # Explore the sales dataset, calculate and print the mean and the median of 'weekly_sales'
     def exercise_9(self):
         sales = self.df
 
@@ -211,6 +216,7 @@ class Manipulation:
         # Print the median of weekly_sales
         print(sales['weekly_sales'].median())
 
+    # Calculate the maximum and minimum of 'date' in sales DF
     def exercise_10(self):
         sales = self.df
 
@@ -220,6 +226,7 @@ class Manipulation:
         # Print the minimum of the date column
         print(sales['date'].min())
 
+    # Define a custom IQR function and print aggregate operations using this function
     def exercise_11(self):
         sales = self.df
 
@@ -234,7 +241,7 @@ class Manipulation:
         print(sales[["temperature_c", 'fuel_price_usd_per_l', 'unemployment']].agg(iqr))
 
         # Update to print IQR and median of temperature_c, fuel_price_usd_per_l, & unemployment,
-        # passing median as a string instead of np.median
+        # passing median as a string argument instead of np.median object
         print(sales[["temperature_c", "fuel_price_usd_per_l", "unemployment"]].agg([iqr, 'median']))
 
     def exercise_12(self):
@@ -746,7 +753,7 @@ if __name__ == '__main__':
         # Manipulation(homeless_key).exercise_8()
         # Manipulation(sales_key).exercise_9()
         # Manipulation(sales_key).exercise_10()
-        # Manipulation(sales_key).exercise_11()
+        Manipulation(sales_key).exercise_11()
         # Manipulation(sales_key).exercise_12()
         # Manipulation(sales_key).exercise_13()
         # Manipulation(sales_key).exercise_14()
@@ -777,7 +784,7 @@ if __name__ == '__main__':
         # Manipulation(None).exercise_39()
         # Manipulation(None).exercise_40()
         # Manipulation(airline_key).exercise_41()
-        Manipulation(airline_key).exercise_42()
+        # Manipulation(airline_key).exercise_42()
 
     # Handle the exceptions appropriately
     except ValueError as e:
