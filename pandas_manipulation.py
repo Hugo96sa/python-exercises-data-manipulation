@@ -99,20 +99,20 @@ class Manipulation:
         # Select multiple columns from a DataFrame with df[[col1, col2]].
         print(homelessness[['region', 'state']].head())
 
-        # Select specific rows and columns by labels with df.loc[row_label, col_label]
+        # Loc, Select specific rows and columns by labels with df.loc[row_label, col_label]
         print(homelessness.loc[3, 'state'])
 
-        # Select specific rows and columns by integer indices with df.iloc[row_index, col_index]
+        # Iloc, Select specific rows and columns by integer indices with df.iloc[row_index, col_index]
         print(homelessness.iloc[3, 1])
 
-    # Filtering and Sorting
+    # Filtering simple and multiple columns
     def exercise_2_2(self):
         homelessness = self.df
 
         # Filter rows based on a condition df[df['column'] > value]
         print(homelessness[homelessness['individuals'] > 10000])
 
-        # Filter rows based on multiple conditions, use &
+        # Filter rows based on multiple conditions, use & operator
         print(homelessness[(homelessness['individuals'] > 10000) & (homelessness['state_pop'] > 15000000)])
 
     # Perform Sorting operations in DF, note that a list can be passed as an argument
@@ -201,7 +201,7 @@ class Manipulation:
         # See the result
         print(mojave_homelessness)
 
-    # Add a column in the DF called 'total' with the sum of 'individuals' and 'family_members'
+    # Broadcasting, Add a column in the DF called 'total' with the sum of 'individuals' and 'family_members'
     def exercise_7(self):
         homelessness = self.df
 
