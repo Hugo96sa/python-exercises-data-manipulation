@@ -236,6 +236,12 @@ class Manipulation:
         # See the result
         print(result)
 
+    # Find unique values in a given column
+    def exercise_8_1(self):
+        homelessness = self.df
+
+        print(homelessness['state'].unique())
+
     # Summary statistics
     # Explore the sales dataset, calculate and print the mean and the median of 'weekly_sales'
     def exercise_9(self):
@@ -325,28 +331,32 @@ class Manipulation:
         store_types = sales.drop_duplicates(subset=["store", "type"])
         store_depts = sales.drop_duplicates(subset=["store", "department"])
 
-        # # Count the number of stores of each type
-        # store_counts = store_types['type'].value_counts()
-        # print(store_counts)
+        # Count the number of stores of each type
+        store_counts = store_types['type'].value_counts()
+        print(store_counts)
 
-        # # Get the proportion of stores of each type
-        # store_props = store_types['type'].value_counts(normalize=True)
-        # print(store_props)
+        # Get the proportion of stores of each type
+        store_props = store_types['type'].value_counts(normalize=True)
+        print(store_props)
 
-        store_depts['count'] = sales.groupby(['store', 'department']).transform('size')
+        # Count the number of each department number and sort
+        dept_counts_sorted = store_depts['department'].value_counts(sort=True)
+        print(dept_counts_sorted)
 
-        # # Count the number of each department number and sort
-        # dept_counts_sorted = store_depts['department'].value_counts(sort=True)
-        # print(dept_counts_sorted)
+        # Get the proportion of departments of each number and sort
+        dept_props_sorted = store_depts['department'].value_counts(sort=True, normalize=True)
+        print(dept_props_sorted)
 
-        # # Get the proportion of departments of each number and sort
-        # dept_props_sorted = store_depts['department'].value_counts(sort=True, normalize=True)
-        # print(dept_props_sorted)
+        # Another way to just print count uniques
+        sales['count'] = sales.groupby(['store', 'department']).transform('size')
+        sales = sales.drop_duplicates(subset=['store', 'department'])
+        print(sales[['store', 'department', 'count']])
 
-        print(store_depts['count'])
+        counts = sales.groupby(['store', 'department']).size().reset_index(name='count')
+        unique_counts = counts.drop_duplicates(subset=['store', 'department'])
+        print(unique_counts)
 
-
-
+    # Grouped summary statistics, without using groupby()
     # Calculate the percentage of sales occured in each store type
     def exercise_15(self):
         sales = self.df
@@ -364,9 +374,10 @@ class Manipulation:
         sales_c = sales[sales["type"] == "C"]["weekly_sales"].sum()
 
         # Get proportion for each type
-        sales_propn_by_type = [sales_a, sales_b, sales_c] / sales_all
-        print(sales_propn_by_type)
+        sales_prop_by_type = [sales_a, sales_b, sales_c] / sales_all
+        print(sales_prop_by_type)
 
+    # Calculations with groupby()
     def exercise_16(self):
         sales = self.df
 
@@ -374,13 +385,14 @@ class Manipulation:
         sales_by_type = sales.groupby("type")["weekly_sales"].sum()
 
         # Get proportion for each type
-        sales_propn_by_type = sales_by_type / sum(sales['weekly_sales'])
-        print(sales_propn_by_type)
+        sales_prop_by_type = sales_by_type / sum(sales['weekly_sales'])
+        print(sales_prop_by_type)
 
         # Group by type and is_holiday; calc total weekly sales
         sales_by_type_is_holiday = sales.groupby(['type', 'is_holiday'])['weekly_sales'].sum()
         print(sales_by_type_is_holiday)
 
+    # Multiple grouped summaries
     def exercise_17(self):
         sales = self.df
 
@@ -398,10 +410,16 @@ class Manipulation:
         # Print unemp_fuel_stats
         print(unemp_fuel_stats)
 
+    # Pivoting on one variable
     def exercise_18(self):
         sales = self.df
 
-        # Pivot for mean weekly_sales for each store type
+        # Calculate the mean using groupby()
+        mean_sales_by_type = sales.groupby("type")["weekly_sales"].mean()
+        print(mean_sales_by_type)
+
+        # Calculate the mean using pivot_table(), Pivot for mean weekly_sales for each store type, not specifiyng
+        # aggfunc argument returns mean by default
         mean_sales_by_type = sales.pivot_table(values='weekly_sales', index='type')
 
         # Print mean_sales_by_type
@@ -419,12 +437,15 @@ class Manipulation:
         # Print mean_sales_by_type_holiday
         print(mean_sales_by_type_holiday)
 
+    # Pivoting on 2 variables, filling the NaN with 0
     def exercise_19(self):
         sales = self.df
 
+        # Print mean weekly_sales by department and type; fill missing values with 0
         print(
             sales.pivot_table(values='weekly_sales', index='department', columns='type', aggfunc='mean', fill_value=0))
 
+        # Print the mean weekly_sales by department and type; fill missing values with 0s; sum all rows and cols
         print(sales.pivot_table(values="weekly_sales", index="department", columns="type", aggfunc='mean', fill_value=0,
                                 margins=True))
 
@@ -698,6 +719,7 @@ class Manipulation:
         # Show plot
         plt.show()
     
+    # Missing Data Handling
     def exercise_37(self):
         avocados_2016 = self.df
         
@@ -707,6 +729,7 @@ class Manipulation:
         # Check if any columns contain missing values
         print(avocados_complete.isna().any())
     
+    # Plot the ocurrence of missing data in the DF
     def exercise_38(self):
         avocados_2016 = self.df
 
@@ -793,13 +816,14 @@ if __name__ == '__main__':
         # Manipulation(homeless_key).exercise_1()
         # Manipulation(homeless_key).exercise_2()
         # Manipulation(homeless_key).exercise_2_1()
-        Manipulation(homeless_key).exercise_2_2()
+        # Manipulation(homeless_key).exercise_2_2()
         # Manipulation(homeless_key).exercise_3()
         # Manipulation(homeless_key).exercise_4()
         # Manipulation(homeless_key).exercise_5()
         # Manipulation(homeless_key).exercise_6()
         # Manipulation(homeless_key).exercise_7()
         # Manipulation(homeless_key).exercise_8()
+        # Manipulation(homeless_key).exercise_8_1()
         # Manipulation(sales_key).exercise_9()
         # Manipulation(sales_key).exercise_10()
         # Manipulation(sales_key).exercise_11()
@@ -833,7 +857,7 @@ if __name__ == '__main__':
         # Manipulation(None).exercise_39()
         # Manipulation(None).exercise_40()
         # Manipulation(airline_key).exercise_41()
-        # Manipulation(airline_key).exercise_42()
+        Manipulation(airline_key).exercise_42()
 
     # Handle the exceptions appropriately
     except ValueError as e:
