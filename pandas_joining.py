@@ -281,6 +281,47 @@ class Joining:
         # Print the top few rows of sorted_pop_vac_lic
         print(sorted_pop_vac_lic.head())
 
+    # Left joins
+    def exercise_8(self):
+        movies = self.set_data(movies_key)
+        financials = self.set_data(financials_key)
+        print(movies.head(), movies.shape)
+        print(financials.head(), financials.shape)
+
+        # Merge movies and financials with a left join
+        movies_financials = movies.merge(financials, on='id',how='left')
+        print(movies_financials.head())
+
+        # Count the number of rows in the budget column that are missing
+        number_of_missing_fin = movies_financials['budget'].isnull().sum()
+
+        # Print the number of movies missing financials
+        print(number_of_missing_fin)
+
+    # Enriching the dataset
+    def exercise_9(self):
+        movies = self.set_data(movies_key)
+        taglines = self.set_data(taglines_key)
+        toy_story = movies[movies['title'].isin(['Toy Story', 'Toy Story 2', 'Toy Story 3'])]
+
+        if toy_story.empty:
+            print("No Toy Story movies found.")
+            return  # Exit the method if no Toy Story movies are found
+
+        # Merge the toy_story and taglines tables with a left join
+        toystory_tag = toy_story.merge(taglines, on='id', how='left')
+
+        # Print the rows and shape of toystory_tag
+        print(toystory_tag)
+        print(toystory_tag.shape)
+
+        # Merge the toy_story and taglines tables with a inner join, notice that nulls are lost
+        toystory_tag = toy_story.merge(taglines, on='id')
+
+        # Print the rows and shape of toystory_tag
+        print(toystory_tag)
+        print(toystory_tag.shape)
+
 
 if __name__ == '__main__':
     try:
@@ -292,7 +333,9 @@ if __name__ == '__main__':
         # j.exercise_4()
         # j.exercise_5()
         # j.exercise_6()
-        j.exercise_7()
+        # j.exercise_7()
+        # j.exercise_8()
+        j.exercise_9()
 
     # Handle the exceptions appropriately
     except ValueError as e:
