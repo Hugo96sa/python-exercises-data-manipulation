@@ -2,6 +2,8 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
 
 actors_movies_key = 'act_mov'
 business_owners_key = 'bus_own'
@@ -308,20 +310,152 @@ class Joining:
             print("No Toy Story movies found.")
             return  # Exit the method if no Toy Story movies are found
 
-        # Merge the toy_story and taglines tables with a left join
+        # Merge the toy_story DF and taglines tables with a left join
         toystory_tag = toy_story.merge(taglines, on='id', how='left')
 
         # Print the rows and shape of toystory_tag
         print(toystory_tag)
         print(toystory_tag.shape)
 
-        # Merge the toy_story and taglines tables with a inner join, notice that nulls are lost
+        # Merge the toy_story DF and taglines tables with a inner join, notice that nulls are lost
         toystory_tag = toy_story.merge(taglines, on='id')
 
         # Print the rows and shape of toystory_tag
         print(toystory_tag)
         print(toystory_tag.shape)
 
+    # Left join, one to one and one to many
+    def exercise_10(self):
+        movies = self.set_data(movies_key)
+        left_table = movies[movies['title'].isin(['Jurassic Park', 'The Lost World: Jurassic Park', 'Jurassic World', 'Jurassic Park III'])]
+        one_to_one = self.set_data(taglines_key)
+        one_to_many = self.set_data(crews_key)
+        print(left_table.head(), left_table.shape)
+        print(one_to_one.head(), one_to_one.shape)
+        print(one_to_many.head(), one_to_many.shape)
+
+        # The output of a one-to-many merge with a left join will have greater than or equal rows than the left table.
+        print(left_table.merge(one_to_one, on='id', how='left').shape)
+        print(left_table.merge(one_to_many, on='id', how='left').shape)
+
+    # Right joins
+    def exercise_11(self):
+        movies_genres = self.set_data(movie_to_genres_key)
+        movies = self.set_data(movies_key)
+        action_movies = movies_genres[movies_genres['genre'].isin(['Action'])]
+        scifi_movies = movies_genres[movies_genres['genre'].isin(['Science Fiction'])]
+
+        # Some movies have more than 1 genre
+        print(movies_genres[movies_genres['movie_id'] == 18])
+
+        # Merge action_movies to scifi_movies with right join, add suffixes
+        action_scifi = action_movies.merge(scifi_movies, on='movie_id', how='right',
+                                        suffixes=('_act', '_sci'))
+
+        # Print the first few rows of action_scifi to see the structure
+        print(action_scifi.head())
+
+        # From action_scifi, select only the rows where the genre_act column is null
+        scifi_only = action_scifi[action_scifi['genre_act'].isnull()]
+
+        # Merge the movies and scifi_only tables with an inner join
+        movies_and_scifi_only = movies.merge(scifi_only, left_on='id', right_on='movie_id')
+
+        # Print the first few rows and shape of movies_and_scifi_only
+        print(movies_and_scifi_only.head())
+        print(movies_and_scifi_only.shape)
+
+    # Popular genres with right join, first find the top 10 most popular genres in movies, then join by id and count
+    def exercise_12(self):
+        movie_to_genres = self.set_data(movie_to_genres_key)
+        movies = self.set_data(movies_key)
+        pop_movies = movies.sort_values('popularity', ascending=False).head(10) # select the top 10
+
+        # Use right join to merge the movie_to_genres and pop_movies tables
+        genres_movies = movie_to_genres.merge(pop_movies, how='right', left_on='movie_id', right_on='id')
+
+        # Count the number of genres
+        genre_count = genres_movies.groupby('genre').agg({'id':'count'})
+
+        # Sort genre_count in descending order based on the count of movies
+        genre_count = genre_count.sort_values(by='id', ascending=False)
+        print(genre_count)
+
+        # Plot with matplotlib a bar chart of the genre_count
+        genre_count.plot(kind='bar', rot=45)
+        plt.xlabel('Genre')
+        plt.ylabel('Number of Movies')
+        plt.title('Number of Movies per Genre for Top 10 Popular Movies')
+        plt.show()
+
+    # Popular genres with right join, first find the top 10 most popular genres in movies, then join by id and count
+    def exercise_13(self):
+        movie_to_genres = self.set_data(movie_to_genres_key)
+        movies = self.set_data(movies_key)
+        pop_movies = movies.sort_values('popularity', ascending=False).head(10) # select the top 10
+
+        # Use right join to merge the movie_to_genres and pop_movies tables
+        genres_movies = movie_to_genres.merge(pop_movies, how='right', left_on='movie_id', right_on='id')
+
+        # Count the number of genres
+        genre_count = genres_movies.groupby('genre').agg({'id':'count'})
+
+        # Sort genre_count in descending order based on the count of movies
+        genre_count = genre_count.sort_values(by='id', ascending=False).reset_index()
+        print(genre_count)
+
+        # Plot using Seaborn
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x='genre', y='id', data=genre_count, palette='viridis')
+        plt.xlabel('Genre')
+        plt.ylabel('Number of Movies')
+        plt.title('Number of Movies per Genre for Top 10 Popular Movies')
+        plt.xticks(rotation=45, ha='right')
+        plt.tight_layout()  # Adjust layout to prevent overlapping labels
+        plt.show()
+    
+    # Popular genres with right join, first find the top 10 most popular genres in movies, then join by id and count
+    def exercise_14(self):
+        movie_to_genres = self.set_data(movie_to_genres_key)
+        movies = self.set_data(movies_key)
+        pop_movies = movies.sort_values('popularity', ascending=False).head(10) # select the top 10
+
+        # Use right join to merge the movie_to_genres and pop_movies tables
+        genres_movies = movie_to_genres.merge(pop_movies, how='right', left_on='movie_id', right_on='id')
+
+        # Count the number of genres
+        genre_count = genres_movies.groupby('genre').agg({'id':'count'})
+
+        # Sort genre_count in descending order based on the count of movies
+        genre_count = genre_count.sort_values(by='id', ascending=False).reset_index()
+        print(genre_count)
+
+        # Plot using Plotly
+        fig = px.bar(genre_count, x='genre', y='id', labels={'genre': 'Genre', 'id': 'Number of Movies'},
+                    title='Number of Movies per Genre for Top 10 Popular Movies',
+                    color='genre', color_discrete_sequence=px.colors.qualitative.Plotly)
+
+        fig.update_layout(xaxis_title='Genre', yaxis_title='Number of Movies', title='Number of Movies per Genre for Top 10 Popular Movies')
+        fig.show()
+
+    # Create a outer join
+    def exercise_15(self):
+        movies = self.set_data(movies_key)
+        casts = self.set_data(casts_key)
+        iron_man_id = movies['id'][movies['title'].isin(['Iron Man'])].values[0]
+        iron_man_2_id = movies['id'][movies['title'].isin(['Iron Man 2'])].values[0]
+
+        iron_1_actors = casts[casts['movie_id'] == iron_man_id][['character', 'id', 'name']]
+        iron_2_actors = casts[casts['movie_id'] == iron_man_2_id][['character', 'id', 'name']]
+
+        # Merge iron_1_actors to iron_2_actors on id with outer join using suffixes
+        iron_1_and_2 = iron_1_actors.merge(iron_2_actors, on='id', how='outer', suffixes=('_1','_2'))
+
+        # Create an index that returns true if name_1 or name_2 are null
+        m = iron_1_and_2['name_1'].isnull() | iron_1_and_2['name_2'].isnull()
+
+        # Print the first few rows of iron_1_and_2
+        print(iron_1_and_2[m].head())
 
 if __name__ == '__main__':
     try:
@@ -335,7 +469,13 @@ if __name__ == '__main__':
         # j.exercise_6()
         # j.exercise_7()
         # j.exercise_8()
-        j.exercise_9()
+        # j.exercise_9()
+        # j.exercise_10()
+        # j.exercise_11()
+        # j.exercise_12()
+        # j.exercise_13()
+        # j.exercise_14()
+        j.exercise_15()
 
     # Handle the exceptions appropriately
     except ValueError as e:
