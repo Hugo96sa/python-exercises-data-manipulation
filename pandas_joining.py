@@ -6,19 +6,26 @@ import seaborn as sns
 import plotly.express as px
 
 actors_movies_key = 'act_mov'
+albums_key = 'albums'
+artists_key = 'artists'
 business_owners_key = 'bus_own'
 casts_key = 'casts'
 census_key = 'census'
 census_altered_key = 'cen_alt'
 crews_key = 'crews'
 cta_calendar_key = 'cta_cal'
-cta_ridership_key = 'cta_rider'
+cta_ridership_key = 'cta_rid'
 employees_key = 'employees'
 financials_key = 'financials'
+genres_key = 'genres'
+inv_aug_key = 'inv_aug'
+inv_jul_key = 'inv_jul'
+inv_sep_key = 'inv_sep'
 land_use_key = 'lan_use'
 licenses_key = 'licenses'
 movie_to_genres_key = 'mov_gen'
 movies_key = 'movies'
+non_mus_key = 'non_mus'
 ratings_key = 'ratings'
 sp500_key = 'sp500'
 sequels_key = 'sequels'
@@ -27,6 +34,10 @@ taglines_key = 'taglines'
 taxi_owners_key = 'tax_own'
 taxi_vehicles_key = 'tax_veh'
 top_cust_key = 'top_cst'
+top_invoices_key = 'top_inv'
+tracks_master_key = 'trk_mas'
+tracks_ride_key = 'trk_rid'
+tracks_st_key = 'trk_st'
 ward_key = 'ward'
 wards_altered_key = 'war_alt'
 world_bank_gdp_key = 'wor_bnk_gdp'
@@ -34,6 +45,8 @@ world_bank_pop_key = 'wor_bnk_pop'
 zip_demo_key = 'zip_demo'
 
 actors_movies_file_path = 'data/pandas_joining/actors_movies.csv'
+albums_file_path = 'data/pandas_joining/albums.csv'
+artists_file_path = 'data/pandas_joining/artists.csv'
 business_owners_file_path = 'data/pandas_joining/business_owners.p'
 casts_file_path = 'data/pandas_joining/casts.p'
 census_file_path = 'data/pandas_joining/census.p'
@@ -43,10 +56,15 @@ cta_calendar_file_path = 'data/pandas_joining/cta_calendar.p'
 cta_ridership_file_path = 'data/pandas_joining/cta_ridership.p'
 employees_file_path = 'data/pandas_joining/employees.csv'
 financials_file_path = 'data/pandas_joining/financials.p'
+genres_file_path = 'data/pandas_joining/genres.csv'
+inv_aug_file_path = 'data/pandas_joining/inv_aug.csv'
+inv_jul_file_path = 'data/pandas_joining/inv_jul.csv'
+inv_sep_file_path = 'data/pandas_joining/inv_sep.csv'
 land_use_file_path = 'data/pandas_joining/land_use.p'
 licenses_file_path = 'data/pandas_joining/licenses.p'
 movie_to_genres_file_path = 'data/pandas_joining/movie_to_genres.p'
 movies_file_path = 'data/pandas_joining/movies.p'
+non_mus_file_path = 'data/pandas_joining/non_mus_tcks.csv'
 ratings_file_path = 'data/pandas_joining/ratings.p'
 sp500_file_path = 'data/pandas_joining/S&P500.csv'
 sequels_file_path = 'data/pandas_joining/sequels.p'
@@ -55,6 +73,10 @@ taglines_file_path = 'data/pandas_joining/taglines.p'
 taxi_owners_file_path = 'data/pandas_joining/taxi_owners.p'
 taxi_vehicles_file_path = 'data/pandas_joining/taxi_vehicles.p'
 top_cust_file_path = 'data/pandas_joining/top_cust.csv'
+top_invoices_file_path = 'data/pandas_joining/top_invoices.csv'
+tracks_master_file_path = 'data/pandas_joining/tracks_master.csv'
+tracks_ride_file_path = 'data/pandas_joining/tracks_ride.csv'
+tracks_st_file_path = 'data/pandas_joining/tracks_st.csv'
 ward_file_path = 'data/pandas_joining/ward.p'
 wards_altered_file_path = 'data/pandas_joining/wards_altered.csv'
 world_bank_gdp_file_path = 'data/pandas_joining/WorldBank_GDP.csv'
@@ -70,6 +92,10 @@ class Joining:
         try:
             if data_selector == actors_movies_key:
                 return pd.read_csv(actors_movies_file_path)
+            elif data_selector == albums_key:
+                return pd.read_csv(albums_file_path, index_col=0)
+            elif data_selector == artists_key:
+                return pd.read_csv(artists_file_path, index_col=0)
             elif data_selector == business_owners_key:
                 return pd.read_pickle(business_owners_file_path)
             elif data_selector == casts_key:
@@ -88,6 +114,14 @@ class Joining:
                 return pd.read_csv(employees_file_path, index_col=0)
             elif data_selector == financials_key:
                 return pd.read_pickle(financials_file_path)
+            elif data_selector == genres_key:
+                return pd.read_csv(genres_file_path, index_col=0)
+            elif data_selector == inv_aug_key:
+                return pd.read_csv(inv_aug_file_path, index_col=0)
+            elif data_selector == inv_jul_key:
+                return pd.read_csv(inv_jul_file_path, index_col=0)
+            elif data_selector == inv_sep_key:
+                return pd.read_csv(inv_sep_file_path, index_col=0)
             elif data_selector == land_use_key:
                 return pd.read_pickle(land_use_file_path)
             elif data_selector == licenses_key:
@@ -96,6 +130,8 @@ class Joining:
                 return pd.read_pickle(movie_to_genres_file_path)
             elif data_selector == movies_key:
                 return pd.read_pickle(movies_file_path)
+            elif data_selector == non_mus_key:
+                return pd.read_csv(non_mus_file_path, index_col=0)
             elif data_selector == ratings_key:
                 return pd.read_pickle(ratings_file_path)
             elif data_selector == sp500_key:
@@ -112,6 +148,14 @@ class Joining:
                 return pd.read_pickle(taxi_vehicles_file_path)
             elif data_selector == top_cust_key:
                 return pd.read_csv(top_cust_file_path, index_col=0)
+            elif data_selector == top_invoices_key:
+                return pd.read_csv(top_invoices_file_path, index_col=0)
+            elif data_selector == tracks_master_key:
+                return pd.read_csv(tracks_master_file_path, index_col=0)
+            elif data_selector == tracks_ride_key:
+                return pd.read_csv(tracks_ride_file_path, index_col=0)
+            elif data_selector == tracks_st_key:
+                return pd.read_csv(tracks_st_file_path, index_col=0)
             elif data_selector == ward_key:
                 return pd.read_pickle(ward_file_path)
             elif data_selector == wards_altered_key:
@@ -469,14 +513,14 @@ class Joining:
 
         # Print the first few rows of iron_1_and_2
         print(iron_1_and_2[m].head())
-    
+
     # Make a self in crews
     def exercise_16(self):
         crews = self.set_data(crews_key)
 
         # Merge the crews table to itself
-        crews_self_merged = crews.merge(crews, on='id', how='inner', suffixes=('_dir', '_crew') )
-        
+        crews_self_merged = crews.merge(crews, on='id', how='inner', suffixes=('_dir', '_crew'))
+
         # Create a Boolean index to select the appropriate
         boolean_filter = ((crews_self_merged['job_dir'] == 'Director') & (crews_self_merged['job_crew'] != 'Director'))
         direct_crews = crews_self_merged[boolean_filter]
@@ -505,7 +549,7 @@ class Joining:
 
         # Self merge with suffixes as inner join with left on sequel and right on id
         orig_seq = sequels_fin.merge(sequels_fin, how='inner', left_on='sequel',
-                                     right_on='id', right_index=True, suffixes=('_org','_seq'))
+                                     right_on='id', right_index=True, suffixes=('_org', '_seq'))
 
         # Add calculation to subtract revenue_org from revenue_seq 
         orig_seq['diff'] = orig_seq['revenue_seq'] - orig_seq['revenue_org']
@@ -514,21 +558,83 @@ class Joining:
         titles_diff = orig_seq[['title_org', 'title_seq', 'diff']]
 
         # Print the first rows of the sorted titles_diff
-        print(titles_diff.sort_values('diff', ascending = False).head())
-    
+        print(titles_diff.sort_values('diff', ascending=False).head())
+
     # Perform an anti-join following the 3 main steps
     def exercise_19(self):
         employees = self.set_data(employees_key)
         top_cust = self.set_data(top_cust_key)
 
         # Merge employees and top_cust
-        empl_cust = employees.merge(top_cust, on='srid',how='left', indicator=True)
+        empl_cust = employees.merge(top_cust, on='srid', how='left', indicator=True)
 
         # Select the srid column where _merge is left_only
         srid_list = empl_cust.loc[empl_cust['_merge'] == 'left_only', 'srid']
 
         # Get employees not working with top customers
         print(employees[employees['srid'].isin(srid_list)])
+
+    # Perform a semi-join
+    def exercise_20(self):
+        non_mus_tcks = self.set_data(non_mus_key)
+        top_invoices = self.set_data(top_invoices_key)
+        genres = self.set_data(genres_key)
+
+        # Merge the non_mus_tck and top_invoices tables on tid
+        tracks_invoices = non_mus_tcks.merge(top_invoices, on='tid')
+
+        # Use .isin() to subset non_mus_tcks to rows with tid in tracks_invoices
+        top_tracks = non_mus_tcks[non_mus_tcks['tid'].isin(tracks_invoices['tid'])]
+
+        # Group the top_tracks by gid and count the tid rows
+        cnt_by_gid = top_tracks.groupby(['gid'], as_index=False).agg({'tid': 'count'})
+
+        # Merge the genres table to cnt_by_gid on gid and print
+        print(cnt_by_gid.merge(genres, on='gid'))
+
+    # Concatenate multiple DF
+    def exercise_21(self):
+        tracks_master = self.set_data(tracks_master_key)
+        tracks_ride = self.set_data(tracks_ride_key)
+        tracks_st = self.set_data(tracks_st_key)
+
+        # Concatenate the tracks
+        tracks_from_albums = pd.concat([tracks_master, tracks_ride, tracks_st], sort=True)
+        print(tracks_from_albums)
+
+        # Concatenate the tracks so the index goes from 0 to n-1
+        tracks_from_albums = pd.concat([tracks_master, tracks_ride, tracks_st], ignore_index=True, sort=True)
+        print(tracks_from_albums)
+
+        # Concatenate the tracks, show only columns names that are in all tables
+        tracks_from_albums = pd.concat([tracks_master, tracks_ride, tracks_st], join='inner', ignore_index=True, sort=True)
+        print(tracks_from_albums)
+
+    # Concatenate using keys
+    def exercise_22(self):
+        inv_jul = self.set_data(inv_jul_key)
+        inv_aug = self.set_data(inv_aug_key)
+        inv_sep = self.set_data(inv_sep_key)
+
+        # Concatenate the tables and add keys
+        inv_jul_thr_sep = pd.concat([inv_jul, inv_aug, inv_sep], 
+                                    keys=['7Jul','8Aug','9Sep'])
+
+        # Group the invoices by the index keys and find avg of the total column
+        avg_inv_by_month = inv_jul_thr_sep.groupby(level=0).agg({'total':'mean'})
+
+        # Bar plot of avg_inv_by_month
+        avg_inv_by_month.plot(kind='bar')
+        plt.show()
+
+    # Validate the merge before, spot the error
+    def exercise_23(self):
+        artists = self.set_data(artists_key)
+        albums = self.set_data(albums_key)
+
+        print(artists.merge(albums, on='artid', validate='many_to_one'))
+
+    
 
 
 if __name__ == '__main__':
@@ -553,7 +659,11 @@ if __name__ == '__main__':
         # j.exercise_16()
         # j.exercise_17()
         # j.exercise_18()
-        j.exercise_19()
+        # j.exercise_19()
+        # j.exercise_20()
+        # j.exercise_21()
+        # j.exercise_22()
+        j.exercise_23()
 
     # Handle the exceptions appropriately
     except ValueError as e:
