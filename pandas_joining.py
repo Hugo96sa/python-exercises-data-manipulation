@@ -13,6 +13,7 @@ census_altered_key = 'cen_alt'
 crews_key = 'crews'
 cta_calendar_key = 'cta_cal'
 cta_ridership_key = 'cta_rider'
+employees_key = 'employees'
 financials_key = 'financials'
 land_use_key = 'lan_use'
 licenses_key = 'licenses'
@@ -25,6 +26,7 @@ stations_key = 'stations'
 taglines_key = 'taglines'
 taxi_owners_key = 'tax_own'
 taxi_vehicles_key = 'tax_veh'
+top_cust_key = 'top_cst'
 ward_key = 'ward'
 wards_altered_key = 'war_alt'
 world_bank_gdp_key = 'wor_bnk_gdp'
@@ -39,6 +41,7 @@ census_altered_file_path = 'data/pandas_joining/census_altered.csv'
 crews_file_path = 'data/pandas_joining/crews.p'
 cta_calendar_file_path = 'data/pandas_joining/cta_calendar.p'
 cta_ridership_file_path = 'data/pandas_joining/cta_ridership.p'
+employees_file_path = 'data/pandas_joining/employees.csv'
 financials_file_path = 'data/pandas_joining/financials.p'
 land_use_file_path = 'data/pandas_joining/land_use.p'
 licenses_file_path = 'data/pandas_joining/licenses.p'
@@ -51,6 +54,7 @@ stations_file_path = 'data/pandas_joining/stations.p'
 taglines_file_path = 'data/pandas_joining/taglines.p'
 taxi_owners_file_path = 'data/pandas_joining/taxi_owners.p'
 taxi_vehicles_file_path = 'data/pandas_joining/taxi_vehicles.p'
+top_cust_file_path = 'data/pandas_joining/top_cust.csv'
 ward_file_path = 'data/pandas_joining/ward.p'
 wards_altered_file_path = 'data/pandas_joining/wards_altered.csv'
 world_bank_gdp_file_path = 'data/pandas_joining/WorldBank_GDP.csv'
@@ -80,6 +84,8 @@ class Joining:
                 return pd.read_pickle(cta_calendar_file_path)
             elif data_selector == cta_ridership_key:
                 return pd.read_pickle(cta_ridership_file_path)
+            elif data_selector == employees_key:
+                return pd.read_csv(employees_file_path, index_col=0)
             elif data_selector == financials_key:
                 return pd.read_pickle(financials_file_path)
             elif data_selector == land_use_key:
@@ -104,6 +110,8 @@ class Joining:
                 return pd.read_pickle(taxi_owners_file_path)
             elif data_selector == taxi_vehicles_key:
                 return pd.read_pickle(taxi_vehicles_file_path)
+            elif data_selector == top_cust_key:
+                return pd.read_csv(top_cust_file_path, index_col=0)
             elif data_selector == ward_key:
                 return pd.read_pickle(ward_file_path)
             elif data_selector == wards_altered_key:
@@ -367,6 +375,7 @@ class Joining:
         print(movies_and_scifi_only.shape)
 
     # Popular genres with right join, first find the top 10 most popular genres in movies, then join by id and count
+    # plot the result with matplotlib
     def exercise_12(self):
         movie_to_genres = self.set_data(movie_to_genres_key)
         movies = self.set_data(movies_key)
@@ -390,6 +399,7 @@ class Joining:
         plt.show()
 
     # Popular genres with right join, first find the top 10 most popular genres in movies, then join by id and count
+    # plot the result with seaborn
     def exercise_13(self):
         movie_to_genres = self.set_data(movie_to_genres_key)
         movies = self.set_data(movies_key)
@@ -416,6 +426,7 @@ class Joining:
         plt.show()
 
     # Popular genres with right join, first find the top 10 most popular genres in movies, then join by id and count
+    # plot the result with plotly
     def exercise_14(self):
         movie_to_genres = self.set_data(movie_to_genres_key)
         movies = self.set_data(movies_key)
@@ -440,7 +451,7 @@ class Joining:
                           title='Number of Movies per Genre for Top 10 Popular Movies')
         fig.show()
 
-    # Create a outer join
+    # Perform an outer join
     def exercise_15(self):
         movies = self.set_data(movies_key)
         casts = self.set_data(casts_key)
@@ -449,7 +460,7 @@ class Joining:
 
         iron_1_actors = casts[casts['movie_id'] == iron_man_id][['character', 'id', 'name']]
         iron_2_actors = casts[casts['movie_id'] == iron_man_2_id][['character', 'id', 'name']]
-
+        print(casts)
         # Merge iron_1_actors to iron_2_actors on id with outer join using suffixes
         iron_1_and_2 = iron_1_actors.merge(iron_2_actors, on='id', how='outer', suffixes=('_1', '_2'))
 
@@ -458,6 +469,66 @@ class Joining:
 
         # Print the first few rows of iron_1_and_2
         print(iron_1_and_2[m].head())
+    
+    # Make a self in crews
+    def exercise_16(self):
+        crews = self.set_data(crews_key)
+
+        # Merge the crews table to itself
+        crews_self_merged = crews.merge(crews, on='id', how='inner', suffixes=('_dir', '_crew') )
+        
+        # Create a Boolean index to select the appropriate
+        boolean_filter = ((crews_self_merged['job_dir'] == 'Director') & (crews_self_merged['job_crew'] != 'Director'))
+        direct_crews = crews_self_merged[boolean_filter]
+
+        # Print the first few rows of direct_crews
+        print(direct_crews.head())
+
+    # Merge movies and ratings on the index
+    def exercise_17(self):
+        movies = self.set_data(movies_key)
+        ratings = self.set_data(ratings_key)
+
+        # Merge to the movies table the ratings table on the index
+        movies_ratings = movies.merge(ratings, on='id', how='left')
+
+        # Print the first few rows of movies_ratings
+        print(movies_ratings.head())
+
+    # Find if sequels make more money than originals
+    def exercise_18(self):
+        sequels = self.set_data(sequels_key).set_index('id')
+        financials = self.set_data(financials_key).set_index('id')
+
+        # Merge sequels and financials on index id
+        sequels_fin = sequels.merge(financials, on='id', how='left')
+
+        # Self merge with suffixes as inner join with left on sequel and right on id
+        orig_seq = sequels_fin.merge(sequels_fin, how='inner', left_on='sequel',
+                                     right_on='id', right_index=True, suffixes=('_org','_seq'))
+
+        # Add calculation to subtract revenue_org from revenue_seq 
+        orig_seq['diff'] = orig_seq['revenue_seq'] - orig_seq['revenue_org']
+
+        # Select the title_org, title_seq, and diff 
+        titles_diff = orig_seq[['title_org', 'title_seq', 'diff']]
+
+        # Print the first rows of the sorted titles_diff
+        print(titles_diff.sort_values('diff', ascending = False).head())
+    
+    # Perform an anti-join following the 3 main steps
+    def exercise_19(self):
+        employees = self.set_data(employees_key)
+        top_cust = self.set_data(top_cust_key)
+
+        # Merge employees and top_cust
+        empl_cust = employees.merge(top_cust, on='srid',how='left', indicator=True)
+
+        # Select the srid column where _merge is left_only
+        srid_list = empl_cust.loc[empl_cust['_merge'] == 'left_only', 'srid']
+
+        # Get employees not working with top customers
+        print(employees[employees['srid'].isin(srid_list)])
 
 
 if __name__ == '__main__':
@@ -478,7 +549,11 @@ if __name__ == '__main__':
         # j.exercise_12()
         # j.exercise_13()
         # j.exercise_14()
-        j.exercise_15()
+        # j.exercise_15()
+        # j.exercise_16()
+        # j.exercise_17()
+        # j.exercise_18()
+        j.exercise_19()
 
     # Handle the exceptions appropriately
     except ValueError as e:
