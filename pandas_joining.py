@@ -19,7 +19,9 @@ cta_calendar_key = 'cta_cal'
 cta_ridership_key = 'cta_rid'
 employees_key = 'employees'
 financials_key = 'financials'
+gdp_key = 'gdp'
 genres_key = 'genres'
+inflation_key = 'inflation'
 inv_aug_key = 'inv_aug'
 inv_jul_key = 'inv_jul'
 inv_sep_key = 'inv_sep'
@@ -30,6 +32,7 @@ movies_key = 'movies'
 non_mus_key = 'non_mus'
 pop_18_key = 'pop_18'
 pop_19_key = 'pop_19'
+pop_key = 'pop'
 ratings_key = 'ratings'
 sp500_key = 'sp500'
 sequels_key = 'sequels'
@@ -42,6 +45,7 @@ top_invoices_key = 'top_inv'
 tracks_master_key = 'trk_mas'
 tracks_ride_key = 'trk_rid'
 tracks_st_key = 'trk_st'
+unemployment_key = 'unemployment'
 ward_key = 'ward'
 wards_altered_key = 'war_alt'
 world_bank_gdp_key = 'wor_bnk_gdp'
@@ -63,6 +67,8 @@ cta_ridership_file_path = 'data/pandas_joining/cta_ridership.p'
 employees_file_path = 'data/pandas_joining/employees.csv'
 financials_file_path = 'data/pandas_joining/financials.p'
 genres_file_path = 'data/pandas_joining/genres.csv'
+gdp_file_path = 'data/pandas_joining/gdp.csv'
+inflation_file_path = 'data/pandas_joining/inflation.csv'
 inv_aug_file_path = 'data/pandas_joining/inv_aug.csv'
 inv_jul_file_path = 'data/pandas_joining/inv_jul.csv'
 inv_sep_file_path = 'data/pandas_joining/inv_sep.csv'
@@ -73,6 +79,7 @@ movies_file_path = 'data/pandas_joining/movies.p'
 non_mus_file_path = 'data/pandas_joining/non_mus_tcks.csv'
 pop_18_file_path = 'data/pandas_joining/pop_18.csv'
 pop_19_file_path = 'data/pandas_joining/pop_19.csv'
+pop_file_path = 'data/pandas_joining/pop.csv'
 ratings_file_path = 'data/pandas_joining/ratings.p'
 sp500_file_path = 'data/pandas_joining/S&P500.csv'
 sequels_file_path = 'data/pandas_joining/sequels.p'
@@ -85,6 +92,7 @@ top_invoices_file_path = 'data/pandas_joining/top_invoices.csv'
 tracks_master_file_path = 'data/pandas_joining/tracks_master.csv'
 tracks_ride_file_path = 'data/pandas_joining/tracks_ride.csv'
 tracks_st_file_path = 'data/pandas_joining/tracks_st.csv'
+unemployment_file_path = 'data/pandas_joining/unemployment.csv'
 ward_file_path = 'data/pandas_joining/ward.p'
 wards_altered_file_path = 'data/pandas_joining/wards_altered.csv'
 world_bank_gdp_file_path = 'data/pandas_joining/WorldBank_GDP.csv'
@@ -128,6 +136,10 @@ class Joining:
                 return pd.read_pickle(financials_file_path)
             elif data_selector == genres_key:
                 return pd.read_csv(genres_file_path, index_col=0)
+            elif data_selector == gdp_key:
+                return pd.read_csv(gdp_file_path, index_col=0)
+            elif data_selector == inflation_key:
+                return pd.read_csv(inflation_file_path, index_col=0)
             elif data_selector == inv_aug_key:
                 return pd.read_csv(inv_aug_file_path, index_col=0)
             elif data_selector == inv_jul_key:
@@ -148,6 +160,8 @@ class Joining:
                 return pd.read_csv(pop_18_file_path, index_col=0)
             elif data_selector == pop_19_key:
                 return pd.read_csv(pop_19_file_path, index_col=0)
+            elif data_selector == pop_key:
+                return pd.read_csv(pop_file_path, index_col=0)
             elif data_selector == ratings_key:
                 return pd.read_pickle(ratings_file_path)
             elif data_selector == sp500_key:
@@ -172,6 +186,8 @@ class Joining:
                 return pd.read_csv(tracks_ride_file_path, index_col=0)
             elif data_selector == tracks_st_key:
                 return pd.read_csv(tracks_st_file_path, index_col=0)
+            elif data_selector == unemployment_key:
+                return pd.read_csv(unemployment_file_path, index_col=0)
             elif data_selector == ward_key:
                 return pd.read_pickle(ward_file_path)
             elif data_selector == wards_altered_key:
@@ -623,7 +639,8 @@ class Joining:
         print(tracks_from_albums)
 
         # Concatenate the tracks, show only columns names that are in all tables
-        tracks_from_albums = pd.concat([tracks_master, tracks_ride, tracks_st], join='inner', ignore_index=True, sort=True)
+        tracks_from_albums = pd.concat([tracks_master, tracks_ride, tracks_st], join='inner', ignore_index=True,
+                                       sort=True)
         print(tracks_from_albums)
 
     # Concatenate using keys
@@ -633,11 +650,11 @@ class Joining:
         inv_sep = self.set_data(inv_sep_key)
 
         # Concatenate the tables and add keys
-        inv_jul_thr_sep = pd.concat([inv_jul, inv_aug, inv_sep], 
-                                    keys=['7Jul','8Aug','9Sep'])
+        inv_jul_thr_sep = pd.concat([inv_jul, inv_aug, inv_sep],
+                                    keys=['7Jul', '8Aug', '9Sep'])
 
         # Group the invoices by the index keys and find avg of the total column
-        avg_inv_by_month = inv_jul_thr_sep.groupby(level=0).agg({'total':'mean'})
+        avg_inv_by_month = inv_jul_thr_sep.groupby(level=0).agg({'total': 'mean'})
 
         # Bar plot of avg_inv_by_month
         avg_inv_by_month.plot(kind='bar')
@@ -672,17 +689,66 @@ class Joining:
         # Print popular chart
         print(popular_classic)
 
+    # Practice renaming, what is the correlation between gdp and sp500?
     def exercise_25(self):
         gdp = self.set_data(world_bank_gdp_key)
         sp500 = self.set_data(sp500_key)
+
+        gdp = gdp[gdp['Country Code'].isin(['USA'])]
+        gdp = gdp[['Country Code', 'Year', 'GDP']]
+        gdp = gdp.rename(columns={'Country Code': 'country code', 'Year': 'year', 'GDP': 'gdp'})
+        sp500 = sp500.rename(columns={'Date': 'date', 'Returns': 'returns'})
 
         # Use merge_ordered() to merge gdp and sp500 on year and date
         gdp_sp500 = pd.merge_ordered(gdp, sp500, left_on='year', right_on='date', how='left')
 
         # Print gdp_sp500
         print(gdp_sp500)
-    
 
+        # Use merge_ordered() to merge gdp and sp500, interpolate missing value
+        gdp_sp500 = pd.merge_ordered(gdp, sp500, left_on='year', right_on='date', how='left', fill_method='ffill')
+
+        # Print gdp_sp500
+        print(gdp_sp500)
+
+        # Subset the gdp and returns columns
+        gdp_returns = gdp_sp500[['gdp', 'returns']]
+
+        # Print gdp_returns correlation
+        print(gdp_returns.corr())
+
+    # Perform a Phillips curve with merge_ordered()
+    def exercise_26(self):
+        inflation = self.set_data(inflation_key)
+        unemployment = self.set_data(unemployment_key)
+
+        # Use merge_ordered() to merge inflation, unemployment with inner join
+        inflation_unemploy = pd.merge_ordered(inflation, unemployment, 
+                                            on='date', how='inner')
+
+        # Print inflation_unemploy 
+        print(inflation_unemploy)
+
+        # Plot a scatter plot of unemployment_rate vs cpi of inflation_unemploy
+        inflation_unemploy.plot(kind='scatter', x='unemployment_rate', y='cpi')
+        plt.show()
+
+    def exercise_27(self):
+        gdp = self.set_data(gdp_key)
+        pop = self.set_data(pop_key)
+
+        # Merge gdp and pop on date and country with fill and notice rows 2 and 3
+        ctry_date = pd.merge_ordered(gdp, pop, on=['date', 'country'], fill_method='ffill')
+
+        # Print ctry_date
+        print(ctry_date)
+
+        # Merge gdp and pop on country and date with fill
+        date_ctry = pd.merge_ordered(gdp, pop, on=['country', 'date'], fill_method='ffill')
+
+        # Print date_ctry
+        print(date_ctry)
+        
 
 if __name__ == '__main__':
     try:
@@ -712,7 +778,9 @@ if __name__ == '__main__':
         # j.exercise_22()
         # j.exercise_23()
         # j.exercise_24()
-        j.exercise_25()
+        # j.exercise_25()
+        # j.exercise_26()
+        j.exercise_27()
 
     # Handle the exceptions appropriately
     except ValueError as e:
