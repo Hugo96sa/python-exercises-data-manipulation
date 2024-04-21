@@ -10,8 +10,10 @@ albums_key = 'albums'
 artists_key = 'artists'
 business_owners_key = 'bus_own'
 casts_key = 'casts'
-census_key = 'census'
 census_altered_key = 'cen_alt'
+census_key = 'census'
+classic_18_key = 'cla_18'
+classic_19_key = 'cla_19'
 crews_key = 'crews'
 cta_calendar_key = 'cta_cal'
 cta_ridership_key = 'cta_rid'
@@ -26,6 +28,8 @@ licenses_key = 'licenses'
 movie_to_genres_key = 'mov_gen'
 movies_key = 'movies'
 non_mus_key = 'non_mus'
+pop_18_key = 'pop_18'
+pop_19_key = 'pop_19'
 ratings_key = 'ratings'
 sp500_key = 'sp500'
 sequels_key = 'sequels'
@@ -49,8 +53,10 @@ albums_file_path = 'data/pandas_joining/albums.csv'
 artists_file_path = 'data/pandas_joining/artists.csv'
 business_owners_file_path = 'data/pandas_joining/business_owners.p'
 casts_file_path = 'data/pandas_joining/casts.p'
-census_file_path = 'data/pandas_joining/census.p'
 census_altered_file_path = 'data/pandas_joining/census_altered.csv'
+census_file_path = 'data/pandas_joining/census.p'
+classic_18_file_path = 'data/pandas_joining/classic_18.csv'
+classic_19_file_path = 'data/pandas_joining/classic_19.csv'
 crews_file_path = 'data/pandas_joining/crews.p'
 cta_calendar_file_path = 'data/pandas_joining/cta_calendar.p'
 cta_ridership_file_path = 'data/pandas_joining/cta_ridership.p'
@@ -65,6 +71,8 @@ licenses_file_path = 'data/pandas_joining/licenses.p'
 movie_to_genres_file_path = 'data/pandas_joining/movie_to_genres.p'
 movies_file_path = 'data/pandas_joining/movies.p'
 non_mus_file_path = 'data/pandas_joining/non_mus_tcks.csv'
+pop_18_file_path = 'data/pandas_joining/pop_18.csv'
+pop_19_file_path = 'data/pandas_joining/pop_19.csv'
 ratings_file_path = 'data/pandas_joining/ratings.p'
 sp500_file_path = 'data/pandas_joining/S&P500.csv'
 sequels_file_path = 'data/pandas_joining/sequels.p'
@@ -100,10 +108,14 @@ class Joining:
                 return pd.read_pickle(business_owners_file_path)
             elif data_selector == casts_key:
                 return pd.read_pickle(casts_file_path)
-            elif data_selector == census_key:
-                return pd.read_pickle(census_file_path)
             elif data_selector == census_altered_key:
                 return pd.read_csv(census_altered_file_path, index_col=0)
+            elif data_selector == census_key:
+                return pd.read_pickle(census_file_path)
+            elif data_selector == classic_18_key:
+                return pd.read_csv(classic_18_file_path, index_col=0)
+            elif data_selector == classic_19_key:
+                return pd.read_csv(classic_19_file_path, index_col=0)
             elif data_selector == crews_key:
                 return pd.read_pickle(crews_file_path)
             elif data_selector == cta_calendar_key:
@@ -132,6 +144,10 @@ class Joining:
                 return pd.read_pickle(movies_file_path)
             elif data_selector == non_mus_key:
                 return pd.read_csv(non_mus_file_path, index_col=0)
+            elif data_selector == pop_18_key:
+                return pd.read_csv(pop_18_file_path, index_col=0)
+            elif data_selector == pop_19_key:
+                return pd.read_csv(pop_19_file_path, index_col=0)
             elif data_selector == ratings_key:
                 return pd.read_pickle(ratings_file_path)
             elif data_selector == sp500_key:
@@ -634,6 +650,37 @@ class Joining:
 
         print(artists.merge(albums, on='artid', validate='many_to_one'))
 
+    # Concatenate and merge to fing common songs
+    def exercise_24(self):
+        classic_18 = self.set_data(classic_18_key)
+        classic_19 = self.set_data(classic_19_key)
+        pop_18 = self.set_data(pop_18_key)
+        pop_19 = self.set_data(pop_19_key)
+
+        # Concatenate the classic tables vertically
+        classic_18_19 = pd.concat([classic_18, classic_19], ignore_index=True)
+
+        # Concatenate the pop tables vertically
+        pop_18_19 = pd.concat([pop_18, pop_19], ignore_index=True)
+
+        # Merge classic_18_19 with pop_18_19
+        classic_pop = classic_18_19.merge(pop_18_19, on='tid')
+
+        # Using .isin(), filter classic_18_19 rows where tid is in classic_pop
+        popular_classic = classic_18_19[classic_18_19['tid'].isin(classic_pop['tid'])]
+
+        # Print popular chart
+        print(popular_classic)
+
+    def exercise_25(self):
+        gdp = self.set_data(world_bank_gdp_key)
+        sp500 = self.set_data(sp500_key)
+
+        # Use merge_ordered() to merge gdp and sp500 on year and date
+        gdp_sp500 = pd.merge_ordered(gdp, sp500, left_on='year', right_on='date', how='left')
+
+        # Print gdp_sp500
+        print(gdp_sp500)
     
 
 
@@ -663,7 +710,9 @@ if __name__ == '__main__':
         # j.exercise_20()
         # j.exercise_21()
         # j.exercise_22()
-        j.exercise_23()
+        # j.exercise_23()
+        # j.exercise_24()
+        j.exercise_25()
 
     # Handle the exceptions appropriately
     except ValueError as e:
