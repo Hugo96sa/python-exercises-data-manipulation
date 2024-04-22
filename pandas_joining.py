@@ -8,6 +8,7 @@ import plotly.express as px
 actors_movies_key = 'act_mov'
 albums_key = 'albums'
 artists_key = 'artists'
+bac_key = 'bac'
 business_owners_key = 'bus_own'
 casts_key = 'casts'
 census_altered_key = 'cen_alt'
@@ -17,14 +18,18 @@ classic_19_key = 'cla_19'
 crews_key = 'crews'
 cta_calendar_key = 'cta_cal'
 cta_ridership_key = 'cta_rid'
+dji_key = 'dji'
 employees_key = 'employees'
 financials_key = 'financials'
+gdp_2_key = 'gdp_2'
 gdp_key = 'gdp'
 genres_key = 'genres'
+inflation_2_key = 'inflation_2'
 inflation_key = 'inflation'
 inv_aug_key = 'inv_aug'
 inv_jul_key = 'inv_jul'
 inv_sep_key = 'inv_sep'
+jpm_key = 'jpm_sep'
 land_use_key = 'lan_use'
 licenses_key = 'licenses'
 movie_to_genres_key = 'mov_gen'
@@ -34,20 +39,25 @@ pop_18_key = 'pop_18'
 pop_19_key = 'pop_19'
 pop_key = 'pop'
 ratings_key = 'ratings'
+recession_key = 'recession'
 sp500_key = 'sp500'
 sequels_key = 'sequels'
+social_fin_key = 'soc_fin'
 stations_key = 'stations'
 taglines_key = 'taglines'
 taxi_owners_key = 'tax_own'
 taxi_vehicles_key = 'tax_veh'
+ten_yr_key = 'ten_yr'
 top_cust_key = 'top_cst'
 top_invoices_key = 'top_inv'
 tracks_master_key = 'trk_mas'
 tracks_ride_key = 'trk_rid'
 tracks_st_key = 'trk_st'
 unemployment_key = 'unemployment'
+ur_wide_key = 'ur_wide'
 ward_key = 'ward'
 wards_altered_key = 'war_alt'
+wells_key = 'wells'
 world_bank_gdp_key = 'wor_bnk_gdp'
 world_bank_pop_key = 'wor_bnk_pop'
 zip_demo_key = 'zip_demo'
@@ -55,6 +65,7 @@ zip_demo_key = 'zip_demo'
 actors_movies_file_path = 'data/pandas_joining/actors_movies.csv'
 albums_file_path = 'data/pandas_joining/albums.csv'
 artists_file_path = 'data/pandas_joining/artists.csv'
+bac_file_path = 'data/pandas_joining/bac.csv'
 business_owners_file_path = 'data/pandas_joining/business_owners.p'
 casts_file_path = 'data/pandas_joining/casts.p'
 census_altered_file_path = 'data/pandas_joining/census_altered.csv'
@@ -64,14 +75,18 @@ classic_19_file_path = 'data/pandas_joining/classic_19.csv'
 crews_file_path = 'data/pandas_joining/crews.p'
 cta_calendar_file_path = 'data/pandas_joining/cta_calendar.p'
 cta_ridership_file_path = 'data/pandas_joining/cta_ridership.p'
+dji_file_path = 'data/pandas_joining/dji.csv'
 employees_file_path = 'data/pandas_joining/employees.csv'
 financials_file_path = 'data/pandas_joining/financials.p'
 genres_file_path = 'data/pandas_joining/genres.csv'
+gdp_2_file_path = 'data/pandas_joining/gdp_2.csv'
 gdp_file_path = 'data/pandas_joining/gdp.csv'
+inflation_2_file_path = 'data/pandas_joining/inflation_2.csv'
 inflation_file_path = 'data/pandas_joining/inflation.csv'
 inv_aug_file_path = 'data/pandas_joining/inv_aug.csv'
 inv_jul_file_path = 'data/pandas_joining/inv_jul.csv'
 inv_sep_file_path = 'data/pandas_joining/inv_sep.csv'
+jpm_file_path = 'data/pandas_joining/jpm.csv'
 land_use_file_path = 'data/pandas_joining/land_use.p'
 licenses_file_path = 'data/pandas_joining/licenses.p'
 movie_to_genres_file_path = 'data/pandas_joining/movie_to_genres.p'
@@ -81,20 +96,25 @@ pop_18_file_path = 'data/pandas_joining/pop_18.csv'
 pop_19_file_path = 'data/pandas_joining/pop_19.csv'
 pop_file_path = 'data/pandas_joining/pop.csv'
 ratings_file_path = 'data/pandas_joining/ratings.p'
+recession_file_path = 'data/pandas_joining/recession.csv'
 sp500_file_path = 'data/pandas_joining/S&P500.csv'
 sequels_file_path = 'data/pandas_joining/sequels.p'
+social_fin_file_path = 'data/pandas_joining/social_fin.csv'
 stations_file_path = 'data/pandas_joining/stations.p'
 taglines_file_path = 'data/pandas_joining/taglines.p'
 taxi_owners_file_path = 'data/pandas_joining/taxi_owners.p'
 taxi_vehicles_file_path = 'data/pandas_joining/taxi_vehicles.p'
+ten_yr_file_path = 'data/pandas_joining/ten_yr.csv'
 top_cust_file_path = 'data/pandas_joining/top_cust.csv'
 top_invoices_file_path = 'data/pandas_joining/top_invoices.csv'
 tracks_master_file_path = 'data/pandas_joining/tracks_master.csv'
 tracks_ride_file_path = 'data/pandas_joining/tracks_ride.csv'
 tracks_st_file_path = 'data/pandas_joining/tracks_st.csv'
 unemployment_file_path = 'data/pandas_joining/unemployment.csv'
+ur_wide_file_path = 'data/pandas_joining/ur_wide.csv'
 ward_file_path = 'data/pandas_joining/ward.p'
 wards_altered_file_path = 'data/pandas_joining/wards_altered.csv'
+wells_file_path = 'data/pandas_joining/wells.csv'
 world_bank_gdp_file_path = 'data/pandas_joining/WorldBank_GDP.csv'
 world_bank_pop_file_path = 'data/pandas_joining/WorldBank_POP.csv'
 zip_demo_file_path = 'data/pandas_joining/zip_demo.p'
@@ -112,6 +132,8 @@ class Joining:
                 return pd.read_csv(albums_file_path, index_col=0)
             elif data_selector == artists_key:
                 return pd.read_csv(artists_file_path, index_col=0)
+            elif data_selector == bac_key:
+                return pd.read_csv(bac_file_path, index_col=0)
             elif data_selector == business_owners_key:
                 return pd.read_pickle(business_owners_file_path)
             elif data_selector == casts_key:
@@ -130,14 +152,20 @@ class Joining:
                 return pd.read_pickle(cta_calendar_file_path)
             elif data_selector == cta_ridership_key:
                 return pd.read_pickle(cta_ridership_file_path)
+            elif data_selector == dji_key:
+                return pd.read_csv(dji_file_path, index_col=0)
             elif data_selector == employees_key:
                 return pd.read_csv(employees_file_path, index_col=0)
             elif data_selector == financials_key:
                 return pd.read_pickle(financials_file_path)
             elif data_selector == genres_key:
                 return pd.read_csv(genres_file_path, index_col=0)
+            elif data_selector == gdp_2_key:
+                return pd.read_csv(gdp_2_file_path, index_col=0)
             elif data_selector == gdp_key:
                 return pd.read_csv(gdp_file_path, index_col=0)
+            elif data_selector == inflation_2_key:
+                return pd.read_csv(inflation_2_file_path, index_col=0)
             elif data_selector == inflation_key:
                 return pd.read_csv(inflation_file_path, index_col=0)
             elif data_selector == inv_aug_key:
@@ -146,6 +174,8 @@ class Joining:
                 return pd.read_csv(inv_jul_file_path, index_col=0)
             elif data_selector == inv_sep_key:
                 return pd.read_csv(inv_sep_file_path, index_col=0)
+            elif data_selector == jpm_key:
+                return pd.read_csv(jpm_file_path, index_col=0)
             elif data_selector == land_use_key:
                 return pd.read_pickle(land_use_file_path)
             elif data_selector == licenses_key:
@@ -164,10 +194,14 @@ class Joining:
                 return pd.read_csv(pop_file_path, index_col=0)
             elif data_selector == ratings_key:
                 return pd.read_pickle(ratings_file_path)
+            elif data_selector == recession_key:
+                return pd.read_csv(recession_file_path, index_col=0)
             elif data_selector == sp500_key:
                 return pd.read_csv(sp500_file_path)
             elif data_selector == sequels_key:
                 return pd.read_pickle(sequels_file_path)
+            elif data_selector == social_fin_key:
+                return pd.read_csv(social_fin_file_path, index_col=0)
             elif data_selector == stations_key:
                 return pd.read_pickle(stations_file_path)
             elif data_selector == taglines_key:
@@ -176,6 +210,8 @@ class Joining:
                 return pd.read_pickle(taxi_owners_file_path)
             elif data_selector == taxi_vehicles_key:
                 return pd.read_pickle(taxi_vehicles_file_path)
+            elif data_selector == ten_yr_key:
+                return pd.read_csv(ten_yr_file_path, index_col=0)
             elif data_selector == top_cust_key:
                 return pd.read_csv(top_cust_file_path, index_col=0)
             elif data_selector == top_invoices_key:
@@ -188,10 +224,14 @@ class Joining:
                 return pd.read_csv(tracks_st_file_path, index_col=0)
             elif data_selector == unemployment_key:
                 return pd.read_csv(unemployment_file_path, index_col=0)
+            elif data_selector == ur_wide_key:
+                return pd.read_csv(ur_wide_file_path, index_col=0)
             elif data_selector == ward_key:
                 return pd.read_pickle(ward_file_path)
             elif data_selector == wards_altered_key:
                 return pd.read_csv(wards_altered_file_path, index_col=0)
+            elif data_selector == wells_key:
+                return pd.read_csv(wells_file_path, index_col=0)
             elif data_selector == world_bank_gdp_key:
                 return pd.read_csv(world_bank_gdp_file_path)
             elif data_selector == world_bank_pop_key:
@@ -723,8 +763,8 @@ class Joining:
         unemployment = self.set_data(unemployment_key)
 
         # Use merge_ordered() to merge inflation, unemployment with inner join
-        inflation_unemploy = pd.merge_ordered(inflation, unemployment, 
-                                            on='date', how='inner')
+        inflation_unemploy = pd.merge_ordered(inflation, unemployment,
+                                              on='date', how='inner')
 
         # Print inflation_unemploy 
         print(inflation_unemploy)
@@ -748,7 +788,120 @@ class Joining:
 
         # Print date_ctry
         print(date_ctry)
-        
+
+    def exercise_28(self):
+        jpm = self.set_data(jpm_key)
+        wells = self.set_data(wells_key)
+        bac = self.set_data(bac_key)
+        jpm['date_time'] = pd.to_datetime(jpm['date_time'])
+        wells['date_time'] = pd.to_datetime(wells['date_time'])
+        bac['date_time'] = pd.to_datetime(bac['date_time'])
+
+        # Use merge_asof() to merge jpm and wells
+        jpm_wells = pd.merge_asof(jpm, wells, on='date_time',
+                                  suffixes=('', '_wells'), direction='nearest')
+
+        # Use merge_asof() to merge jpm_wells and bac
+        jpm_wells_bac = pd.merge_asof(jpm_wells, bac, on='date_time',
+                                      suffixes=('_jpm', '_bac'), direction='nearest')
+
+        # Compute price diff
+        price_diffs = jpm_wells_bac.diff()
+
+        # Plot the price diff of the close of jpm, wells and bac only
+        price_diffs.plot(y=['close_jpm', 'close_wells', 'close_bac'])
+        plt.show()
+
+    def exercise_29(self):
+        gdp = self.set_data(gdp_2_key)
+        recession = self.set_data(recession_key)
+        gdp['date'] = pd.to_datetime(gdp['date'])
+        recession['date'] = pd.to_datetime(recession['date'])
+
+        # Merge gdp and recession on date using merge_asof()
+        gdp_recession = pd.merge_asof(gdp, recession, on='date')
+
+        # Create a list based on the row value of gdp_recession['econ_status']
+        is_recession = ['r' if s == 'recession' else 'g' for s in gdp_recession['econ_status']]
+
+        # Plot a bar chart of gdp_recession
+        gdp_recession.plot(kind='bar', y='gdp', x='date', color=is_recession, rot=90)
+        plt.show()
+
+    def exercise_30(self):
+        social_fin = self.set_data(social_fin_key)
+
+        # False, There 2 rows where the value is greater than $50,000,000K.
+        print(social_fin.query('value > 50000000'))
+
+        # False, There are 3 rows for total revenue for Facebook.
+        print(social_fin.query('financial == "total_revenue" and company == "facebook"'))
+
+        # True, There are 6 rows where the net income has a negative value.
+        print(social_fin.query('financial == "net_income" and value < 0'))
+
+        # False, social_fin.query('financial == "gross_profit" and value > 100')
+        print(social_fin.query('financial == "gross_profit" and value > 100'))
+
+    def exercise_31(self):
+        gdp = self.set_data(gdp_key)
+        pop = self.set_data(pop_key)
+
+        # Merge gdp and pop on date and country with fill
+        gdp_pop = pd.merge_ordered(gdp, pop, on=['country', 'date'], fill_method='ffill')
+
+        # Add a column named gdp_per_capita to gdp_pop that divides the gdp by pop
+        gdp_pop['gdp_per_capita'] = gdp_pop['gdp'] / gdp_pop['pop']
+
+        # Pivot table of gdp_per_capita, where index is date and columns is country
+        gdp_pivot = gdp_pop.pivot_table('gdp_per_capita', 'date', 'country')
+
+        # Select dates equal to or greater than 1991-01-01
+        recent_gdp_pop = gdp_pivot.query('date >= "1991-01-01"')
+
+        # Plot recent_gdp_pop
+        recent_gdp_pop.plot(rot=90)
+        plt.show()
+
+    def exercise_32(self):
+        inflation = self.set_data(inflation_2_key)
+
+        print(inflation.melt(id_vars=['country', 'indicator'], var_name='year', value_name='annual'))
+
+    def exercise_33(self):
+        ur_wide = self.set_data(ur_wide_key)
+
+        # unpivot everything besides the year column
+        ur_tall = ur_wide.melt(id_vars=['year'], var_name='month', value_name='unempl_rate')
+
+        # Create a date column using the month and year columns of ur_tall
+        ur_tall['date'] = pd.to_datetime(ur_tall['month'] + '-' + ur_tall['year'].astype(str), format='%b-%Y')
+
+        # Sort ur_tall by date in ascending order
+        ur_sorted = ur_tall.sort_values('date')
+
+        # Plot the unempl_rate by date
+        ur_sorted.plot(x='date', y='unempl_rate')
+        plt.show()
+
+    def exercise_34(self):
+        ten_yr = self.set_data(ten_yr_key)
+        dji = self.set_data(dji_key)
+
+        # Use melt on ten_yr, unpivot everything besides the metric column
+        bond_perc = ten_yr.melt(id_vars='metric', var_name='date', value_name='close')
+
+        # Use query on bond_perc to select only the rows where metric=close
+        bond_perc_close = bond_perc.query('metric == "close"')
+
+        # Merge (ordered) dji and bond_perc_close on date with an inner join
+        dow_bond = pd.merge_ordered(dji, bond_perc_close, on='date',
+                                    suffixes=('_dow', '_bond'), how='inner')
+
+        # Plot only the close_dow and close_bond columns
+        dow_bond.plot(y=['close_dow', 'close_bond'], x='date', rot=90)
+        plt.show()
+
 
 if __name__ == '__main__':
     try:
@@ -780,7 +933,14 @@ if __name__ == '__main__':
         # j.exercise_24()
         # j.exercise_25()
         # j.exercise_26()
-        j.exercise_27()
+        # j.exercise_27()
+        # j.exercise_28()
+        # j.exercise_29()
+        # j.exercise_30()
+        # j.exercise_31()
+        # j.exercise_32()
+        # j.exercise_33()
+        j.exercise_34()
 
     # Handle the exceptions appropriately
     except ValueError as e:
