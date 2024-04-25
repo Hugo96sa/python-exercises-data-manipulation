@@ -3,13 +3,20 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats import uniform
+from scipy.stats import binom
+from scipy.stats import norm
+from scipy.stats import poisson
+from scipy.stats import expon
 
 amir_deals_key = 'ami_dea'
+all_deals_key = 'all_dea'
 food_consumption_key = 'foo_con'
 restaurant_groups_key = 'res_gro'
 world_happiness_key = 'wor_hap'
 
 amir_deals_file_path = 'data/statistics_python/amir_deals.csv'
+all_deals_file_path = 'data/statistics_python/all_deals.csv'
 food_consumption_file_path = 'data/statistics_python/food_consumption.csv'
 restaurant_groups_file_path = 'data/statistics_python/restaurant_groups.csv'
 world_happiness_file_path = 'data/statistics_python/world_happiness.csv'
@@ -23,6 +30,8 @@ class Statistics:
         try:
             if data_selector == amir_deals_key:
                 return pd.read_csv(amir_deals_file_path)
+            elif data_selector == all_deals_key:
+                return pd.read_csv(all_deals_file_path, index_col=0)
             elif data_selector == food_consumption_key:
                 return pd.read_csv(food_consumption_file_path)
             elif data_selector == restaurant_groups_key:
@@ -216,7 +225,7 @@ class Statistics:
         restaurant_groups = self.set_data(restaurant_groups_key)
 
         # Create a histogram of restaurant_groups and show plot
-        restaurant_groups['group_size'].hist(bins=np.linspace(2,6,5))
+        restaurant_groups['group_size'].hist(bins=np.linspace(2, 6, 5))
         plt.show()
 
         # Create probability distribution
@@ -238,6 +247,216 @@ class Statistics:
         prob_4_or_more = np.sum(groups_4_or_more['prob'])
         print(prob_4_or_more)
 
+    def exercise_10(self):
+        # Min and max wait times for back-up that happens every 30 min
+        min_time = 0
+        max_time = 30
+
+        # Calculate probability of waiting less than 5 mins
+        prob_less_than_5 = uniform.cdf(5, min_time, max_time)
+        print(prob_less_than_5)
+
+        # Calculate probability of waiting more than 5 mins
+        prob_greater_than_5 = 1 - uniform.cdf(5, min_time, max_time)
+        print(prob_greater_than_5)
+
+        # Calculate probability of waiting 10-20 mins
+        prob_between_10_and_20 = uniform.cdf(20, min_time, max_time) - uniform.cdf(10, min_time, max_time)
+        print(prob_between_10_and_20)
+
+    def exercise_11(self):
+        # Set random seed to 334
+        np.random.seed(334)
+
+        # Generate 1000 wait times between 0 and 30 mins
+        wait_times = uniform.rvs(0, 30, size=1000)
+
+        print(wait_times)
+
+        # Create a histogram of simulated times and show plot
+        plt.hist(wait_times)
+        plt.show()
+
+    def exercise_12(self):
+        # Set random seed to 10
+        np.random.seed(10)
+
+        # Simulate a single deal
+        print(binom.rvs(1, 0.3, size=1))
+
+        # Simulate 1 week of 3 deals
+        print(binom.rvs(3, 0.3, size=1))
+
+        # Simulate 52 weeks of 3 deals
+        deals = binom.rvs(3, 0.3, size=52)
+
+        # Print mean deals won per week
+        print(np.mean(deals))
+
+    def exercise_13(self):
+        # Probability of closing 3 out of 3 deals
+        prob_3 = binom.pmf(3, 3, 0.3)
+        print(prob_3)
+
+        # Probability of closing <= 1 deal out of 3 deals
+        prob_less_than_or_equal_1 = binom.cdf(1, 3, 0.3)
+        print(prob_less_than_or_equal_1)
+
+        # Probability of closing > 1 deal out of 3 deals
+        prob_greater_than_1 = 1 - binom.cdf(1, 3, 0.3)
+        print(prob_greater_than_1)
+
+    def exercise_14(self):
+        # Expected number won with 30% win rate
+        won_30pct = 3 * 0.3
+        print(won_30pct)
+
+        # Expected number won with 25% win rate
+        won_25pct = 3 * 0.25
+        print(won_25pct)
+
+        # Expected number won with 35% win rate
+        won_35pct = 3 * 0.35
+        print(won_35pct)
+
+    def exercise_15(self):
+        amir_deals = self.set_data(amir_deals_key)
+
+        # Histogram of amount with 10 bins and show plot
+        amir_deals['amount'].hist(bins=10)
+        plt.show()
+
+    def exercise_16(self):
+        # Probability of deal < 7500
+        prob_less_7500 = norm.cdf(7500, 5000, 2000)
+        print(prob_less_7500)
+
+        # Probability of deal > 1000
+        prob_over_1000 = 1 - norm.cdf(1000, 5000, 2000)
+        print(prob_over_1000)
+
+        # Probability of deal between 3000 and 7000
+        prob_3000_to_7000 = norm.cdf(7000, 5000, 2000) - norm.cdf(3000, 5000, 2000)
+        print(prob_3000_to_7000)
+
+        # Calculate amount that 25% of deals will be less than
+        pct_25 = norm.ppf(0.25, 5000, 2000)
+        print(pct_25)
+
+    def exercise_17(self):
+        # Calculate new average amount
+        new_mean = 5000 * 1.2
+
+        # Calculate new standard deviation
+        new_sd = 2000 * 1.3
+
+        # Simulate 36 new sales
+        new_sales = norm.rvs(new_mean, new_sd, size=36)
+
+        # Create histogram and show
+        plt.hist(new_sales)
+        plt.show()
+
+    # Which market is better?
+    def exercise_18(self):
+        # Based only on the metric of percent of sales over $1000, does Amir perform better
+        # in the current market or the predicted market?
+        print(1 - norm.cdf(1000, 5000, 2000))
+        print(1 - norm.cdf(1000, 6000, 2600))
+        # Amir performs about equally in both markets.
+
+    # Central limit theorem in action
+    def exercise_19(self):
+        amir_deals = self.set_data(amir_deals_key)
+
+        # Create a histogram of num_users and show
+        amir_deals['num_users'].hist()
+        plt.show()
+
+        # Set seed to 104
+        np.random.seed(104)
+
+        # Sample 20 num_users with replacement
+        samp_20 = amir_deals['num_users'].sample(20, replace=True)
+
+        # Take mean of samp_20
+        print(np.mean(samp_20))
+
+        sample_means = []
+
+        # Loop 100 times
+        for i in range(100):
+            # Take samples of 20 num_users with replacement
+            samp_20 = amir_deals['num_users'].sample(20, replace=True)
+            # Calculate mean of samp_20
+            samp_20_mean = np.mean(samp_20)
+            # Append samp_20_mean to sample_means
+            sample_means.append(samp_20_mean)
+
+        print(sample_means)
+
+        # Convert to Series and plot histogram
+        sample_means_series = pd.Series(sample_means)
+        sample_means_series.hist()
+        # Show plot
+        plt.show()
+
+    # Mean of means
+    def exercise_20(self):
+        all_deals = self.set_data(all_deals_key)
+        amir_deals = self.set_data(amir_deals_key)
+
+        # Set seed to 321
+        np.random.seed(321)
+
+        sample_means = []
+        # Loop 30 times to take 30 means
+        for i in range(30):
+            # Take sample of size 20 from num_users col of all_deals with replacement
+            cur_sample = all_deals['num_users'].sample(20, replace=True)
+            # Take mean of cur_sample
+            cur_mean = np.mean(cur_sample)
+            # Append cur_mean to sample_means
+            sample_means.append(cur_mean)
+
+        # Print mean of sample_means
+        print(np.mean(sample_means))
+
+        # Print mean of num_users in amir_deals
+        print(np.mean(amir_deals['num_users']))
+
+    # Poisson distribution
+    def exercise_21(self):
+        # Probability of 5 responses
+        prob_5 = poisson.pmf(5, 4)
+
+        print(prob_5)
+
+        # Probability of 5 responses
+        prob_coworker = poisson.pmf(5, 5.5)
+
+        print(prob_coworker)
+
+        # Probability of 2 or fewer responses
+        prob_2_or_less = poisson.cdf(2, 4)
+
+        print(prob_2_or_less)
+
+        # Probability of > 10 responses
+        prob_over_10 = 1 - poisson.cdf(10, 4)
+
+        print(prob_over_10)
+
+    def exercise_22(self):
+        # Print probability response takes < 1 hour
+        print(expon.cdf(1, scale=2.5))
+
+        # Print probability response takes > 4 hours
+        print(1 - expon.cdf(4, scale=2.5))
+
+        # Print probability response takes 3-4 hours
+        print(expon.cdf(3, scale=2.5) - expon.cdf(4, scale=2.5))
+
 
 if __name__ == '__main__':
     try:
@@ -251,7 +470,20 @@ if __name__ == '__main__':
         # s.exercise_6()
         # s.exercise_7()
         # s.exercise_8()
-        s.exercise_9()
+        # s.exercise_9()
+        # s.exercise_10()
+        # s.exercise_11()
+        # s.exercise_12()
+        # s.exercise_13()
+        # s.exercise_14()
+        # s.exercise_15()
+        # s.exercise_16()
+        # s.exercise_17()
+        # s.exercise_18()
+        # s.exercise_19()
+        # s.exercise_20()
+        # s.exercise_21()
+        s.exercise_22()
 
     # Handle the exceptions appropriately
     except ValueError as e:
