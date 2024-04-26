@@ -62,62 +62,63 @@ world_bank_gdp_key = 'wor_bnk_gdp'
 world_bank_pop_key = 'wor_bnk_pop'
 zip_demo_key = 'zip_demo'
 
-actors_movies_file_path = 'data/pandas_joining/actors_movies.csv'
-albums_file_path = 'data/pandas_joining/albums.csv'
-artists_file_path = 'data/pandas_joining/artists.csv'
-bac_file_path = 'data/pandas_joining/bac.csv'
-business_owners_file_path = 'data/pandas_joining/business_owners.p'
-casts_file_path = 'data/pandas_joining/casts.p'
-census_altered_file_path = 'data/pandas_joining/census_altered.csv'
-census_file_path = 'data/pandas_joining/census.p'
-classic_18_file_path = 'data/pandas_joining/classic_18.csv'
-classic_19_file_path = 'data/pandas_joining/classic_19.csv'
-crews_file_path = 'data/pandas_joining/crews.p'
-cta_calendar_file_path = 'data/pandas_joining/cta_calendar.p'
-cta_ridership_file_path = 'data/pandas_joining/cta_ridership.p'
-dji_file_path = 'data/pandas_joining/dji.csv'
-employees_file_path = 'data/pandas_joining/employees.csv'
-financials_file_path = 'data/pandas_joining/financials.p'
-genres_file_path = 'data/pandas_joining/genres.csv'
-gdp_2_file_path = 'data/pandas_joining/gdp_2.csv'
-gdp_file_path = 'data/pandas_joining/gdp.csv'
-inflation_2_file_path = 'data/pandas_joining/inflation_2.csv'
-inflation_file_path = 'data/pandas_joining/inflation.csv'
-inv_aug_file_path = 'data/pandas_joining/inv_aug.csv'
-inv_jul_file_path = 'data/pandas_joining/inv_jul.csv'
-inv_sep_file_path = 'data/pandas_joining/inv_sep.csv'
-jpm_file_path = 'data/pandas_joining/jpm.csv'
-land_use_file_path = 'data/pandas_joining/land_use.p'
-licenses_file_path = 'data/pandas_joining/licenses.p'
-movie_to_genres_file_path = 'data/pandas_joining/movie_to_genres.p'
-movies_file_path = 'data/pandas_joining/movies.p'
-non_mus_file_path = 'data/pandas_joining/non_mus_tcks.csv'
-pop_18_file_path = 'data/pandas_joining/pop_18.csv'
-pop_19_file_path = 'data/pandas_joining/pop_19.csv'
-pop_file_path = 'data/pandas_joining/pop.csv'
-ratings_file_path = 'data/pandas_joining/ratings.p'
-recession_file_path = 'data/pandas_joining/recession.csv'
-sp500_file_path = 'data/pandas_joining/S&P500.csv'
-sequels_file_path = 'data/pandas_joining/sequels.p'
-social_fin_file_path = 'data/pandas_joining/social_fin.csv'
-stations_file_path = 'data/pandas_joining/stations.p'
-taglines_file_path = 'data/pandas_joining/taglines.p'
-taxi_owners_file_path = 'data/pandas_joining/taxi_owners.p'
-taxi_vehicles_file_path = 'data/pandas_joining/taxi_vehicles.p'
-ten_yr_file_path = 'data/pandas_joining/ten_yr.csv'
-top_cust_file_path = 'data/pandas_joining/top_cust.csv'
-top_invoices_file_path = 'data/pandas_joining/top_invoices.csv'
-tracks_master_file_path = 'data/pandas_joining/tracks_master.csv'
-tracks_ride_file_path = 'data/pandas_joining/tracks_ride.csv'
-tracks_st_file_path = 'data/pandas_joining/tracks_st.csv'
-unemployment_file_path = 'data/pandas_joining/unemployment.csv'
-ur_wide_file_path = 'data/pandas_joining/ur_wide.csv'
-ward_file_path = 'data/pandas_joining/ward.p'
-wards_altered_file_path = 'data/pandas_joining/wards_altered.csv'
-wells_file_path = 'data/pandas_joining/wells.csv'
-world_bank_gdp_file_path = 'data/pandas_joining/WorldBank_GDP.csv'
-world_bank_pop_file_path = 'data/pandas_joining/WorldBank_POP.csv'
-zip_demo_file_path = 'data/pandas_joining/zip_demo.p'
+base_file_path = 'data/pandas_joining/'
+actors_movies_file_path = 'actors_movies.csv'
+albums_file_path = 'albums.csv'
+artists_file_path = 'artists.csv'
+bac_file_path = 'bac.csv'
+business_owners_file_path = 'business_owners.p'
+casts_file_path = 'casts.p'
+census_altered_file_path = 'census_altered.csv'
+census_file_path = 'census.p'
+classic_18_file_path = 'classic_18.csv'
+classic_19_file_path = 'classic_19.csv'
+crews_file_path = 'crews.p'
+cta_calendar_file_path = 'cta_calendar.p'
+cta_ridership_file_path = 'cta_ridership.p'
+dji_file_path = 'dji.csv'
+employees_file_path = 'employees.csv'
+financials_file_path = 'financials.p'
+genres_file_path = 'genres.csv'
+gdp_2_file_path = 'gdp_2.csv'
+gdp_file_path = 'gdp.csv'
+inflation_2_file_path = 'inflation_2.csv'
+inflation_file_path = 'inflation.csv'
+inv_aug_file_path = 'inv_aug.csv'
+inv_jul_file_path = 'inv_jul.csv'
+inv_sep_file_path = 'inv_sep.csv'
+jpm_file_path = 'jpm.csv'
+land_use_file_path = 'land_use.p'
+licenses_file_path = 'licenses.p'
+movie_to_genres_file_path = 'movie_to_genres.p'
+movies_file_path = 'movies.p'
+non_mus_file_path = 'non_mus_tcks.csv'
+pop_18_file_path = 'pop_18.csv'
+pop_19_file_path = 'pop_19.csv'
+pop_file_path = 'pop.csv'
+ratings_file_path = 'ratings.p'
+recession_file_path = 'recession.csv'
+sp500_file_path = 'S&P500.csv'
+sequels_file_path = 'sequels.p'
+social_fin_file_path = 'social_fin.csv'
+stations_file_path = 'stations.p'
+taglines_file_path = 'taglines.p'
+taxi_owners_file_path = 'taxi_owners.p'
+taxi_vehicles_file_path = 'taxi_vehicles.p'
+ten_yr_file_path = 'ten_yr.csv'
+top_cust_file_path = 'top_cust.csv'
+top_invoices_file_path = 'top_invoices.csv'
+tracks_master_file_path = 'tracks_master.csv'
+tracks_ride_file_path = 'tracks_ride.csv'
+tracks_st_file_path = 'tracks_st.csv'
+unemployment_file_path = 'unemployment.csv'
+ur_wide_file_path = 'ur_wide.csv'
+ward_file_path = 'ward.p'
+wards_altered_file_path = 'wards_altered.csv'
+wells_file_path = 'wells.csv'
+world_bank_gdp_file_path = 'WorldBank_GDP.csv'
+world_bank_pop_file_path = 'WorldBank_POP.csv'
+zip_demo_file_path = 'zip_demo.p'
 
 
 class Joining:
@@ -127,117 +128,117 @@ class Joining:
     def set_data(self, data_selector):
         try:
             if data_selector == actors_movies_key:
-                return pd.read_csv(actors_movies_file_path)
+                return pd.read_csv(base_file_path + actors_movies_file_path)
             elif data_selector == albums_key:
-                return pd.read_csv(albums_file_path, index_col=0)
+                return pd.read_csv(base_file_path + albums_file_path, index_col=0)
             elif data_selector == artists_key:
-                return pd.read_csv(artists_file_path, index_col=0)
+                return pd.read_csv(base_file_path + artists_file_path, index_col=0)
             elif data_selector == bac_key:
-                return pd.read_csv(bac_file_path, index_col=0)
+                return pd.read_csv(base_file_path + bac_file_path, index_col=0)
             elif data_selector == business_owners_key:
-                return pd.read_pickle(business_owners_file_path)
+                return pd.read_pickle(base_file_path + business_owners_file_path)
             elif data_selector == casts_key:
-                return pd.read_pickle(casts_file_path)
+                return pd.read_pickle(base_file_path + casts_file_path)
             elif data_selector == census_altered_key:
-                return pd.read_csv(census_altered_file_path, index_col=0)
+                return pd.read_csv(base_file_path + census_altered_file_path, index_col=0)
             elif data_selector == census_key:
-                return pd.read_pickle(census_file_path)
+                return pd.read_pickle(base_file_path + census_file_path)
             elif data_selector == classic_18_key:
-                return pd.read_csv(classic_18_file_path, index_col=0)
+                return pd.read_csv(base_file_path + classic_18_file_path, index_col=0)
             elif data_selector == classic_19_key:
-                return pd.read_csv(classic_19_file_path, index_col=0)
+                return pd.read_csv(base_file_path + classic_19_file_path, index_col=0)
             elif data_selector == crews_key:
-                return pd.read_pickle(crews_file_path)
+                return pd.read_pickle(base_file_path + crews_file_path)
             elif data_selector == cta_calendar_key:
-                return pd.read_pickle(cta_calendar_file_path)
+                return pd.read_pickle(base_file_path + cta_calendar_file_path)
             elif data_selector == cta_ridership_key:
-                return pd.read_pickle(cta_ridership_file_path)
+                return pd.read_pickle(base_file_path + cta_ridership_file_path)
             elif data_selector == dji_key:
-                return pd.read_csv(dji_file_path, index_col=0)
+                return pd.read_csv(base_file_path + dji_file_path, index_col=0)
             elif data_selector == employees_key:
-                return pd.read_csv(employees_file_path, index_col=0)
+                return pd.read_csv(base_file_path + employees_file_path, index_col=0)
             elif data_selector == financials_key:
-                return pd.read_pickle(financials_file_path)
+                return pd.read_pickle(base_file_path + financials_file_path)
             elif data_selector == genres_key:
-                return pd.read_csv(genres_file_path, index_col=0)
+                return pd.read_csv(base_file_path + genres_file_path, index_col=0)
             elif data_selector == gdp_2_key:
-                return pd.read_csv(gdp_2_file_path, index_col=0)
+                return pd.read_csv(base_file_path + gdp_2_file_path, index_col=0)
             elif data_selector == gdp_key:
-                return pd.read_csv(gdp_file_path, index_col=0)
+                return pd.read_csv(base_file_path + gdp_file_path, index_col=0)
             elif data_selector == inflation_2_key:
-                return pd.read_csv(inflation_2_file_path, index_col=0)
+                return pd.read_csv(base_file_path + inflation_2_file_path, index_col=0)
             elif data_selector == inflation_key:
-                return pd.read_csv(inflation_file_path, index_col=0)
+                return pd.read_csv(base_file_path + inflation_file_path, index_col=0)
             elif data_selector == inv_aug_key:
-                return pd.read_csv(inv_aug_file_path, index_col=0)
+                return pd.read_csv(base_file_path + inv_aug_file_path, index_col=0)
             elif data_selector == inv_jul_key:
-                return pd.read_csv(inv_jul_file_path, index_col=0)
+                return pd.read_csv(base_file_path + inv_jul_file_path, index_col=0)
             elif data_selector == inv_sep_key:
-                return pd.read_csv(inv_sep_file_path, index_col=0)
+                return pd.read_csv(base_file_path + inv_sep_file_path, index_col=0)
             elif data_selector == jpm_key:
-                return pd.read_csv(jpm_file_path, index_col=0)
+                return pd.read_csv(base_file_path + jpm_file_path, index_col=0)
             elif data_selector == land_use_key:
-                return pd.read_pickle(land_use_file_path)
+                return pd.read_pickle(base_file_path + land_use_file_path)
             elif data_selector == licenses_key:
-                return pd.read_pickle(licenses_file_path)
+                return pd.read_pickle(base_file_path + licenses_file_path)
             elif data_selector == movie_to_genres_key:
-                return pd.read_pickle(movie_to_genres_file_path)
+                return pd.read_pickle(base_file_path + movie_to_genres_file_path)
             elif data_selector == movies_key:
-                return pd.read_pickle(movies_file_path)
+                return pd.read_pickle(base_file_path + movies_file_path)
             elif data_selector == non_mus_key:
-                return pd.read_csv(non_mus_file_path, index_col=0)
+                return pd.read_csv(base_file_path + non_mus_file_path, index_col=0)
             elif data_selector == pop_18_key:
-                return pd.read_csv(pop_18_file_path, index_col=0)
+                return pd.read_csv(base_file_path + pop_18_file_path, index_col=0)
             elif data_selector == pop_19_key:
-                return pd.read_csv(pop_19_file_path, index_col=0)
+                return pd.read_csv(base_file_path + pop_19_file_path, index_col=0)
             elif data_selector == pop_key:
-                return pd.read_csv(pop_file_path, index_col=0)
+                return pd.read_csv(base_file_path + pop_file_path, index_col=0)
             elif data_selector == ratings_key:
-                return pd.read_pickle(ratings_file_path)
+                return pd.read_pickle(base_file_path + ratings_file_path)
             elif data_selector == recession_key:
-                return pd.read_csv(recession_file_path, index_col=0)
+                return pd.read_csv(base_file_path + recession_file_path, index_col=0)
             elif data_selector == sp500_key:
-                return pd.read_csv(sp500_file_path)
+                return pd.read_csv(base_file_path + sp500_file_path)
             elif data_selector == sequels_key:
-                return pd.read_pickle(sequels_file_path)
+                return pd.read_pickle(base_file_path + sequels_file_path)
             elif data_selector == social_fin_key:
-                return pd.read_csv(social_fin_file_path, index_col=0)
+                return pd.read_csv(base_file_path + social_fin_file_path, index_col=0)
             elif data_selector == stations_key:
-                return pd.read_pickle(stations_file_path)
+                return pd.read_pickle(base_file_path + stations_file_path)
             elif data_selector == taglines_key:
-                return pd.read_pickle(taglines_file_path)
+                return pd.read_pickle(base_file_path + taglines_file_path)
             elif data_selector == taxi_owners_key:
-                return pd.read_pickle(taxi_owners_file_path)
+                return pd.read_pickle(base_file_path + taxi_owners_file_path)
             elif data_selector == taxi_vehicles_key:
-                return pd.read_pickle(taxi_vehicles_file_path)
+                return pd.read_pickle(base_file_path + taxi_vehicles_file_path)
             elif data_selector == ten_yr_key:
-                return pd.read_csv(ten_yr_file_path, index_col=0)
+                return pd.read_csv(base_file_path + ten_yr_file_path, index_col=0)
             elif data_selector == top_cust_key:
-                return pd.read_csv(top_cust_file_path, index_col=0)
+                return pd.read_csv(base_file_path + top_cust_file_path, index_col=0)
             elif data_selector == top_invoices_key:
-                return pd.read_csv(top_invoices_file_path, index_col=0)
+                return pd.read_csv(base_file_path + top_invoices_file_path, index_col=0)
             elif data_selector == tracks_master_key:
-                return pd.read_csv(tracks_master_file_path, index_col=0)
+                return pd.read_csv(base_file_path + tracks_master_file_path, index_col=0)
             elif data_selector == tracks_ride_key:
-                return pd.read_csv(tracks_ride_file_path, index_col=0)
+                return pd.read_csv(base_file_path + tracks_ride_file_path, index_col=0)
             elif data_selector == tracks_st_key:
-                return pd.read_csv(tracks_st_file_path, index_col=0)
+                return pd.read_csv(base_file_path + tracks_st_file_path, index_col=0)
             elif data_selector == unemployment_key:
-                return pd.read_csv(unemployment_file_path, index_col=0)
+                return pd.read_csv(base_file_path + unemployment_file_path, index_col=0)
             elif data_selector == ur_wide_key:
-                return pd.read_csv(ur_wide_file_path, index_col=0)
+                return pd.read_csv(base_file_path + ur_wide_file_path, index_col=0)
             elif data_selector == ward_key:
-                return pd.read_pickle(ward_file_path)
+                return pd.read_pickle(base_file_path + ward_file_path)
             elif data_selector == wards_altered_key:
-                return pd.read_csv(wards_altered_file_path, index_col=0)
+                return pd.read_csv(base_file_path + wards_altered_file_path, index_col=0)
             elif data_selector == wells_key:
-                return pd.read_csv(wells_file_path, index_col=0)
+                return pd.read_csv(base_file_path + wells_file_path, index_col=0)
             elif data_selector == world_bank_gdp_key:
-                return pd.read_csv(world_bank_gdp_file_path)
+                return pd.read_csv(base_file_path + world_bank_gdp_file_path)
             elif data_selector == world_bank_pop_key:
-                return pd.read_csv(world_bank_pop_file_path)
+                return pd.read_csv(base_file_path + world_bank_pop_file_path)
             elif data_selector == zip_demo_key:
-                return pd.read_pickle(zip_demo_file_path)
+                return pd.read_pickle(base_file_path + zip_demo_file_path)
             else:
                 raise ValueError("Invalid data_selector provided.")
 
@@ -929,7 +930,7 @@ if __name__ == '__main__':
         # j.exercise_20()
         # j.exercise_21()
         # j.exercise_22()
-        # j.exercise_23()
+        # j.exercise_23() # Stops execution
         # j.exercise_24()
         # j.exercise_25()
         # j.exercise_26()

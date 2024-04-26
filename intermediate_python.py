@@ -9,10 +9,11 @@ brics_key = 'brics'
 cars_key = 'cars'
 gapminder_key = 'gapminder'
 
+base_file_path = 'data/intermediate_python/'
 baseball_file_path = 'data/introduction_to_python/baseball.csv'
-brics_file_path = 'data/intermediate_python/brics.csv'
-cars_file_path = 'data/intermediate_python/cars.csv'
-gapminder_file_path = 'data/intermediate_python/gapminder.csv'
+brics_file_path = f'{base_file_path}brics.csv'
+cars_file_path = f'{base_file_path}cars.csv'
+gapminder_file_path = f'{base_file_path}gapminder.csv'
 
 
 class Intermediate:

@@ -6,8 +6,9 @@ import numpy as np
 baseball_key = 'baseball'
 fifa_key = 'fifa'
 
-baseball_file_path = 'data/introduction_to_python/baseball.csv'
-fifa_file_path = 'data/introduction_to_python/fifa.csv'
+base_file_path = 'data/introduction_to_python/'
+baseball_file_path = f'{base_file_path}baseball.csv'
+fifa_file_path = f'{base_file_path}fifa.csv'
 
 
 class Introduction:

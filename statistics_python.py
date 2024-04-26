@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from scipy.stats import uniform
 from scipy.stats import binom
 from scipy.stats import norm
@@ -15,12 +16,13 @@ food_consumption_key = 'foo_con'
 restaurant_groups_key = 'res_gro'
 world_happiness_key = 'wor_hap'
 
-amir_deals_file_path = 'data/statistics_python/amir_deals.csv'
-all_deals_file_path = 'data/statistics_python/all_deals.csv'
-food_consumption_file_path = 'data/statistics_python/food_consumption.csv'
-restaurant_groups_file_path = 'data/statistics_python/restaurant_groups.csv'
-world_happiness_file_path = 'data/statistics_python/world_happiness.csv'
-
+base_file_path = 'data/statistics_python/'
+amir_deals_file_path = f'{base_file_path}amir_deals.csv'
+all_deals_file_path = f'{base_file_path}all_deals.csv'
+food_consumption_file_path = f'{base_file_path}food_consumption.csv'
+restaurant_groups_file_path = f'{base_file_path}restaurant_groups.csv'
+world_happiness_file_path = f'{base_file_path}world_happiness.csv'
+world_happiness_2_file_path = f'{base_file_path}world_happiness2.csv'
 
 class Statistics:
     def __init__(self):
@@ -447,6 +449,7 @@ class Statistics:
 
         print(prob_over_10)
 
+    # Exponencial distribution
     def exercise_22(self):
         # Print probability response takes < 1 hour
         print(expon.cdf(1, scale=2.5))
@@ -456,6 +459,90 @@ class Statistics:
 
         # Print probability response takes 3-4 hours
         print(expon.cdf(3, scale=2.5) - expon.cdf(4, scale=2.5))
+
+    # Linear correlation and plots
+    def exercise_23(self):
+        world_happiness = self.set_data(world_happiness_key)
+
+        # Create a scatterplot of happiness_score vs. life_exp and show
+        sns.scatterplot(x='life_exp', y='happiness_score', data=world_happiness)
+        plt.show()
+
+        # Create a hexbin plot
+        sns.jointplot(x='life_exp', y='happiness_score', data=world_happiness, kind='hex', color='orange')
+        plt.show()
+
+        # Create scatterplot of happiness_score vs life_exp with trendline
+        sns.lmplot(x='life_exp', y='happiness_score', data=world_happiness, ci=None)
+        plt.show()
+
+        # Based on the scatterplot, which is most likely the correlation between life_exp and happiness_score? = 0.8
+
+        # Correlation between life_exp and happiness_score
+        cor = world_happiness['life_exp'].corr(world_happiness['happiness_score'])
+        print(cor)
+
+    # Fix the correlation with the use of np.log
+    def exercise_24(self):
+        world_happiness = self.set_data(world_happiness_key)
+
+        # Scatterplot of gdp_per_cap and life_exp
+        sns.scatterplot(x='gdp_per_cap', y='life_exp', data=world_happiness)
+        plt.show()
+
+        # Correlation between gdp_per_cap and life_exp
+        cor = world_happiness['gdp_per_cap'].corr(world_happiness['life_exp'])
+        print(cor)
+
+        # Create log_gdp_per_cap column
+        world_happiness['log_gdp_per_cap'] = np.log(world_happiness['gdp_per_cap'])
+
+        # Fixxing the Scatterplot of gdp_per_cap and life_exp
+        sns.scatterplot(x='log_gdp_per_cap', y='life_exp', data=world_happiness)
+        plt.show()
+
+        # Fixxing the Correlation between gdp_per_cap and life_exp with log_gdp_per_cap
+        cor = world_happiness['log_gdp_per_cap'].corr(world_happiness['life_exp'])
+        print(cor)
+
+    # Transforming variables
+    def exercise_25(self):
+        world_happiness = self.set_data(world_happiness_key)
+
+        # Scatterplot of happiness_score vs. gdp_per_cap
+        sns.scatterplot(x='gdp_per_cap', y='happiness_score', data=world_happiness)
+        plt.show()
+
+        # Calculate correlation
+        cor = world_happiness['gdp_per_cap'].corr(world_happiness['happiness_score'])
+        print(cor)
+
+        # Create log_gdp_per_cap column
+        world_happiness['log_gdp_per_cap'] = np.log(world_happiness['gdp_per_cap'])
+
+        # Scatterplot of happiness_score vs. log_gdp_per_cap
+        sns.scatterplot(x='log_gdp_per_cap', y='happiness_score', data=world_happiness)
+        plt.show()
+
+        # Calculate correlation
+        cor = world_happiness['log_gdp_per_cap'].corr(world_happiness['happiness_score'])
+        print(cor)
+    
+    # Does sugar improve happiness?, an effort was made to merge 2 different csv files so we are
+    # working with the most data possible
+    def exercise_26(self):
+        world_happiness = self.set_data(world_happiness_key)
+
+        # Scatterplot of grams_sugar_per_day and happiness_score
+        sns.scatterplot(x='grams_sugar_per_day', y='happiness_score', data=world_happiness)
+        plt.show()
+
+        # Correlation between grams_sugar_per_day and happiness_score
+        cor = world_happiness['grams_sugar_per_day'].corr(world_happiness['happiness_score'])
+        print(cor)
+
+        # Which statement about sugar consumption and happiness scores is true?
+        # Increased sugar consumption is associated with a higher happiness score.
 
 
 if __name__ == '__main__':
@@ -483,7 +570,11 @@ if __name__ == '__main__':
         # s.exercise_19()
         # s.exercise_20()
         # s.exercise_21()
-        s.exercise_22()
+        # s.exercise_22()
+        # s.exercise_23()
+        # s.exercise_24()
+        # s.exercise_25()
+        s.exercise_26()
 
     # Handle the exceptions appropriately
     except ValueError as e:

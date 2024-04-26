@@ -10,12 +10,13 @@ homeless_key = 'homeless'
 sales_key = 'sales'
 temp_key = 'temp'
 
-airline_file_path = 'data/pandas_manipulation/airline_bumping.csv'
-avocados_file_path = 'data/pandas_manipulation/avoplotto.pkl'
-avocados_2016_file_path = 'data/pandas_manipulation/avocados_2016.csv'
-homeless_file_path = 'data/pandas_manipulation/homelessness.csv'
-sales_file_path = 'data/pandas_manipulation/sales_subset.csv'
-temp_file_path = 'data/pandas_manipulation/temperatures.csv'
+base_file_path = 'data/pandas_manipulation/'
+airline_file_path = f'{base_file_path}airline_bumping.csv'
+avocados_file_path = f'{base_file_path}avoplotto.pkl'
+avocados_2016_file_path = f'{base_file_path}avocados_2016.csv'
+homeless_file_path = f'{base_file_path}homelessness.csv'
+sales_file_path = f'{base_file_path}sales_subset.csv'
+temp_file_path = f'{base_file_path}temperatures.csv'
 
 
 class Manipulation:
