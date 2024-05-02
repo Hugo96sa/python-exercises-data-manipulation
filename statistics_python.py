@@ -24,6 +24,7 @@ restaurant_groups_file_path = f'{base_file_path}restaurant_groups.csv'
 world_happiness_file_path = f'{base_file_path}world_happiness.csv'
 world_happiness_2_file_path = f'{base_file_path}world_happiness2.csv'
 
+
 class Statistics:
     def __init__(self):
         self.df = {}
@@ -449,7 +450,7 @@ class Statistics:
 
         print(prob_over_10)
 
-    # Exponencial distribution
+    # Exponential distribution
     def exercise_22(self):
         # Print probability response takes < 1 hour
         print(expon.cdf(1, scale=2.5))
@@ -472,7 +473,7 @@ class Statistics:
         sns.jointplot(x='life_exp', y='happiness_score', data=world_happiness, kind='hex', color='orange')
         plt.show()
 
-        # Create scatterplot of happiness_score vs life_exp with trendline
+        # Create scatterplot of happiness_score vs life_exp with trend line
         sns.lmplot(x='life_exp', y='happiness_score', data=world_happiness, ci=None)
         plt.show()
 
@@ -497,11 +498,11 @@ class Statistics:
         # Create log_gdp_per_cap column
         world_happiness['log_gdp_per_cap'] = np.log(world_happiness['gdp_per_cap'])
 
-        # Fixxing the Scatterplot of gdp_per_cap and life_exp
+        # Fixing the Scatterplot of gdp_per_cap and life_exp
         sns.scatterplot(x='log_gdp_per_cap', y='life_exp', data=world_happiness)
         plt.show()
 
-        # Fixxing the Correlation between gdp_per_cap and life_exp with log_gdp_per_cap
+        # Fixing the Correlation between gdp_per_cap and life_exp with log_gdp_per_cap
         cor = world_happiness['log_gdp_per_cap'].corr(world_happiness['life_exp'])
         print(cor)
 
@@ -527,8 +528,8 @@ class Statistics:
         # Calculate correlation
         cor = world_happiness['log_gdp_per_cap'].corr(world_happiness['happiness_score'])
         print(cor)
-    
-    # Does sugar improve happiness?, an effort was made to merge 2 different csv files so we are
+
+    # Does sugar improve happiness?, an effort was made to merge 2 different csv files, so we are
     # working with the most data possible
     def exercise_26(self):
         world_happiness = self.set_data(world_happiness_key)

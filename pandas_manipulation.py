@@ -290,7 +290,7 @@ class Manipulation:
         # passing median as a string argument instead of np.median object
         print(sales[["temperature_c", "fuel_price_usd_per_l", "unemployment"]].agg([iqr, 'median']))
 
-    # Find the cummulative sum and maximum values in 'weekly_sales' from 'store' = 1 and 'department' == 1 data
+    # Find the cumulative sum and maximum values in 'weekly_sales' from 'store' = 1 and 'department' == 1 data
     def exercise_12(self):
         # Subset the DF to find the data in which 'store' == 1 and 'department' == 1, note that we use & operator
         sales_1_1 = self.df[(self.df['store'] == 1) & (self.df['department'] == 1)]
@@ -307,8 +307,8 @@ class Manipulation:
         # See the columns you calculated
         print(sales_1_1[["date", "weekly_sales", "cum_weekly_sales", "cum_max_sales"]])
 
-    # Find unique conbinations of 'store' and 'type' / 'store' and 'department' by dropping duplicates
-    # subset the rows where 'is_holiday' == True, dropiing duplicates with the same 'date'
+    # Find unique combinations of 'store' and 'type' / 'store' and 'department' by dropping duplicates
+    # subset the rows where 'is_holiday' == True, dropping duplicates with the same 'date'
     def exercise_13(self):
         sales = self.df
 
@@ -325,7 +325,7 @@ class Manipulation:
 
         # Print date col of holiday_dates
         print(holiday_dates['date'])
-    
+
     # From last exercise, count and get the proportion of the store/types and store/departments, sort them
     def exercise_14(self):
         sales = self.df
@@ -358,7 +358,7 @@ class Manipulation:
         print(unique_counts)
 
     # Grouped summary statistics, without using groupby()
-    # Calculate the percentage of sales occured in each store type
+    # Calculate the percentage of sales occurred in each store type
     def exercise_15(self):
         sales = self.df
 
@@ -419,7 +419,7 @@ class Manipulation:
         mean_sales_by_type = sales.groupby("type")["weekly_sales"].mean()
         print(mean_sales_by_type)
 
-        # Calculate the mean using pivot_table(), Pivot for mean weekly_sales for each store type, not specifiyng
+        # Calculate the mean using pivot_table(), Pivot for mean weekly_sales for each store type, not specifying
         # aggfunc argument returns mean by default
         mean_sales_by_type = sales.pivot_table(values='weekly_sales', index='type')
 
@@ -482,7 +482,7 @@ class Manipulation:
         # Reset the temperatures_ind index, keeping its contents
         print(temperatures_ind.reset_index())
 
-        # Reset the temperatures_ind index, dropping its contents it will completly eliminate the index column
+        # Reset the temperatures_ind index, dropping its contents it will completely eliminate the index column
         print(temperatures_ind.reset_index(drop=True))
 
     # Subsetting in DF using .loc[] and indexes
@@ -576,7 +576,7 @@ class Manipulation:
         # Use .loc[] to subset temperatures_ind for rows from Aug 2010 to Feb 2011, mind the inclusive range
         print(temperatures_ind.loc["2010-08":"2011-03"])
 
-    # subsetting by row and column number with .iloc[]
+    # Subsetting by row and column number with .iloc[]
     def exercise_28(self):
         temperatures = self.df
 
@@ -603,7 +603,8 @@ class Manipulation:
         print(temperatures.head())
 
         # Pivot avg_temp_c by country and city vs year
-        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country","city"], columns="year")
+        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country", "city"],
+                                                                columns="year")
 
         # See the result
         print(temp_by_country_city_vs_year)
@@ -613,23 +614,25 @@ class Manipulation:
         temperatures = self.df
         temperatures["date"] = pd.to_datetime(temperatures["date"])
         temperatures["year"] = temperatures["date"].dt.year
-        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country","city"], columns="year")
+        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country", "city"],
+                                                                columns="year")
 
         # Subset for Egypt to India
         print(temp_by_country_city_vs_year.loc["Egypt":"India"])
 
         # Subset for Egypt, Cairo to India, Delhi
-        print(temp_by_country_city_vs_year.loc[("Egypt","Cairo"):("India","Delhi")])
+        print(temp_by_country_city_vs_year.loc[("Egypt", "Cairo"):("India", "Delhi")])
 
         # Subset for Egypt, Cairo to India, Delhi, and 2005 to 2010
-        print(temp_by_country_city_vs_year.loc[("Egypt","Cairo"):("India","Delhi"),"2005":"2010"])
+        print(temp_by_country_city_vs_year.loc[("Egypt", "Cairo"):("India", "Delhi"), "2005":"2010"])
 
     # Calculating on a pivot table
     def exercise_31(self):
         temperatures = self.df
         temperatures["date"] = pd.to_datetime(temperatures["date"])
         temperatures["year"] = temperatures["date"].dt.year
-        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country","city"], columns="year")
+        temp_by_country_city_vs_year = temperatures.pivot_table(values="avg_temp_c", index=["country", "city"],
+                                                                columns="year")
 
         # Get the worldwide mean temp by year
         mean_temp_by_year = temp_by_country_city_vs_year.mean(axis="index")
@@ -672,7 +675,7 @@ class Manipulation:
 
         # Show the plot
         plt.show()
-    
+
     # Avocado supply and demand, Plot the relationship between number sold vs average price
     def exercise_34(self):
         avocados = self.df
@@ -682,7 +685,7 @@ class Manipulation:
 
         # Show the plot
         plt.show()
-    
+
     # Create histograms showing the average price with conventional and organic avocados
     def exercise_35(self):
         avocados = self.df
@@ -694,7 +697,7 @@ class Manipulation:
         avocados[avocados["type"] == "organic"]["avg_price"].hist()
 
         # Add a legend
-        plt.legend(["conventional","organic"])
+        plt.legend(["conventional", "organic"])
 
         # Show the plot
         plt.show()
@@ -723,7 +726,7 @@ class Manipulation:
         # Show the plot
         plt.show()
 
-    # Find mising values, plot the histogram of ocurrence
+    # Find missing values, plot the histogram of occurrence
     def exercise_36(self):
         avocados_2016 = self.df
 
@@ -738,18 +741,18 @@ class Manipulation:
 
         # Show plot
         plt.show()
-    
+
     # Missing Data Handling, remove missing values and check info()
     def exercise_37(self):
         avocados_2016 = self.df
-        
+
         # Remove rows with missing values
         avocados_complete = avocados_2016.dropna()
 
         # Check if any columns contain missing values
         print(avocados_complete.isna().any())
-    
-    # Replace missing values, Plot the ocurrence of missing data in the DF before and after replacing
+
+    # Replace missing values, Plot the occurrence of missing data in the DF before and after replacing
     def exercise_38(self):
         avocados_2016 = self.df
 
@@ -790,9 +793,9 @@ class Manipulation:
     def exercise_40(self):
         # Create a dictionary of lists with new data
         avocados_dict = {
-        "date": ["2019-11-17", "2019-12-01"],
-        "small_sold": [10859987, 9291631],
-        "large_sold": [7674135, 6238096]
+            "date": ["2019-11-17", "2019-12-01"],
+            "small_sold": [10859987, 9291631],
+            "large_sold": [7674135, 6238096]
         }
 
         # Convert dictionary into DataFrame
@@ -800,7 +803,7 @@ class Manipulation:
 
         # Print the new DataFrame
         print(avocados_2019)
-    
+
     # Read a CSV, work in the DF to find the number of bumps for every 10000 passengers
     def exercise_41(self):
         # Read CSV as DataFrame called airline_bumping, already done in the set_data() method above
@@ -810,7 +813,7 @@ class Manipulation:
         print(airline_bumping.head())
 
         # For each airline, select nb_bumped and total_passengers and sum
-        airline_totals = airline_bumping.groupby("airline")[["nb_bumped","total_passengers"]].sum()
+        airline_totals = airline_bumping.groupby("airline")[["nb_bumped", "total_passengers"]].sum()
 
         # Create new col, bumps_per_10k: no. of bumps per 10k passengers for each airline
         airline_totals["bumps_per_10k"] = airline_totals["nb_bumped"] / airline_totals["total_passengers"] * 10000
@@ -818,21 +821,21 @@ class Manipulation:
         # Print airline_totals
         print(airline_totals)
 
-    # Writting DF to CSV
+    # Writing DF to CSV
     def exercise_42(self):
         airline_bumping = self.df
-        airline_totals = airline_bumping.groupby("airline")[["nb_bumped","total_passengers"]].sum()
+        airline_totals = airline_bumping.groupby("airline")[["nb_bumped", "total_passengers"]].sum()
         airline_totals["bumps_per_10k"] = airline_totals["nb_bumped"] / airline_totals["total_passengers"] * 10000
 
         # Create airline_totals_sorted
-        airline_totals_sorted = airline_totals.sort_values("bumps_per_10k", ascending = False)
+        airline_totals_sorted = airline_totals.sort_values("bumps_per_10k", ascending=False)
 
         # Print airline_totals_sorted
         print(airline_totals_sorted)
 
         # Save as airline_totals_sorted.csv
         airline_totals_sorted.to_csv("data/pandas_manipulation/airline_totals_sorted.csv")
-    
+
 
 if __name__ == '__main__':
     try:

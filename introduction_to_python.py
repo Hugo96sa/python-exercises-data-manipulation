@@ -231,7 +231,7 @@ class Introduction:
         # Alternative slicing to create upstairs
         upstairs = areas[6:]
 
-    # Replace elements inside of a list
+    # Replace elements inside the list
     def exercise_16(self):
         # Create the areas list
         areas = ["hallway", 11.25, "kitchen", 18.0, "living room", 20.0, "bedroom", 10.75, "bathroom", 9.50]
@@ -254,7 +254,7 @@ class Introduction:
         # Add garage data to areas_1, new list is areas_2
         areas_2 = areas_1 + ["garage", 15.45]
 
-    # Verify that original areas list is not afectes by changes in other copies
+    # Verify that original areas list is not affects by changes in other copies
     def exercise_18(self):
         # Create list areas
         areas = [11.25, 18.0, 20.0, 10.75, 9.50]
@@ -267,7 +267,7 @@ class Introduction:
 
         # Print areas
         print(areas)
-    
+
     # Use some functions like type(), len(), int()
     def exercise_19(self):
         # Create variables var1 and var2
@@ -403,7 +403,7 @@ class Introduction:
         # Print np_height_m
         print(np_height_m)
 
-    # Now find the weight in kg and calculate the bmi of each playes using numpy arrays
+    # Now find the weight in kg and calculate the bmi of each plays using numpy arrays
     def exercise_28(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
@@ -420,7 +420,7 @@ class Introduction:
 
         # Print out bmi
         print(bmi)
-    
+
     # Find out which players are considered light using bmi with m and kg
     def exercise_29(self):
         mlb_df = self.df
@@ -508,7 +508,7 @@ class Introduction:
         # Print out height of 124th player
         print(np_baseball[123, 0])
 
-    # Perform calculations inside the 3D np array, wheight, height and age
+    # Perform calculations inside the 3D np array, weight, height and age
     def exercise_34(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()
@@ -519,17 +519,18 @@ class Introduction:
         # Create np_baseball (3 cols)
         np_baseball = np.array(baseball)
 
-        # # Print out addition of np_baseball and updated, updated is a 2D np array of 1015 x 3, sadly not found in resources 
+        # Print out addition of np_baseball and updated, updated is a 2D np array of 1015 x 3, sadly not found
+        # in resources
         # print(np_baseball + updated)
-        
+
         # Create numpy array: conversion
         conversion = [0.0254, 0.453592, 1]
         np_conversion = np.array(conversion)
-        
+
         # Print out product of np_baseball and conversion
         print(np_baseball * np_conversion)
 
-    # Calculate the nean and median of the np_basebal np array
+    # Calculate the mean and median of the np_baseball np array
     def exercise_35(self):
         mlb_df = self.df
         height_in = mlb_df['Height'].to_list()

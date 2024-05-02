@@ -4,3 +4,4 @@ matplotlib
 seaborn
 scipy
 plotly==5.21.0.
+pyarrow

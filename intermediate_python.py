@@ -398,7 +398,7 @@ class Intermediate:
         plt.show()
 
     def exercise_27(self):
-        # clear the plot so it doesn't get cluttered if you run this many times
+        # Clear the plot, so it doesn't get cluttered if you run this many times
         plt.clf()
 
         # Simulate random walk 20 times

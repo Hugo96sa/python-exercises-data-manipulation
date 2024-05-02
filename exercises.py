@@ -1,3 +1,5 @@
+# Hugo Solares
+
 import math
 
 
@@ -10,23 +12,23 @@ class Exercises:
             number_2 = int(input('Enter second number: '))
             result = number_1 + number_2
             print('the sum is:', result)
-        
+
         except ValueError:
             print('Please enter valid numbers.')
-    
+
     # Calculate the circle area with a given radius
     def exercise_2(self):
         try:
             radius = float(input('Enter the radius of the circle: '))
             area = math.pi * (radius ** 2)
             print('The area of the circle is:', round(area, 4))
-        
+
         except ValueError:
             print('Please enter a valid number.')
-    
+
     # Concatenate a string with fstrings
     def exercise_3(self):
-        try: 
+        try:
             string_1 = input('Enter first string: ')
             string_2 = input('Enter second string: ')
             concat_string = f'{string_1} {string_2}'
@@ -40,7 +42,7 @@ class Exercises:
         list_1 = [1, 'two', 3.0, True]
         print(list_1)
 
-    # Multiplicate 2 numbers and show its result
+    # Multiplication 2 numbers and show its result
     def exercise_5(self):
         try:
             num_1 = int(input('Enter first number: '))
@@ -50,16 +52,16 @@ class Exercises:
 
         except ValueError:
             print('Please enter valid integers.')
-    
-    # Multiplicate 2 numbers without using * operator and show its result
+
+    # Multiplication 2 numbers without using * operator and show its result
     def exercise_6(self):
         def multiply_by_sum(num_1, num_2):
             result = 0
             for _ in range(abs(num_2)):
                 result += num_1 if num_2 > 0 else -num_1
             return result
-        
-        try: 
+
+        try:
             num_1 = int(input('Enter first number: '))
             num_2 = int(input('Enter second number: '))
             result = multiply_by_sum(num_1, num_2)
@@ -68,7 +70,7 @@ class Exercises:
         except ValueError:
             print('Please enter valid integers.')
 
-    # Read a text string and show its lenght
+    # Read a text string and show its length
     def exercise_7(self):
         try:
             string = input('Enter a text string: ')
@@ -77,7 +79,7 @@ class Exercises:
 
         except ValueError:
             print('Please enter a valid string.')
-    
+
     # Calculate the mean of a list of numbers
     def exercise_8(self):
         try:
@@ -92,7 +94,7 @@ class Exercises:
 
         except ValueError:
             print('Please enter a valid list of numbers separated with spaces.')
-    
+
     # Create a tuple of elements and print it
     def exercise_9(self):
         my_tuple = (3, False, 'one', 5.5)
@@ -105,7 +107,7 @@ class Exercises:
             exponent = int(input('Enter exponent number: '))
             result = base ** exponent
             print(f'Result: {result}')
-        
+
         except ValueError:
             print('Please enter valid integers.')
 
@@ -126,7 +128,7 @@ class Exercises:
             height = float(input('Enter height: '))
             area = base * height
             print(f'The area is: {area}')
-        
+
         except ValueError:
             print('Please enter valid numbers.')
 
@@ -134,7 +136,8 @@ class Exercises:
     def exercise_13(self):
         try:
             integer = int(input('Enter an integer: '))
-            print(f'The integer was: {str(integer)}, input function returns a string, so it needs to be converted to int.')
+            print(
+                f'The integer was: {str(integer)}, input function returns a string, so it needs to be converted to int.')
 
         except ValueError:
             print('Please enter a valid integer.')
@@ -184,7 +187,7 @@ class Exercises:
 
         except ValueError:
             print('Please enter a valid list of numbers separated with spaces.')
-    
+
     # Calculate the power of a number without using the ** operator
     def exercise_17(self):
         try:
@@ -194,7 +197,7 @@ class Exercises:
             for _ in range(power):
                 result = result * base
             print(result)
-        
+
         except ValueError:
             print('Please enter valid integers.')
 
@@ -216,17 +219,17 @@ class Exercises:
 
         except ValueError as e:
             print(e)
-    
+
     # convert a float into an int
     def exercise_19(self):
         try:
             number = int(input('Enter a decimal number: '))
             print(f'The integer part is: {number}')
-        
+
         except ValueError:
             print('Please enter a valid numbers.')
 
-    # Count the ocurrence of a character in a given string
+    # Count the occurrence of a character in a given string
     def exercise_20(self):
         try:
             string = input('Enter a string: ')
@@ -236,13 +239,13 @@ class Exercises:
 
             if char not in string:
                 raise LookupError('Character not found in string.')
-            
+
             count = string.count(char)
             print(f'The number of occurrences is: {count}')
 
         except ValueError as e:
             print(e)
-        
+
         except LookupError as e:
             print(e)
 
@@ -255,7 +258,7 @@ class Exercises:
 
         except ValueError:
             print('Please enter a valid string.')
-    
+
     # Multiply a string by a given number
     def exercise_22(self):
         try:
@@ -266,7 +269,7 @@ class Exercises:
 
         except ValueError:
             print('Please enter a valid string and number.')
-    
+
     # Separate a string into substrings using the spaces
     def exercise_23(self):
         try:
@@ -281,22 +284,22 @@ class Exercises:
     def exercise_24(self):
         try:
             string = input("Enter a string to check if it is a palindrome: ")
-            string_lenght = len(string)
-            half_lenght = (string_lenght // 2) + 1
+            string_length = len(string)
+            half_length = (string_length // 2) + 1
             is_palindrome = False
             i = 0
 
-            while string[i] == string[string_lenght - i - 1]:
-                if (i == half_lenght):
+            while string[i] == string[string_length - i - 1]:
+                if (i == half_length):
                     is_palindrome = True
                     break
                 i += 1
 
-            if(is_palindrome):
+            if (is_palindrome):
                 print("The string is a palindrome")
             else:
                 print("The string is not a palindrome")
-        
+
         except ValueError:
             print("Please enter a valid string.")
 
@@ -305,7 +308,7 @@ class Exercises:
         numbers = [*range(1, 201)]
         for i in numbers:
             print(i)
-    
+
     # Interchange the values of 2 variables with multiple assignment
     def exercise_26(self):
         try:
@@ -323,6 +326,7 @@ class Exercises:
         union = set_1 | set_2
         intersection = set_1 & set_2
         print(f'Union {union}, intersection {intersection}')
+
 
 if __name__ == '__main__':
     exer = Exercises()
